@@ -45,4 +45,38 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
         return $row;
     }
+    public function InsertHistoPago($data)
+    {
+        try {
+            $columnas = implode(", ", array_keys($data));
+            $valores = array_values($data);
+            $placeholders = implode(", ", array_fill(0, count($valores), "?"));
+            $sql = "INSERT INTO tbhistorialpago ($columnas) VALUES ($placeholders)";
+            $stmt = $this->CNX1->prepare($sql);
+            $stmt->execute($valores);
+            $lastInsertId = $this->CNX1->lastInsertId();
+
+            return $lastInsertId;
+        } catch (PDOException $e) {
+            die("Error al insertar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
+    public function InsertUserAdmin($data)
+    {
+        try {
+            $columnas = implode(", ", array_keys($data));
+            $valores = array_values($data);
+            $placeholders = implode(", ", array_fill(0, count($valores), "?"));
+            $sql = "INSERT INTO tbempleados ($columnas) VALUES ($placeholders)";
+            $stmt = $this->CNX1->prepare($sql);
+            $stmt->execute($valores);
+            $lastInsertId = $this->CNX1->lastInsertId();
+
+            return $lastInsertId;
+        } catch (PDOException $e) {
+            die("Error al insertar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
 }

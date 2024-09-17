@@ -109,6 +109,7 @@ async function TbDetalle(idPlan) {
 }
 async function ChangeEstPlan(idPlan, Est) {
   Swal.fire({
+    icon: "info",
     text: "¿Enserio Quieres cambiar de estado?",
     showCancelButton: true,
     confirmButtonText: "Aceptar",

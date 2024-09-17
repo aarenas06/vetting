@@ -1,4 +1,4 @@
-<table class="table" id="tb1">
+<table class="table" id="tb2">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -29,9 +29,9 @@
                 <td><?= $dt['EmpreRepre'] ?></td>
                 <td><?= $dt['EmpreRepreCC'] ?></td>
                 <td><?= $dt['EmpreRepreTel'] ?></td>
-                <td class="text-center"> <button onclick="ChangeEstPlan(<?= $dt['idTbEmpresas'] ?>,<?= $dt['EmpreEst'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
-                <td><button class="btn btn-primary"></button></td>
-                <td></td>
+                <td class="text-center"> <button onclick="ChangeEstEmp(<?= $dt['idTbEmpresas'] ?>,<?= $dt['EmpreEst'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
+                <td><button class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i></button></td>
+                <td><button class="btn btn-primary"><i class="fa-solid fa-id-card"></i></button></td>
                 <td></td>
 
             </tr>

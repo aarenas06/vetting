@@ -24,8 +24,11 @@
 
     <link rel="stylesheet" href="/vetting/plantilla/assets/css/mystyle.css" />
 
+    <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-yboEl7AImU6k6HjdnRn7hxOxlQpFRKlNeI3+KkI4UgDq+qFOmj7fwboXf1g8oTbiuID9AO48ewAHVV9mkgfsIg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,6 +104,14 @@
                                 <span class="hide-menu">Empresas</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-aperture"></i>
+                                </span>
+                                <span class="hide-menu">Propietarios</span>
+                            </a>
+                        </li>
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Empresas</span>
@@ -113,16 +124,33 @@
                                 <span class="hide-menu">Inventario</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-aperture"></i>
+                                </span>
+                                <span class="hide-menu">Propietarios</span>
+                            </a>
+                        </li>
+
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Propietarios</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=mascotas/index" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-aperture"></i>
+                                </span>
+                                <span class="hide-menu">Home</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="?p=Mascotas/index" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-truck-ramp-box"></i>
                                 </span>
-                                <span class="hide-menu">mascotas</span>
+                                <span class="hide-menu">Mascotas</span>
                             </a>
                             <a class="sidebar-link" href="?p=Conoce/index" aria-expanded="false">
                                 <span>

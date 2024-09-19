@@ -27,12 +27,28 @@ class Controller
             $_SESSION['Celular'] = $validar['UsuCel'];
             $_SESSION['Direccion'] = $validar['UsuDirec'];
             $_SESSION['Rol'] = $validar['idTbRoles'];
+
             $_SESSION['RolObs'] = $validar['RolNom'];
             $_SESSION['UsuEmail'] = $validar['UsuEmail'];
 
-            echo json_encode('ok');
+           echo json_encode('ok');
+           echo json_encode(['idTbRoles' => $validar['idTbRoles'],'success' => 'ok']);
+
         } else {
             echo json_encode('false');
+        }
+    }
+
+    public function InsertPropietarios()
+    {
+        $ValidaExitencia = $this->MODEL->ValidaExitencia($_POST['IdentPropietarios']);
+
+        if ($ValidaExitencia == false) {
+            echo json_encode(false);
+            exit;
+        } else {
+            $datos = $this->MODEL->InsertPropietarios($_POST);
+            echo json_encode(true);
         }
     }
 }

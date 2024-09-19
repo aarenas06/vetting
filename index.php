@@ -1,6 +1,159 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+  /* Estilos para los botones */
+  .quote_btn-container button {
+    color: black;
+    border-radius: 12px;
+    padding: 10px 20px;
+    text-decoration: underline;
+    text-decoration-color: green;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Estilo al pasar el mouse (hover), Subrayado */
+  .quote_btn-container button:hover {
+    background-color: #E7E3E3;
+    color: black;
+  }
+
+  /* ESTOLOS PARA EL BOTON DE whatsapp */
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+  }
+
+  .whatsapp-float i {
+    margin-top: 16px;
+    color: white;
+    font-size: 35px;
+  }
+
+  .whatsapp-float:hover {
+    background-color: #22bb53;
+  }
+
+  .whatsapp-float:hover i {
+    color: #f0f0f0;
+  }
+
+  /* Estilos específicos para el modal de registro */
+  .custom-modal-registrarse .modal-content {
+    background-color: #f8f9fa;
+    /* Fondo claro y elegante */
+    border-radius: 8px;
+    /* Bordes ligeramente redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Sombra suave */
+    border: none;
+    /* Sin bordes */
+  }
+
+  .custom-modal-registrarse .modal-header {
+    background-color: #E0DEDE;
+    /* Azul Bootstrap para el encabezado */
+    color: black;
+    /* Texto en blanco */
+    border-bottom: none;
+    /* Eliminar borde inferior */
+    text-align: center;
+    /* Centrar el título */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .custom-modal-registrarse .modal-header h4 {
+    margin: 0;
+    font-size: 22px;
+    /* Tamaño del título */
+    font-weight: bold;
+  }
+
+  .custom-modal-registrarse .modal-body {
+    padding: 20px;
+  }
+
+  .custom-modal-registrarse .input-group {
+    margin-bottom: 15px;
+  }
+
+  .custom-modal-registrarse .input-group .input-group-text {
+    background-color: #6c757d;
+    /* Color gris oscuro para los íconos */
+    color: white;
+    /* Color blanco para los íconos */
+    border: none;
+    /* Sin bordes */
+    border-radius: 0.25rem 0 0 0.25rem;
+    /* Bordes redondeados para los inputs */
+  }
+
+  .custom-modal-registrarse .input-group .form-control {
+    border-left: none;
+    /* Eliminar borde entre el ícono y el input */
+  }
+
+  .custom-modal-registrarse .btn-primary {
+    background-color: #469DFF;
+    /* Verde elegante */
+    border-color: #469DFF;
+    padding: 10px 20px;
+    /* Espacio interno */
+    font-size: 16px;
+    /* Tamaño de fuente adecuado */
+    border-radius: 25px;
+    /* Botón más redondeado */
+    transition: background-color 0.3s ease;
+    /* Efecto suave al pasar el mouse */
+  }
+
+  .custom-modal-registrarse .btn-primary:hover {
+    background-color: #218838;
+    /* Verde oscuro en hover */
+  }
+
+  .custom-modal-registrarse .modal-body hr {
+    border-top: 1px solid #007bff;
+    /* Personalización del <hr> */
+  }
+
+  .custom-modal-registrarse .modal-footer {
+    text-align: center;
+    /* Centrar el botón */
+  }
+
+  /* Extra estilos para una mejor experiencia */
+  .custom-modal-registrarse .modal-body input {
+    padding: 12px;
+    /* Mayor espacio dentro de los inputs */
+  }
+
+  .custom-modal-registrarse .modal-body .input-group-text i {
+    font-size: 18px;
+    /* Tamaño adecuado de los íconos */
+    color: white;
+  }
+
+  .custom-modal-registrarse .modal-body input::placeholder {
+    color: #6c757d;
+    /* Placeholder gris claro */
+    opacity: 1;
+    /* Asegura que el color del placeholder se vea */
+  }
+</style>
+
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -28,10 +181,19 @@
   <!-- responsive style -->
   <link href="asset/css/responsive.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 </head>
 
 <body>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -47,16 +209,26 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav  ">
-
+              <ul class="navbar-nav">
+                <!-- Aquí pueden ir los enlaces de navegación -->
               </ul>
             </div>
-            <div class="quote_btn-container  d-flex justify-content-center">
-              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">iniciar Sesion</button>
+
+            <!-- Botón "Registrate" -->
+            <div class="quote_btn-container d-flex justify-content-center">
+              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalRegistrase">Registrase</button>
+            </div>
+
+            <!-- Botón "Iniciar Sesion" con margen a la izquierda -->
+            <div class="quote_btn-container d-flex justify-content-center ms-2">
+              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar Sesion</button>
             </div>
           </div>
+
+
         </nav>
       </div>
     </header>
@@ -229,11 +401,11 @@
           </center>
 
           <div class="input-group mb-3">
-            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: white;" class="fa-solid fa-user"></i></span>
+            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
             <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
           </div>
           <div class="input-group mb-3">
-            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: white;" class="fa-solid fa-key"></i></span>
+            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
             <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
           </div>
           <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
@@ -244,8 +416,75 @@
       </div>
     </div>
   </div>
-  <!-- about section -->
 
+  <!-- Modal Registrarse-->
+  <div class="modal fade custom-modal-registrarse" id="exampleModalRegistrase" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Registrarse</h4>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box btn-1" id="basic-addon1">
+              <i class="fa-solid fa-user-large"></i>
+            </span>
+              <input type="text" class="form-control" id="NomPropietarios" placeholder="Nombre" aria-label="NomPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="IdentPropietarios" placeholder="Identificación" aria-label="IdentPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-phone-volume" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="TelPropietarios" placeholder="Teléfono" aria-label="TelPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="DirPropietarios" placeholder="Dir. Residencial" aria-label="DirPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+            </span>
+            <input type="email" class="form-control" id="EmailPropietarios" placeholder="Correo Electrónico" aria-label="EmailPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="UsuPropietarios" placeholder="Usuario" aria-label="UsuPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-key" style="color: #ffffff;"></i>
+            </span>
+            <input type="password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
+          </div>
+
+          <center>
+            <hr>
+            <button class="btn btn-block btn-primary btn-sm" onclick="InsertPropietarios()">Registrarse</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- about Registrarse -->
   <section class="about_section layout_padding">
     <div class="container">
       <div class="row">
@@ -346,11 +585,6 @@
   </section>
 
   <!-- end service section -->
-
-
-
-
-
 
   <!-- end gallery section -->
 

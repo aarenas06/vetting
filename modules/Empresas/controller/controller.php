@@ -86,6 +86,15 @@ class Controller
             echo 'No Hay Empresas Aún Creadas';
         }
     }
+    public function ChangeEstEmp()
+    {
+        if ($_POST['Est'] == 1) {
+            $new = 2;
+        } else {
+            $new = 1;
+        }
+        $update = $this->MODEL->ChangeEstEmp($_POST['IdEmp'], $new);
+    }
 }
 $controller = new Controller();
 

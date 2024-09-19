@@ -248,3 +248,29 @@ async function UpdatePlan(idPlan) {
     console.log(error);
   }
 }
+contPlan();
+async function contPlan() {
+  let formData = new FormData();
+  formData.append("funcion", "contPlan");
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Planes/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.text();
+    $("#contPlan").html(res2);
+    $("#tbCost").DataTable();
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    console.log(error);
+  }
+}

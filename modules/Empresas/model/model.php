@@ -39,7 +39,10 @@ class modelo
     }
     public function listEmpresa()
     {
-        $sql = "SELECT * FROM `tbempresas`";
+        $sql = "SELECT tb1.*, tb2.HistPagoFec,tb3.PlanNom, CONCAT(tb3.PlanVigenciaMes,' Meses ' ,tb3.PlanVigenciaDia, ' Dias ') Vigencia ,     DATE_ADD(DATE_ADD(tb2.HistPagoFec, INTERVAL tb3.PlanVigenciaMes MONTH), INTERVAL tb3.PlanVigenciaDia DAY) AS FechaTerminacion
+        FROM tbempresas tb1
+        LEFT JOIN tbhistorialpago tb2 on tb2.idTbEmpresas=tb1.idTbEmpresas And tb2.HistPagoEst=1
+        LEFT JOIN tbplanes tb3 on tb3.idTbPlanes=tb2.idTbPlanes;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -78,5 +81,11 @@ class modelo
             die("Error al insertar los datos: " . $e->getMessage());
             return false;
         }
+    }
+    public function ChangeEstEmp($idEmp, $new)
+    {
+        $sql = "update tbempresas set EmpreEst='$new' where idTbEmpresas =$idEmp";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
     }
 }

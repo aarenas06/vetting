@@ -252,10 +252,10 @@
                                             <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                                 <img src="/vetting/plantilla/assets/img/home/profile.jpg" class="rounded-circle" width="80" height="80" alt="" />
                                                 <div class="ms-3">
-                                                    <h5 class="mb-1 fs-3">Diego Arenas</h5>
-                                                    <span class="mb-1 d-block text-dark">CEO</span>
+                                                    <h5 class="mb-1 fs-3"><?= $_SESSION['Nombre'] ?></h5>
+                                                    <span class="mb-1 d-block text-dark"><?= $_SESSION['RolObs'] ?></span>
                                                     <p class="mb-0 d-flex text-dark align-items-center gap-2">
-                                                        <i class="ti ti-mail fs-4"></i> diegoaarenas06@gmail.com
+                                                        <i class="ti ti-mail fs-4"></i> <?= $_SESSION['UsuEmail'] ?>
                                                     </p>
                                                 </div>
                                             </div>

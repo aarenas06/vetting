@@ -126,7 +126,7 @@ async function ChangeEstEmp(IdEmp, Est) {
           icon: "success",
           text: `Estado Actualizado`,
         });
-        listPlanes();
+        listEmpresa();
       } catch (error) {
         Swal.fire({
           icon: "error",

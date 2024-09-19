@@ -29,7 +29,7 @@ $Modulos = $control->GetModulos();
     <div class="col-lg-4">
         <h4 class="title">Reconteo de Planes</h4>
         <hr>
-        <h6>Aqui Iria un resumen ya cuando la empresa adquiera el servicio</h6>
+        <div class="contPlan" id="contPlan"></div>
     </div>
 </div>
 <!-- Modal Creacion Plan -->

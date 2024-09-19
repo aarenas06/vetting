@@ -15,7 +15,9 @@ class modelo
     public function Validar($user, $pass)
     {
 
-        $sql = "SELECT * FROM `tbusuarios` WHERE UsuUser='$user' AND UsuCla='$pass'";
+        $sql = "SELECT tb1.* , tb2.RolNom FROM tbusuarios tb1 
+        INNER JOIN tbroles tb2 on tb2.idTbRoles=tb1.idTbRoles
+        WHERE tb1.UsuUser='$user' AND tb1.UsuCla='$pass'";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetch(PDO::FETCH_NAMED);

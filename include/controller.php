@@ -27,6 +27,9 @@ class Controller
             $_SESSION['Celular'] = $validar['UsuCel'];
             $_SESSION['Direccion'] = $validar['UsuDirec'];
             $_SESSION['Rol'] = $validar['idTbRoles'];
+            $_SESSION['RolObs'] = $validar['RolNom'];
+            $_SESSION['UsuEmail'] = $validar['UsuEmail'];
+
             echo json_encode('ok');
         } else {
             echo json_encode('false');

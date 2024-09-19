@@ -49,6 +49,8 @@ $GetPlanes = $control->GetPlanes();
                 <input type="number" class="form-control form-control-sm " id="EmpreRepreTel">
                 <label class="form-label">Contrato Firmado</label>
                 <input type="file" class="form-control form-control-sm " id="EmpreContr">
+                <label class="form-label">Correo Electronico</label>
+                <input type="email" class="form-control form-control-sm " id="EmpreEmail">
                 <label class="form-label ">Plan firmado:</label>
                 <select class="form-select form-select-sm" id="PlanSelect">
                     <option selected></option>
@@ -56,6 +58,7 @@ $GetPlanes = $control->GetPlanes();
                         <option value="<?= $Gp['idTbPlanes'] ?>"><?= $Gp['PlanNom'] ?></option>
                     <?php } ?>
                 </select>
+                <input type="text" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
                 <hr>
                 <br>
                 <center>

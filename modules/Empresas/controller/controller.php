@@ -45,7 +45,27 @@ class Controller
             "EmpreContr" => $nuevoNombreEmpreContr,
             "EmpreAdj" => $nuevoNombreEmpreAdj,
         );
-        $this->MODEL->InsertEmp($data);
+        $lastId = $this->MODEL->InsertEmp($data);
+        $dataPago = array(
+            "UsuCod" => $_POST['UsuCod'],
+            "idTbPlanes " => $_POST['PlanSelect'],
+            "idTbEmpresas " => $lastId,
+        );
+        $this->MODEL->InsertHistoPago($dataPago);
+
+        //crea UsuarioAdmin 
+        $dataUsuario = array(
+            "idTbEmpresas" => $lastId,
+            "idTbRoles " => 3,
+            "EmpNom" => $_POST['EmpreNom'] . '-Admin',
+            "EmpCod" => '',
+            "EmpUsu" => $_POST['EmpreNit'],
+            "EmpCla" => $_POST['EmpreNit'],
+            "EmpCel" => $_POST['EmpreRepreTel'],
+            "EmpEst" => 1,
+            "EmpEmail" => $_POST['EmpreEmail'],
+        );
+        $this->MODEL->InsertUserAdmin($dataUsuario);
     }
     private function getNombre($length)
     {
@@ -65,6 +85,15 @@ class Controller
         } else {
             echo 'No Hay Empresas Aún Creadas';
         }
+    }
+    public function ChangeEstEmp()
+    {
+        if ($_POST['Est'] == 1) {
+            $new = 2;
+        } else {
+            $new = 1;
+        }
+        $update = $this->MODEL->ChangeEstEmp($_POST['IdEmp'], $new);
     }
 }
 $controller = new Controller();

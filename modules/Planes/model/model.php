@@ -101,4 +101,14 @@ class modelo
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
     }
+    public function contPlan()
+    {
+        $sql = "SELECT tb1.PlanNom,tb1.PlanCosto,COUNT(tb2.idTbHistorialPago)C FROM tbplanes tb1
+        INNER JOIN tbhistorialpago tb2 on tb2.idTbPlanes = tb1.idTbPlanes and tb2.HistPagoEst=1
+        GROUP by tb1.PlanNom,tb1.PlanCosto;";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
 }

@@ -95,6 +95,15 @@ class Controller
     {
         print_r($_POST);
     }
+    public function contPlan()
+    {
+        $datos = $this->MODEL->contPlan();
+        if ($datos) {
+            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Planes/layout/tbContPlan.php');
+        } else {
+            echo 'No Hay Planes Aún Creados';
+        }
+    }
 }
 $controller = new Controller();
 

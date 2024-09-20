@@ -127,9 +127,9 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-aperture"></i>
+                                    <i class="fa-solid fa-person"></i>
                                 </span>
-                                <span class="hide-menu">Propietarios</span>
+                                <span class="hide-menu">Cliente</span>
                             </a>
                         </li>
 
@@ -138,9 +138,9 @@
                             <span class="hide-menu">Propietarios</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=home/index" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-aperture"></i>
+                                    <i class="fa-solid fa-house"></i>
                                 </span>
                                 <span class="hide-menu">Home</span>
                             </a>
@@ -148,9 +148,9 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="?p=Mascotas/index" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-truck-ramp-box"></i>
+                                    <i class="fa-solid fa-paw"></i>
                                 </span>
-                                <span class="hide-menu">Mascotas</span>
+                                <span class="hide-menu">Mascotas </span>
                             </a>
                             <a class="sidebar-link" href="?p=Conoce/index" aria-expanded="false">
                                 <span>

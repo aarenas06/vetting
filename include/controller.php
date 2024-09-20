@@ -31,7 +31,6 @@ class Controller
             $_SESSION['RolObs'] = $validar['RolNom'];
             $_SESSION['UsuEmail'] = $validar['UsuEmail'];
 
-           echo json_encode('ok');
            echo json_encode(['idTbRoles' => $validar['idTbRoles'],'success' => 'ok']);
 
         } else {

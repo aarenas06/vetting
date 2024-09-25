@@ -25,42 +25,82 @@ class Controller
         }
     }
 
+    //FUNCION PARA GENERAR EL CODIGO UNICO DEL CHIP
+    public function MascoIdChip($length = 8)
+    {
+        // Define el conjunto de caracteres alfanuméricos
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
 
-    // public function InsertPlan()
-    // {
-    //     $arr = array(
-    //         "PlanNom" => $_POST['PlanNom'],
-    //         "PlanVigenciaDia" => $_POST['PlanVigenciaDia'],
-    //         "PlanCosto" => $_POST['PlanCosto'],
-    //         "PlanVigenciaMes" => $_POST['PlanVigenciaMes'],
-    //     );
-    //     $IdReg = $this->MODEL->InsertPlan($arr);
-    //     $opt = $_POST['selectedServices'];
+        // Bucle para generar códigos hasta encontrar uno que no exista
+        do {
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            // Verifica si el código ya existe en la base de datos
+            $existingCode = $this->MODEL->checkIfCodeExists($randomString);
+        } while ($existingCode);
 
-    //     // Decodificar la cadena JSON en un array
-    //     $optArray = json_decode($opt, true);
+        return $randomString;
+    }
 
-    //     if (is_array($optArray)) {
-    //         foreach ($optArray as $op) {
-    //             $arre = array(
-    //                 "idTbServicios" => $op,
-    //                 "idTbPlanes" => $IdReg
-    //             );
-    //             $this->MODEL->InsertPlanServices($arre);
-    //         }
-    //     }
-    //     echo json_encode(true);
-    // }
+    //FUNCION PARA RETORNAR EL CODIGO DEL CHIP
+    public function generarMascoIdChip()
+    {
+        $codigo = $this->MascoIdChip();
+        echo json_encode(['codigo' => $codigo]);
+    }
 
-    // public function listPlanes()
-    // {
-    //     $data = $this->MODEL->listPlanes();
-    //     if ($data) {
-    //         include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Planes/layout/listPlanes.php');
-    //     } else {
-    //         echo 'No Hay Planes Aún Creados';
-    //     }
-    // }
+    public function listMascotas()
+    {
+        $data = $this->MODEL->listMascotas();
+        if ($data) {
+            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Mascotas/layout/listMascotas.php');
+        } else {
+            echo 'No Hay Macotas Aún Creados';
+        }
+    }
+
+    public function InsertMascota()
+    {
+        // Verifica que el archivo se haya subido correctamente
+
+        $FotoTmpPath = $_FILES['MascoFoto']['tmp_name'];
+        $imge = file_get_contents($FotoTmpPath);
+        $fotoMasco = base64_encode($imge);
+
+        // Prepara el arreglo de datos
+        $dataArray = [
+            'MascoNom' => $_POST['MascoNom'],
+            'MascoFecNaci' => $_POST['MascoFecNaci'],
+            'MascoYear' => $_POST['MascoYear'],
+            'MascoMes' => $_POST['MascoMes'],
+            'MascoSexo' => $_POST['MascoSexo'],
+            'MascoPelaje' => $_POST['MascoPelaje'],
+            'MascoComida' => $_POST['MascoComida'],
+            'MascoCelo' => $_POST['MascoCelo'],
+            'MascoAdopcion' => $_POST['MascoAdopcion'],
+            'MascoEspecie' => $_POST['MascoEspecie'],
+            'MascoRaza' => $_POST['MascoRaza'],
+            'MascoPeso' => $_POST['MascoPeso'],
+            'MascoVivienda' => $_POST['MascoVivienda'],
+            'MascoChip' => $_POST['MascoChip'],
+            'Mascoagresividad' => $_POST['Mascoagresividad'],
+            'MascoPatologia' => $_POST['MascoPatologia'],
+            'UsuCod' => $_POST['UsuCod'],
+            'fotoMasco' => $fotoMasco
+        ];
+
+        $datos = $this->MODEL->InsertMascota($dataArray);
+        if (isset($datos)) {
+            echo json_encode(true);
+        } else {
+            echo json_encode(false);
+        }
+    }
+
+
     // public function tbdetalle()
     // {
     //     $idPlan = $_POST['idPlan'];

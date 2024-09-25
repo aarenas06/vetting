@@ -12,7 +12,7 @@ class modelo
         $conexion = new conexion(); // Crear una instancia de la clase conexion
         $this->CNX1 = $conexion->mysql(); // Llamar al método mysql() de la instancia
     }
-    
+
     public function selectEspecie()
     {
         $sql = "SELECT * FROM tbespecies";
@@ -22,31 +22,64 @@ class modelo
         return $row;
     }
 
-    // public function InsertPlan($data)
-    // {
-    //     try {
-    //         $columnas = implode(", ", array_keys($data));
-    //         $valores = array_values($data);
-    //         $placeholders = implode(", ", array_fill(0, count($valores), "?"));
-    //         $sql = "INSERT INTO tbplanes ($columnas) VALUES ($placeholders)";
-    //         $stmt = $this->CNX1->prepare($sql);
-    //         $stmt->execute($valores);
-    //         $lastInsertId = $this->CNX1->lastInsertId();
-
-    //         return $lastInsertId;
-    //     } catch (PDOException $e) {
-    //         die("Error al insertar los datos: " . $e->getMessage());
-    //         return false;
-    //     }
-    // }
-    public function GetModulos()
+    //FUNCION PARA VALIDAR SI EL CODE DEL CHIP EXISTE
+    public function checkIfCodeExists($code)
     {
-        $sql = "SELECT * FROM tboptservicios WHERE OptEst=1";
+        $sql = "SELECT * FROM `tbmascotas` WHERE MascoChip='" . $code . "'";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
         return $row;
     }
+
+    public function listMascotas()
+    {
+        $sql = "SELECT MascoCod Cod, MascoChip Chip, MascoNom Nombre, MascoRaza Raza, MascoFechNac FechNaci,CONCAT(MascoYear, ' Años ', MascoMes, ' Meses') EdadMascota, 
+        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion FROM tbmascotas";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+    public function InsertMascota($data)
+    {
+        try {
+            $sql = "INSERT INTO tbmascotas (idTbUsuarios, idTbEspecies, MascoCod, MascoNom, MascoRaza, MascoFechNac, MascoYear, MascoMes, MascoSex, MascoPelaje, 
+                        MascoPeso, MascoComidaHab, MascoVivienda, MascoUltCelo, MascoChip, MascoPatologia, MascoAdop, MascoPic, MascoAgresion) 
+                VALUES (:idTbUsuarios, :idTbEspecies, :MascoCod, :MascoNom, :MascoRaza, :MascoFechNac, :MascoYear, :MascoMes, :MascoSex, :MascoPelaje, 
+                        :MascoPeso, :MascoComidaHab, :MascoVivienda, :MascoUltCelo, :MascoChip, :MascoPatologia, :MascoAdop, :MascoPic, :MascoAgresion);";
+            $stmt = $this->CNX1->prepare($sql);
+            // Asignar los valores a los parámetros
+            $stmt->bindParam(':idTbUsuarios', $data['UsuCod']);
+            $stmt->bindParam(':idTbEspecies', $data['MascoEspecie']);
+            $stmt->bindParam(':MascoCod', $data['MascoChip']);
+            $stmt->bindParam(':MascoNom', $data['MascoNom']);
+            $stmt->bindParam(':MascoRaza', $data['MascoRaza']);
+            $stmt->bindParam(':MascoFechNac', $data['MascoFecNaci']);
+            $stmt->bindParam(':MascoYear', $data['MascoYear']);
+            $stmt->bindParam(':MascoMes', $data['MascoMes']);
+            $stmt->bindParam(':MascoSex', $data['MascoSexo']);
+            $stmt->bindParam(':MascoPelaje', $data['MascoPelaje']);
+            $stmt->bindParam(':MascoPeso', $data['MascoPeso']);
+            $stmt->bindParam(':MascoComidaHab', $data['MascoComida']);
+            $stmt->bindParam(':MascoVivienda', $data['MascoVivienda']);
+            $stmt->bindParam(':MascoUltCelo', $data['MascoCelo']);
+            $stmt->bindParam(':MascoChip', $data['MascoChip']);
+            $stmt->bindParam(':MascoPatologia', $data['MascoPatologia']);
+            $stmt->bindParam(':MascoAdop', $data['MascoAdopcion']);
+            $stmt->bindParam(':MascoPic', $data['fotoMasco']);
+            $stmt->bindParam(':MascoAgresion', $data['Mascoagresividad']);
+            $stmt->execute();
+            $lastInsertId = $this->CNX1->lastInsertId();
+            return true; // Retornamos la respuesta de la DB
+        } catch (PDOException $e) {
+            // Manejar el error
+            error_log("Error al insertar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
+
     // public function InsertPlanServices($data)
     // {
     //     try {
@@ -62,17 +95,7 @@ class modelo
     //         return false;
     //     }
     // }
-    // public function listPlanes()
-    // {
-    //     $sql = "SELECT tb1.* ,COUNT(tb2.idTbServicios) C
-    //     FROM tbplanes  tb1 
-    //     LEFT JOIN tbservicios tb2 on tb2.idTbPlanes=tb1.idTbPlanes
-    //     GROUP BY idTbPlanes;";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    //     $row = $sql->fetchAll(PDO::FETCH_NAMED);
-    //     return $row;
-    // }
+
     // public function tbdetalle($idPlan)
     // {
     //     $sql = "SELECT tb2.*  ,tb1.ServiciosEst Est,tb1.idTbPlanes idPlan
@@ -110,4 +133,13 @@ class modelo
     //     $sql = $this->CNX1->prepare($sql);
     //     $sql->execute();
     // }
+
+    public function GetModulos()
+    {
+        $sql = "SELECT * FROM tboptservicios WHERE OptEst=1";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
 }

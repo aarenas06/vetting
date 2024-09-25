@@ -72,7 +72,7 @@ $Modulos = $control->GetModulos();
             </div>
         </div>
         <hr>
-        <div class="listPlanes" id="listPlanes"></div>
+        <div class="listMascotas" id="listMascotas"></div>
     </div>
 
 </div>
@@ -85,10 +85,13 @@ $Modulos = $control->GetModulos();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod']; ?>">
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label ">Nombre</label>
                         <input type="text" class="form-control form-control-sm" id="MascoNom">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control form-control-sm" id="MascoFecNaci" onchange="MascoFecNaci()">
                         <label class="form-label ">Sexo</label>
                         <Select class="form-control form-control-sm" id="MascoSexo">
                             <option value="" disabled selected>Seleccione...</option>
@@ -104,8 +107,8 @@ $Modulos = $control->GetModulos();
                         <label class="form-label">¿Esta en adopción?</label>
                         <Select class="form-control form-control-sm" id="MascoAdopcion">
                             <option value="" disabled selected>Seleccione...</option>
-                            <option value="Si">Si</option>
-                            <option value="No">No</option>
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
                         </Select>
 
                     </div>
@@ -115,6 +118,8 @@ $Modulos = $control->GetModulos();
                             <option value="" disabled selected>Seleccione...</option>
                             <?php $controller->selectEspecie(); ?>
                         </Select>
+                        <label class="form-label">Edad Mascota</label>
+                        <input type="text" class="form-control form-control-sm" id="MascoEdad">
                         <label class="form-label">Raza</label>
                         <input type="text" class="form-control form-control-sm" id="MascoRaza">
                         <label class="form-label">Peso</label>
@@ -122,7 +127,7 @@ $Modulos = $control->GetModulos();
                         <label class="form-label">Vivienda / ¿Con qué otros animales convive?</label>
                         <input type="text" class="form-control form-control-sm" id="MascoVivienda">
                         <label class="form-label">Chip</label>
-                        <input type="text" class="form-control form-control-sm" id="MascoChip">
+                        <input type="text" class="form-control form-control-sm" id="MascoChip" disabled>
                         <div class="slider-container">
                             <div class="slider-label">
                                 <label class="form-label" for="agresividad">Agresividad</label>
@@ -146,12 +151,10 @@ $Modulos = $control->GetModulos();
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <div class="col-md-10">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="MascoFoto" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <input type="file" id="fileInput" style="display: none;" accept=".jpg,.jpeg,.png" onchange="updateFileName()">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('fileInput').click();">Seleccionar</button>
-                            </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="MascoFotoNombre" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
+                            <input type="file" id="MascoFotoInput" style="display: none;" accept=".jpg,.jpeg,.png" onchange="updateFileName()">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('MascoFotoInput').click();">Seleccionar</button>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
@@ -159,7 +162,7 @@ $Modulos = $control->GetModulos();
 
                 <br>
                 <center>
-                    <button class="btn btn-primary" onclick="InsertPlan()"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                    <button class="btn btn-primary" onclick="InsertMascota()"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
                 </center>
             </div>
 

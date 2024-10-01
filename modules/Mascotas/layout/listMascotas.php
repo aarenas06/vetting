@@ -12,27 +12,40 @@
                 <th scope="col">Peso</th>
                 <th scope="col">Patologia</th>
                 <th scope="col">Agresión</th>
-                <th scope="col">Opt</th>
+                <th scope="col">Historial</th>
+                <th scope="col">Estado</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($data as $dt) { ?>
+            <?php
+            foreach ($data as $dt) {
+                if ($dt['Estado'] == 1) {
+                    $back = 'success';
+                    $text = 'Activo';
+                } else {
+                    $back = 'danger';
+                    $text = 'Innactivo';
+                }
+
+                $control = new Controller;
+                // Obtención de raza, validar si es necesario
+                $raza = $control->ObtRaza($dt['Raza']);
+                // print_r($raza);
+            ?>
                 <tr>
                     <th scope="row"><?= $dt['Cod'] ?></th>
                     <td><?= $dt['Chip'] ?></td>
                     <td><?= $dt['Nombre'] ?></td>
-                    <td><?= $dt['Raza'] ?></td>
+                    <td><?= $raza ?></td>
                     <td><?= $dt['FechNaci'] ?></td>
                     <td><?= $dt['EdadMascota'] ?></td>
                     <td><?= $dt['Sexo'] ?></td>
                     <td><?= $dt['Peso'] ?></td>
                     <td><?= $dt['Patologia'] ?></td>
                     <td><?= $dt['Agresion'] ?></td>
-                    <td>
-                        <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="DeletePropietarios(<?= $Propietarios['idTbUsuarios'] ?>)" data-bs-toggle="modal"><i class="fa-solid fa-trash-can"></i></button>
-                        </div> -->
-                    </td>
+                    <td class="text-center"> <button onclick="HisMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>')" class="btn btn-sm btn-info"><i class="fa-solid fa-file-medical fa-beat"></i></button></td>
+                    <td class="text-center"> <button onclick="ChangeEstMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>',<?= $dt['Estado'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
+
                 </tr>
             <?php } ?>
         </tbody>

@@ -17,11 +17,11 @@ class Controller
         return $data;
     }
 
-    public function selectEspecie()
+    public function selectRaza()
     {
-        $data = $this->MODEL->selectEspecie();
+        $data = $this->MODEL->selectRaza();
         foreach ($data as $row) {
-            echo '<option class="form-control" value="' . $row['idTbEspecies'] . '">' . $row['EspeNom'] . '</option>';
+            echo '<option class="form-control" value="' . $row['idTbRazas'] . '">' . $row['RazNom'] . '</option>';
         }
     }
 
@@ -50,6 +50,24 @@ class Controller
     {
         $codigo = $this->MascoIdChip();
         echo json_encode(['codigo' => $codigo]);
+    }
+
+
+    public function ChangeEstMasco()
+    {
+        if ($_POST['Est'] == 1) {
+            $new = 2;
+        } else {
+            $new = 1;
+        }
+        $update = $this->MODEL->ChangeEstMasco($_POST, $new);
+    }
+
+    public function ObtRaza($razaId)
+    {
+        // Llamada al modelo para obtener la raza
+        $raza = $this->MODEL->ObtRaza($razaId);
+        return $raza;
     }
 
     public function listMascotas()

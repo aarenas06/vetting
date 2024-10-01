@@ -50,6 +50,7 @@ class Controller
             echo json_encode(true);
         }
     }
+    
 }
 $controller = new Controller();
 

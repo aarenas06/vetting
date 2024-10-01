@@ -13,9 +13,9 @@ class modelo
         $this->CNX1 = $conexion->mysql(); // Llamar al método mysql() de la instancia
     }
 
-    public function selectEspecie()
+    public function selectRaza()
     {
-        $sql = "SELECT * FROM tbespecies";
+        $sql = "SELECT * FROM tbrazas";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -32,10 +32,28 @@ class modelo
         return $row;
     }
 
+    public function ChangeEstMasco($data, $new)
+    {
+        $sql = "UPDATE tbmascotas SET MascoEst=$new WHERE  idtbMascotas='" . $data['idMasco'] . "' and MascoChip='" . $data['chip'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+    }
+
+    public function ObtRaza($razaId)
+    {
+        $sql = "SELECT RazNom FROM tbrazas WHERE idTbRazas = :razaId";
+        $stmt = $this->CNX1->prepare($sql);
+        $stmt->bindParam(':razaId', $razaId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['RazNom'] : null;
+    }
+
+
     public function listMascotas()
     {
-        $sql = "SELECT MascoCod Cod, MascoChip Chip, MascoNom Nombre, MascoRaza Raza, MascoFechNac FechNaci,CONCAT(MascoYear, ' Años ', MascoMes, ' Meses') EdadMascota, 
-        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion FROM tbmascotas";
+        $sql = "SELECT 	idtbMascotas idMasco, MascoCod Cod, MascoChip Chip, MascoNom Nombre, idTbRazas Raza, MascoFechNac FechNaci,CONCAT(MascoYear, ' Años ', MascoMes, ' Meses') EdadMascota, 
+        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion, MascoEst Estado FROM tbmascotas";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -45,17 +63,16 @@ class modelo
     public function InsertMascota($data)
     {
         try {
-            $sql = "INSERT INTO tbmascotas (idTbUsuarios, idTbEspecies, MascoCod, MascoNom, MascoRaza, MascoFechNac, MascoYear, MascoMes, MascoSex, MascoPelaje, 
+            $sql = "INSERT INTO tbmascotas (idTbUsuarios, MascoCod, MascoNom, idTbRazas, MascoFechNac, MascoYear, MascoMes, MascoSex, MascoPelaje, 
                         MascoPeso, MascoComidaHab, MascoVivienda, MascoUltCelo, MascoChip, MascoPatologia, MascoAdop, MascoPic, MascoAgresion) 
-                VALUES (:idTbUsuarios, :idTbEspecies, :MascoCod, :MascoNom, :MascoRaza, :MascoFechNac, :MascoYear, :MascoMes, :MascoSex, :MascoPelaje, 
+                VALUES (:idTbUsuarios, :MascoCod, :MascoNom, :idTbRazas, :MascoFechNac, :MascoYear, :MascoMes, :MascoSex, :MascoPelaje, 
                         :MascoPeso, :MascoComidaHab, :MascoVivienda, :MascoUltCelo, :MascoChip, :MascoPatologia, :MascoAdop, :MascoPic, :MascoAgresion);";
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':idTbUsuarios', $data['UsuCod']);
-            $stmt->bindParam(':idTbEspecies', $data['MascoEspecie']);
             $stmt->bindParam(':MascoCod', $data['MascoChip']);
             $stmt->bindParam(':MascoNom', $data['MascoNom']);
-            $stmt->bindParam(':MascoRaza', $data['MascoRaza']);
+            $stmt->bindParam(':idTbRazas', $data['MascoRaza']);
             $stmt->bindParam(':MascoFechNac', $data['MascoFecNaci']);
             $stmt->bindParam(':MascoYear', $data['MascoYear']);
             $stmt->bindParam(':MascoMes', $data['MascoMes']);

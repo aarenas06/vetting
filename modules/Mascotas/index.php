@@ -113,15 +113,15 @@ $Modulos = $control->GetModulos();
 
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label ">Especie</label>
-                        <Select class="form-control form-control-sm" id="MascoEspecie">
+                        <label class="form-label ">Raza</label>
+                        <Select class="form-control form-control-sm" id="MascoRaza">
                             <option value="" disabled selected>Seleccione...</option>
-                            <?php $controller->selectEspecie(); ?>
+                            <?php $controller->selectRaza(); ?>
                         </Select>
                         <label class="form-label">Edad Mascota</label>
-                        <input type="text" class="form-control form-control-sm" id="MascoEdad">
-                        <label class="form-label">Raza</label>
-                        <input type="text" class="form-control form-control-sm" id="MascoRaza">
+                        <input type="text" class="form-control form-control-sm" id="MascoEdad" disabled>
+                        <!-- <label class="form-label">Raza</label>
+                        <input type="text" class="form-control form-control-sm" id="MascoRaza"> -->
                         <label class="form-label">Peso</label>
                         <input type="text" class="form-control form-control-sm" id="MascoPeso">
                         <label class="form-label">Vivienda / ¿Con qué otros animales convive?</label>
@@ -137,6 +137,7 @@ $Modulos = $control->GetModulos();
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">

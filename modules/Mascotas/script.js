@@ -196,107 +196,46 @@ async function InsertMascota() {
   }
 }
 
-// async function TbDetalle(idPlan) {
-//   let formData = new FormData();
-//   formData.append("funcion", "TbDetalle");
-//   formData.append("idPlan", idPlan);
+async function ChangeEstMasco(idMasco, chip, Est) {
+  Swal.fire({
+    icon: "info",
+    text: "¿Quieres cambiar de estado?",
+    showCancelButton: true,
+    confirmButtonText: "Aceptar",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      let formData = new FormData();
+      formData.append("funcion", "ChangeEstMasco");
+      formData.append("idMasco", idMasco);
+      formData.append("chip", chip);
+      formData.append("Est", Est);
 
-//   try {
-//     let req2 = await fetch(
-//       "/vetting/modules/Planes/controller/controller.php",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
+      try {
+        let req2 = await fetch(
+          "/vetting/modules/Mascotas/controller/controller.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        let res2 = await req2.text();
+        Swal.fire({
+          icon: "success",
+          text: `Estado Actualizado...!`,
+        });
+        listMascotas();
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          text: `Problema del Servidor: ${error.message}`,
+        });
+        console.log(error);
+      }
+    } else if (result.isDenied) {
+    }
+  });
+}
 
-//     let res2 = await req2.text();
-//     $("#tbDetalle").html(res2);
-//   } catch (error) {
-//     Swal.fire({
-//       icon: "error",
-//       title: "Error!",
-//       text: `Problema del Servidor: ${error.message}`,
-//     });
-//     console.log(error);
-//   }
-// }
-// async function ChangeEstPlan(idPlan, Est) {
-//   Swal.fire({
-//     text: "¿Enserio Quieres cambiar de estado?",
-//     showCancelButton: true,
-//     confirmButtonText: "Aceptar",
-//   }).then(async (result) => {
-//     if (result.isConfirmed) {
-//       let formData = new FormData();
-//       formData.append("funcion", "ChangeEstPlan");
-//       formData.append("idPlan", idPlan);
-//       formData.append("Est", Est);
-
-//       try {
-//         let req2 = await fetch(
-//           "/vetting/modules/Planes/controller/controller.php",
-//           {
-//             method: "POST",
-//             body: formData,
-//           }
-//         );
-//         let res2 = await req2.text();
-//         Swal.fire({
-//           icon: "success",
-//           text: `Estado Actualizado`,
-//         });
-//         listPlanes();
-//       } catch (error) {
-//         Swal.fire({
-//           icon: "error",
-//           text: `Problema del Servidor: ${error.message}`,
-//         });
-//         console.log(error);
-//       }
-//     } else if (result.isDenied) {
-//     }
-//   });
-// }
-
-// async function ChangeEst(idServicio, idPlan, Est) {
-//   Swal.fire({
-//     text: "¿Enserio Quieres cambiar de estado?",
-//     showCancelButton: true,
-//     confirmButtonText: "Aceptar",
-//   }).then(async (result) => {
-//     if (result.isConfirmed) {
-//       let formData = new FormData();
-//       formData.append("funcion", "ChangeEst");
-//       formData.append("idPlan", idPlan);
-//       formData.append("idServicio", idServicio);
-//       formData.append("Est", Est);
-
-//       try {
-//         let req2 = await fetch(
-//           "/vetting/modules/Planes/controller/controller.php",
-//           {
-//             method: "POST",
-//             body: formData,
-//           }
-//         );
-//         let res2 = await req2.text();
-//         Swal.fire({
-//           icon: "success",
-//           text: `Estado Actualizado`,
-//         });
-//         TbDetalle(idPlan);
-//       } catch (error) {
-//         Swal.fire({
-//           icon: "error",
-//           text: `Problema del Servidor: ${error.message}`,
-//         });
-//         console.log(error);
-//       }
-//     } else if (result.isDenied) {
-//     }
-//   });
-// }
 // async function listData(idPlan) {
 //   let formData = new FormData();
 //   formData.append("funcion", "ListData");

@@ -22,6 +22,8 @@ class Controller
         $datos = $this->MODEL->listMascotashome($_POST);
         echo json_encode($datos);
     }
+
+    
 }
 
 $controller = new Controller();

@@ -43,9 +43,8 @@
                     <td><?= $dt['Peso'] ?></td>
                     <td><?= $dt['Patologia'] ?></td>
                     <td><?= $dt['Agresion'] ?></td>
-                    <td class="text-center"> <button onclick="HisMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>')" class="btn btn-sm btn-info"><i class="fa-solid fa-file-medical fa-beat"></i></button></td>
+                    <td class="text-center"> <button onclick="HistorialMasco(<?= $dt['idMasco'] ?>)" class="btn btn-sm btn-info"><i class="fa-solid fa-file-medical fa-beat"></i></button></td>
                     <td class="text-center"> <button onclick="ChangeEstMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>',<?= $dt['Estado'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
-
                 </tr>
             <?php } ?>
         </tbody>

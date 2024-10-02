@@ -33,4 +33,5 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
+    
 }

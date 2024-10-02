@@ -235,68 +235,50 @@ async function ChangeEstMasco(idMasco, chip, Est) {
     }
   });
 }
+async function HistorialMasco(IdMasco) {
+  let formData = new FormData();
+  formData.append("funcion", "HistorialMasco");
+  formData.append("IdMasco", IdMasco);
+  try {
+    let req2 = await fetch("/vetting/modules/home/controller/controller.php", {
+      method: "POST",
+      body: formData,
+    });
 
-// async function listData(idPlan) {
-//   let formData = new FormData();
-//   formData.append("funcion", "ListData");
-//   formData.append("idPlan", idPlan);
+    let res2 = await req2.json();
+    // console.log(res2[0]);
 
-//   try {
-//     let req2 = await fetch(
-//       "/vetting/modules/Planes/controller/controller.php",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
+    res2.forEach((item) => {
+      let ContMascotas = document.getElementById("InfoHistorial");
+      ContMascotas.innerHTML += `
+      <br>
+        <section class="row">
+          <section class="col-md-4">
+            <div class="card custom-card">
+              <div class="card-header">
+                <h4 class="card-title" style="font-size:19px;"><b>${item["Nombre"]}</b></h4>
+                <p class="card-text" style="text-align:left; color:black;">${item["OptNombre"]}</p>
+                <p class="card-text" style="text-align:left; color:black;">${item["CitaDate"]}</p>
+              </div>
 
-//     let res2 = await req2.text();
-//     $("#ListData").html(res2);
-//   } catch (error) {
-//     Swal.fire({
-//       icon: "error",
-//       title: "Error!",
-//       text: `Problema del Servidor: ${error.message}`,
-//     });
-//     console.log(error);
-//   }
-// }
-// async function UpdatePlan(idPlan) {
-//   var PlanNom = $("#PlanNomUp").val();
-//   var PlanVigenciaDia = $("#PlanVigenciaDiaUp").val();
-//   var PlanCosto = $("#PlanCostoUp").val();
-//   var PlanVigenciaMes = $("#PlanVigenciaMesUp").val();
-//   PlanCosto = PlanCosto.replace(/[,\.]/g, ""); // Eliminar comas y puntos
-
-//   let formData = new FormData();
-//   formData.append("funcion", "UpdatePlan");
-//   formData.append("idPlan", idPlan);
-//   formData.append("PlanNom", PlanNom);
-//   formData.append("PlanVigenciaDia", PlanVigenciaDia);
-//   formData.append("PlanCosto", PlanCosto);
-//   formData.append("PlanVigenciaMes", PlanVigenciaMes);
-
-//   try {
-//     let req2 = await fetch(
-//       "/vetting/modules/Planes/controller/controller.php",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
-//     let res2 = await req2.text();
-//     Swal.fire({
-//       icon: "success",
-//       text: `información Actualizada`,
-//     });
-//     $("#ModalData").modal("hide");
-//     listPlanes();
-//   } catch (error) {
-//     Swal.fire({
-//       icon: "error",
-//       title: "Error!",
-//       text: `Problema del Servidor: ${error.message}`,
-//     });
-//     console.log(error);
-//   }
-//}
+              <div class="card-body">
+                <div style="text-align:left;">
+                  <p class="card-text" style="text-align:left; color:black;">
+                    <b>Observaciones:</b> <br> ${item["CitaObs"]}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      `;
+    });
+  } catch (error) {
+    Swal.fire({
+      icon: "info",
+      title: "Upss!!",
+      text: `No hay Historial para esta mascota`,
+    });
+    console.log(error);
+  }
+}

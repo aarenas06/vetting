@@ -96,60 +96,17 @@ class modelo
             return false;
         }
     }
-
-    // public function InsertPlanServices($data)
-    // {
-    //     try {
-    //         $columnas = implode(", ", array_keys($data));
-    //         $valores = array_values($data);
-    //         $placeholders = implode(", ", array_fill(0, count($valores), "?"));
-    //         $sql = "INSERT INTO tbservicios ($columnas) VALUES ($placeholders)";
-    //         $stmt = $this->CNX1->prepare($sql);
-    //         $stmt->execute($valores);
-    //         return 1;
-    //     } catch (PDOException $e) {
-    //         die("Error al insertar los datos: " . $e->getMessage());
-    //         return false;
-    //     }
-    // }
-
-    // public function tbdetalle($idPlan)
-    // {
-    //     $sql = "SELECT tb2.*  ,tb1.ServiciosEst Est,tb1.idTbPlanes idPlan
-    //     FROM  tbservicios tb1
-    //     inner JOIN  tboptservicios tb2 on tb2.IdoptServicios=tb1.idTbServicios
-    //     WHERE tb1.idTbPlanes=$idPlan";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    //     $row = $sql->fetchAll(PDO::FETCH_NAMED);
-    //     return $row;
-    // }
-    // public function ChangeEst($idPlan, $idServicio, $new)
-    // {
-    //     $sql = "UPDATE tbservicios SET ServiciosEst=$new WHERE  idTbServicios=$idServicio AND idTbPlanes=$idPlan";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    // }
-    // public function ChangeEstPlan($idPlan, $new)
-    // {
-    //     $sql = "UPDATE tbplanes SET PlanEst=$new WHERE  idTbPlanes=$idPlan";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    // }
-    // public function ListData($idPlan)
-    // {
-    //     $sql = "SELECT * FROM tbplanes where idTbPlanes =$idPlan";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    //     $row = $sql->fetch(PDO::FETCH_NAMED);
-    //     return $row;
-    // }
-    // public function UpdatePlan($idPlan, $PlanNom, $PlanVigenciaDia, $PlanCosto, $PlanVigenciaMes)
-    // {
-    //     $sql = "UPDATE tbplanes SET PlanNom='$PlanNom',PlanVigenciaDia=$PlanVigenciaDia,PlanCosto=$PlanCosto, PlanVigenciaMes=$PlanVigenciaMes WHERE  idTbPlanes=$idPlan";
-    //     $sql = $this->CNX1->prepare($sql);
-    //     $sql->execute();
-    // }
+    public function HistorialMasco($data)
+    {
+        $sql = "SELECT citas.idTbCitas,mas.MascoNom,serv.OptNombre,citas.CitaDate,citas.CitaObs FROM tbcitas citas
+            LEFT JOIN tbmascotas mas ON mas.idtbMascotas=citas.idtbMascotas
+            LEFT JOIN tboptservicios serv ON serv.IdoptServicios=citas.idTbServicios 
+            WHERE idtbMascotas='" . $data['IdMasco'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
 
     public function GetModulos()
     {

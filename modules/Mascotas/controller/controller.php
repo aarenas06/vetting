@@ -118,53 +118,11 @@ class Controller
         }
     }
 
-
-    // public function tbdetalle()
-    // {
-    //     $idPlan = $_POST['idPlan'];
-    //     $data = $this->MODEL->tbdetalle($idPlan);
-    //     if ($data) {
-    //         include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Planes/layout/tbDetalle.php');
-    //     } else {
-    //         echo 'No Hay Planes Aún Creados';
-    //     }
-    // }
-    // public function ChangeEst()
-    // {
-    //     if ($_POST['Est'] == 1) {
-    //         $new = 2;
-    //     } else {
-    //         $new = 1;
-    //     }
-    //     $update = $this->MODEL->ChangeEst($_POST['idPlan'], $_POST['idServicio'], $new);
-    // }
-    // public function ChangeEstPlan()
-    // {
-    //     if ($_POST['Est'] == 1) {
-    //         $new = 2;
-    //     } else {
-    //         $new = 1;
-    //     }
-    //     $update = $this->MODEL->ChangeEstPlan($_POST['idPlan'], $new);
-    // }
-    // public function listData()
-    // {
-    //     $idPlan = $_POST['idPlan'];
-    //     $data = $this->MODEL->listData($idPlan);
-    //     if ($data) {
-    //         include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Planes/layout/ListData.php');
-    //     } else {
-    //         echo 'No Hay Planes Aún Creados';
-    //     }
-    // }
-    // public function UpdatePlan()
-    // {
-    //     $UpdatePlan = $this->MODEL->UpdatePlan($_POST['idPlan'], $_POST['PlanNom'], $_POST['PlanVigenciaDia'], $_POST['PlanCosto'], $_POST['PlanVigenciaMes']);
-    // }
-    // public function InsertEmp()
-    // {
-    //     print_r($_POST);
-    // }
+    public function HistorialMasco()
+    {
+        $datos = $this->MODEL->HistorialMasco($_POST);
+        echo json_encode($datos);
+    }
 }
 $controller = new Controller();
 

@@ -235,30 +235,39 @@ async function ChangeEstMasco(idMasco, chip, Est) {
     }
   });
 }
+
 async function HistorialMasco(IdMasco) {
   let formData = new FormData();
   formData.append("funcion", "HistorialMasco");
   formData.append("IdMasco", IdMasco);
   try {
-    let req2 = await fetch("/vetting/modules/home/controller/controller.php", {
-      method: "POST",
-      body: formData,
-    });
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     let res2 = await req2.json();
-    // console.log(res2[0]);
 
+    // Limpiar el contenido del modal antes de agregar los nuevos datos
+    let ContMascotas = document.getElementById("InfoHistorial");
+    ContMascotas.innerHTML = ""; // Limpia el contenido previo
+
+    let hc = document.getElementById("Hc");
+    hc.innerHTML = "Historial Clínico" + " - " + res2[0]["MascoNom"];
+
+    // Iterar sobre la respuesta para mostrar los nuevos datos
     res2.forEach((item) => {
-      let ContMascotas = document.getElementById("InfoHistorial");
       ContMascotas.innerHTML += `
       <br>
         <section class="row">
-          <section class="col-md-4">
+          <section class="col-md-12">
             <div class="card custom-card">
               <div class="card-header">
-                <h4 class="card-title" style="font-size:19px;"><b>${item["Nombre"]}</b></h4>
-                <p class="card-text" style="text-align:left; color:black;">${item["OptNombre"]}</p>
-                <p class="card-text" style="text-align:left; color:black;">${item["CitaDate"]}</p>
+                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["OptNombre"]}</p>
+                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["CitaDate"]}</p>
               </div>
 
               <div class="card-body">

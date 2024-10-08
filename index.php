@@ -2,6 +2,21 @@
 <html>
 
 <style>
+  .slider_img-box img {
+    width: 400px;
+    /* Ancho fijo */
+    height: 300px;
+    /* Altura fija, igual al ancho */
+    object-fit: cover;
+    /* Asegura que la imagen cubra el área sin deformarse */
+    border-radius: 12px;
+    /* Hace la imagen circular */
+    display: block;
+    /* Se asegura que se comporte como un bloque */
+    margin: 0 auto;
+    /* Centra la imagen horizontalmente */
+  }
+
   /* Estilos para los botones */
   .quote_btn-container button {
     color: black;
@@ -152,6 +167,95 @@
     opacity: 1;
     /* Asegura que el color del placeholder se vea */
   }
+
+  /*+++++++++ Tamaño slider +++++++*/
+  .hero_area {
+    max-width: auto;
+    max-height: 85vh;
+  }
+
+  /*+++++++++ End slider +++++++*/
+
+  /*++++++++++ setion 2 +++++++++++++*/
+  #imgeSec2 img {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+
+  /* Efecto cortina para el texto */
+  #textSec2 {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+
+  /* Cuando se activa el scroll y se visualiza */
+  .section-visible #imgeSec2 img {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .section-visible #textSec2 {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /*+++++++ End section 2 +++++++++++++*/
+
+  /*+++++++ Section Service ++++++++++++*/
+  #imgService {
+    border-radius: 10px;
+    margin-top: 30%;
+  }
+
+  /* Animaciones */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mantener los elementos ocultos antes de la animación */
+  .hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  #ServiImg.hidden {
+    transform: translateY(-100%);
+  }
+
+  /* Agregar la clase para activar animaciones */
+  .section-visible {
+    animation: slideInLeft 0.5s forwards;
+    /* Para elementos que entran desde la izquierda */
+  }
+
+  #ServiImg.section-visible {
+    animation: slideInDown 0.5s forwards;
+    /* Para el ServiImg que entra desde arriba */
+  }
+
+  /*+++++++ End Section Service ++++++++*/
 </style>
 
 <head>
@@ -187,28 +291,24 @@
 
 </head>
 
-<body>
-
+<body class="body">
   <!-- Botón flotante de WhatsApp -->
   <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
   <div class="hero_area">
-    <!-- header section strats -->
+    <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href="index.html">
             <img src="images/logo.png" alt="">
-            <span>
-              Petology
-            </span>
+            <span>Petology</span>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
@@ -219,7 +319,7 @@
 
             <!-- Botón "Registrate" -->
             <div class="quote_btn-container d-flex justify-content-center">
-              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalRegistrase">Registrase</button>
+              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalRegistrase">Registrarse</button>
             </div>
 
             <!-- Botón "Iniciar Sesion" con margen a la izquierda -->
@@ -227,274 +327,113 @@
               <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar Sesion</button>
             </div>
           </div>
-
-
         </nav>
       </div>
     </header>
     <!-- end header section -->
-    <!-- slider section -->
-    <section class=" slider_section position-relative">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        </ol>
+
+    <!-- Slider Section -->
+    <section class="slider_section position-relative">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
+          <!-- Slide 1 -->
           <div class="carousel-item active">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-4 offset-md-2">
                   <div class="slider_detail-box">
-                    <h1>
-                      Professional
-                      <span>
-                        Care Your Pet
-                      </span>
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever
-                    </p>
+                    <h1>Professional <span>Care Your Pet</span></h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div class="btn-box">
-                      <a href="" class="btn-1">
-                        Buy now
-                      </a>
-                      <a href="" class="btn-2">
-                        Contact
-                      </a>
+                      <a href="#" class="btn btn-primary">Buy now</a>
+                      <a href="#" class="btn btn-outline-secondary">Contact</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="slider_img-box">
-                    <img src="images/slider-img.png" alt="">
+                    <!-- Imagen del slider con tamaño fijo -->
+                    <img src="asset/images/slider-img-1.png" class="img-fluid" alt="Slider Image 1">
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Slide 2 -->
           <div class="carousel-item">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-4 offset-md-2">
                   <div class="slider_detail-box">
-                    <h1>
-                      Professional
-                      <span>
-                        Care Your Pet
-                      </span>
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever
-                    </p>
+                    <h1>Professional <span>Care Your Pet</span></h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div class="btn-box">
-                      <a href="" class="btn-1">
-                        Buy now
-                      </a>
-                      <a href="" class="btn-2">
-                        Contact
-                      </a>
+                      <a href="#" class="btn btn-primary">Buy now</a>
+                      <a href="#" class="btn btn-outline-secondary">Contact</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="slider_img-box">
-                    <img src="images/slider-img.png" alt="">
+                    <!-- Imagen del slider con tamaño fijo -->
+                    <img src="asset/images/slider-img-2.png" class="img-fluid" alt="Slider Image 1">
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Slide 3 -->
           <div class="carousel-item">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-4 offset-md-2">
                   <div class="slider_detail-box">
-                    <h1>
-                      Professional
-                      <span>
-                        Care Your Pet
-                      </span>
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever
-                    </p>
+                    <h1>Professional <span>Care Your Pet</span></h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div class="btn-box">
-                      <a href="" class="btn-1">
-                        Buy now
-                      </a>
-                      <a href="" class="btn-2">
-                        Contact
-                      </a>
+                      <a href="#" class="btn btn-primary">Buy now</a>
+                      <a href="#" class="btn btn-outline-secondary">Contact</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="slider_img-box">
-                    <img src="images/slider-img.png" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4 offset-md-2">
-                  <div class="slider_detail-box">
-                    <h1>
-                      Professional
-                      <span>
-                        Care Your Pet
-                      </span>
-                    </h1>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn-1">
-                        Buy now
-                      </a>
-                      <a href="" class="btn-2">
-                        Contact
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="slider_img-box">
-                    <img src="images/slider-img.png" alt="">
+                    <!-- Imagen del slider con tamaño fijo -->
+                    <img src="asset/images/slider-img-3.png" class="img-fluid" alt="Slider Image 1">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
+        <!-- Controles de navegación (prev y next) -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </section>
-    <!-- end slider section -->
+    <!-- End Slider Section -->
   </div>
 
-  <!-- Modal Iniciar Sesion-->
-  <div class="modal fade" id="exampleModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <center>
-
-            <h2>Inicia Sesión</h2>
-
-          </center>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
-            <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
-            <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
-          </div>
-          <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
-          <center>
-            <button style="margin-top: 10px;" class="btn btn-block btn-success btn-sm" onclick="Validar()">Ingresar</button>
-          </center>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Registrarse-->
-  <div class="modal fade custom-modal-registrarse" id="exampleModalRegistrase" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Registrarse</h4>
-        </div>
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box btn-1" id="basic-addon1">
-              <i class="fa-solid fa-user-large"></i>
-            </span>
-              <input type="text" class="form-control" id="NomPropietarios" placeholder="Nombre" aria-label="NomPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="IdentPropietarios" placeholder="Identificación" aria-label="IdentPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-phone-volume" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="TelPropietarios" placeholder="Teléfono" aria-label="TelPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="DirPropietarios" placeholder="Dir. Residencial" aria-label="DirPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
-            </span>
-            <input type="email" class="form-control" id="EmailPropietarios" placeholder="Correo Electrónico" aria-label="EmailPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="UsuPropietarios" placeholder="Usuario" aria-label="UsuPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-key" style="color: #ffffff;"></i>
-            </span>
-            <input type="password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
-          </div>
-
-          <center>
-            <hr>
-            <button class="btn btn-block btn-primary btn-sm" onclick="InsertPropietarios()">Registrarse</button>
-          </center>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- about Registrarse -->
+  <!-- Section 2 -->
   <section class="about_section layout_padding">
-    <div class="container">
+    <div class="container" id="section2">
       <div class="row">
         <div class="col-md-6">
-          <div class="img-box">
-            <img src="images/about.png" alt="">
+          <div class="img-box" id="imgeSec2">
+            <img src="asset/images/imgSection2.jpg" alt="">
           </div>
         </div>
         <div class="col-md-6">
-          <div class="detail-box">
+          <div class="detail-box" id="textSec2">
             <h2 class="custom_heading">
               About Our Pets
               <span>
@@ -516,20 +455,21 @@
       </div>
     </div>
   </section>
+  <!-- End Section 2 -->
 
-  <!-- service section -->
-  <section class="service_section layout_padding">
+  <!-- service section 3 -->
+  <section class="service_section layout_padding" id="service_section">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 offset-md-2">
+        <div class="col-md-6 offset-md-2" id="Servi1">
           <h2 class="custom_heading">
             Our <span>Services</span>
           </h2>
           <div class="container layout_padding2">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-4" id="Servi11">
                 <div class="img_box">
-                  <img src="images/s-1.png" alt="">
+                  <img src="asset/images/s-1.png" alt="">
                 </div>
                 <div class="detail_box">
                   <h6>
@@ -541,9 +481,9 @@
                   </p>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" id="Servi12">
                 <div class="img_box">
-                  <img src="images/s-2.png" alt="">
+                  <img src="asset/images/s-2.png" alt="">
                 </div>
                 <div class="detail_box">
                   <h6>
@@ -555,9 +495,9 @@
                   </p>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" id="Servi13">
                 <div class="img_box">
-                  <img src="images/s-3.png" alt="">
+                  <img src="asset/images/s-3.png" alt="">
                 </div>
                 <div class="detail_box">
                   <h6>
@@ -577,20 +517,20 @@
             </a>
           </div>
         </div>
-        <div class="col-md-4">
-          <img src="images/tool.png" alt="" class="w-100">
+        <div class="col-md-4" id="ServiImg">
+          <img id="imgService" src="asset/images/imgSection3.jpg" alt="" class="w-100">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- end service section -->
+  <!-- end service section 3 -->
 
   <!-- end gallery section -->
 
   <!-- buy section -->
 
-  <section class="buy_section layout_padding">
+  <!-- <section class="buy_section layout_padding">
     <div class="container">
       <h2>
         You Can Buy Pet From Our Clinic
@@ -605,12 +545,12 @@
         </a>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- end buy section -->
 
   <!-- client section -->
-  <section class="client_section layout_padding-bottom">
+  <!-- <section class="client_section layout_padding-bottom">
     <div class="container">
       <h2 class="custom_heading text-center">
         What Say Our
@@ -700,11 +640,8 @@
         </div>
 
       </div>
-
-
     </div>
-
-  </section>
+  </section> -->
   <!-- end client section -->
 
   <!-- map section -->
@@ -743,10 +680,7 @@
         </div>
       </div>
     </div>
-    </div>
   </section>
-
-
   <!-- end map section -->
 
   <!-- info section -->
@@ -792,8 +726,106 @@
       </div>
     </div>
   </section>
-
   <!-- end info_section -->
+
+  <!-- Modals Sections -->
+  <!-- Modal Iniciar Sesion-->
+  <div class="modal fade" id="exampleModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <center>
+
+            <h2>Inicia Sesión</h2>
+
+          </center>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
+            <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
+            <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
+          </div>
+          <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
+          <center>
+            <button style="margin-top: 10px;" class="btn btn-block btn-success btn-sm" onclick="Validar()">Ingresar</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Registrarse-->
+  <div class="modal fade custom-modal-registrarse" id="exampleModalRegistrase" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Registrarse</h4>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box btn-1" id="basic-addon1">
+              <i class="fa-solid fa-user-large"></i>
+            </span>
+            <input type="text" class="form-control" id="NomPropietarios" placeholder="Nombre" aria-label="NomPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="IdentPropietarios" placeholder="Identificación" aria-label="IdentPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-phone-volume" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="TelPropietarios" placeholder="Teléfono" aria-label="TelPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="DirPropietarios" placeholder="Dir. Residencial" aria-label="DirPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+            </span>
+            <input type="email" class="form-control" id="EmailPropietarios" placeholder="Correo Electrónico" aria-label="EmailPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
+            </span>
+            <input type="text" class="form-control" id="UsuPropietarios" placeholder="Usuario" aria-label="UsuPropietarios">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text btn-box">
+              <i class="fa-solid fa-key" style="color: #ffffff;"></i>
+            </span>
+            <input type="password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
+          </div>
+
+          <center>
+            <hr>
+            <button class="btn btn-block btn-primary btn-sm" onclick="InsertPropietarios()">Registrarse</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modals Sections -->
 
   <!-- footer section -->
   <section class="container-fluid footer_section">
@@ -812,24 +844,75 @@
     // Australia.
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 11,
+        zoom: 13, // Nivel de zoom actualizado
         center: {
-          lat: 40.645037,
-          lng: -73.880224
+          lat: 2.9386, // Coordenada de latitud para Neiva
+          lng: -75.2715 // Coordenada de longitud para Neiva
         },
       });
 
       var image = 'images/maps-and-flags.png';
       var beachMarker = new google.maps.Marker({
         position: {
-          lat: 40.645037,
-          lng: -73.880224
+          lat: 2.9386, // Coordenada de latitud para Neiva
+          lng: -75.2715 // Coordenada de longitud para Neiva
         },
         map: map,
         icon: image
       });
     }
+
+    //FUNCTION FOR SECTION 2 
+    window.addEventListener('scroll', function() {
+      const section = document.querySelector('#section2');
+      const sectionPosition = section.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.3;
+
+      if (sectionPosition < screenPosition) {
+        section.classList.add('section-visible');
+      }
+    });
+    //END FUNCTION FOR SECTION 2 
+
+    //FUNTION SERVICE SECTION 3
+    document.addEventListener("DOMContentLoaded", function() {
+      const serviSection = document.getElementById("service_section");
+      const serviElements = document.querySelectorAll("#Servi1, #Servi11, #Servi12, #Servi13");
+      const serviImg = document.getElementById("ServiImg");
+      let hasAnimated = false; // Para evitar que la animación se ejecute varias veces
+
+      // Función para verificar si la sección está visible en el viewport
+      function animateOnScroll() {
+        const sectionPosition = serviSection.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3; // Ajustar para activar un poco antes
+
+        if (sectionPosition < screenPosition && !hasAnimated) {
+          // Agregar la clase 'section-visible' para activar las animaciones
+          serviElements.forEach(function(element) {
+            element.classList.add("section-visible");
+          });
+          serviImg.classList.add("section-visible");
+
+          hasAnimated = true; // Evitar que se repita la animación
+        }
+      }
+
+      // Añadir la clase 'hidden' inicialmente a todos los elementos
+      serviElements.forEach(function(element) {
+        element.classList.add("hidden");
+      });
+      serviImg.classList.add("hidden");
+
+      // Detectar el evento de scroll para animar los elementos cuando la sección entre en el viewport
+      window.addEventListener("scroll", animateOnScroll);
+
+      // Llamar a la función por si la sección ya está en el viewport al cargar la página
+      animateOnScroll();
+    });
+
+    //END FUNTION SERVICE SECTION 3
   </script>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- google map js -->
@@ -839,7 +922,6 @@
 
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
-
 </body>
 </body>
 

@@ -18,21 +18,20 @@
         </thead>
         <tbody>
             <?php
-            foreach ($data as $dt) {
-                if ($dt['Estado'] == 1) {
+            foreach ($datos as $dt) {
+                if ($dt['Estado'] = 1) {
                     $back = 'success';
                     $text = 'Activo';
                 } else {
                     $back = 'danger';
-                    $text = 'Innactivo';
+                    $text = 'Inactivo';
                 }
 
                 $control = new Controller;
                 // Obtención de raza, validar si es necesario
                 $raza = $control->ObtRaza($dt['Raza']);
-                // print_r($raza);
             ?>
-                <>
+                <tr> <!-- Se añade la apertura de la fila -->
                     <th scope="row"><?= $dt['Cod'] ?></th>
                     <td><?= $dt['Chip'] ?></td>
                     <td><?= $dt['Nombre'] ?></td>
@@ -45,8 +44,8 @@
                     <td><?= $dt['Agresion'] ?></td>
                     <td class="text-center"><button class="btn btn-info btn-sm" onclick="HistorialMasco(<?= $dt['idMasco'] ?>)" data-bs-toggle="modal" data-bs-target="#HistorialMasco"> <i class="fa-solid fa-file-medical fa-beat"></i></button></td>
                     <td class="text-center"> <button onclick="ChangeEstMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>',<?= $dt['Estado'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
-                    </tr>
-                <?php } ?>
+                </tr> <!-- Se añade el cierre de la fila -->
+            <?php } ?>
         </tbody>
     </table>
 </div>

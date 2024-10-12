@@ -63,6 +63,8 @@ listMascotas();
 async function listMascotas() {
   let formData = new FormData();
   formData.append("funcion", "listMascotas");
+  formData.append("UsuCod", $("#UsuCod").val());
+
   try {
     let req2 = await fetch(
       "/vetting/modules/Mascotas/controller/controller.php",
@@ -117,6 +119,7 @@ async function InsertMascota() {
   var MascoPatologia = $("#MascoPatologia").val();
   var MascoFoto = $("#MascoFotoInput").get(0).files[0];
   var UsuCod = $("#UsuCod").val();
+  var Estado = "1"; //Activo
 
   //Validación si los hay campos vacios
   if (
@@ -155,6 +158,7 @@ async function InsertMascota() {
   formData.append("MascoPatologia", MascoPatologia);
   formData.append("MascoFoto", MascoFoto);
   formData.append("UsuCod", UsuCod);
+  formData.append("Estado", Estado);
 
   try {
     let req2 = await fetch(
@@ -257,6 +261,15 @@ async function HistorialMasco(IdMasco) {
 
     let hc = document.getElementById("Hc");
     hc.innerHTML = "Historial Clínico" + " - " + res2[0]["MascoNom"];
+
+    // Verificar si hay más de 3 registros para agregar scroll
+    if (res2.length > 3) {
+      ContMascotas.style.maxHeight = "400px"; // Ajusta el tamaño máximo del contenedor
+      ContMascotas.style.overflowY = "auto"; // Activa el scroll vertical
+    } else {
+      ContMascotas.style.maxHeight = "none"; // Si hay 3 o menos, sin límite
+      ContMascotas.style.overflowY = "visible"; // Sin scroll
+    }
 
     // Iterar sobre la respuesta para mostrar los nuevos datos
     res2.forEach((item) => {

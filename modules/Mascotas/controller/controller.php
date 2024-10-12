@@ -72,12 +72,11 @@ class Controller
 
     public function listMascotas()
     {
-        $data = $this->MODEL->listMascotas();
-        if ($data) {
-            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Mascotas/layout/listMascotas.php');
-        } else {
-            echo 'No Hay Macotas Aún Creados';
+        $datos = $this->MODEL->listMascotas($_POST);
+        if ($datos == 'vacio') {  // Se usa == para comparar
+            echo 'No Hay Mascotas Aún Creadas';
         }
+        include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Mascotas/layout/listMascotas.php');
     }
 
     public function InsertMascota()
@@ -107,6 +106,7 @@ class Controller
             'Mascoagresividad' => $_POST['Mascoagresividad'],
             'MascoPatologia' => $_POST['MascoPatologia'],
             'UsuCod' => $_POST['UsuCod'],
+            'Estado' => $_POST['Estado'],
             'fotoMasco' => $fotoMasco
         ];
 

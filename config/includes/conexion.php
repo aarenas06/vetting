@@ -4,12 +4,15 @@ ini_set('display_errors', 1);
 
 class conexion
 {
-    private $host = 'localhost';
-    private $usuario = 'root';
-    private $contrasena = '';
-    private $nombreBaseDatos = 'vetconnect';
+    // private $host = 'localhost';
+    // private $usuario = 'root';
+    // private $contrasena = '';
+    // private $nombreBaseDatos = 'vetconnect';
 
-
+    private $host = '15.235.119.22';
+    private $usuario = 'mercadou_Developer0610';
+    private $contrasena = '#FXLCKlV2Rgf';
+    private $nombreBaseDatos = 'mercadou_vetconnect';
 
     public function mysql()
     {

@@ -50,23 +50,28 @@ class modelo
     }
 
 
-    public function listMascotas()
+    public function listMascotas($data)
     {
         $sql = "SELECT 	idtbMascotas idMasco, MascoCod Cod, MascoChip Chip, MascoNom Nombre, idTbRazas Raza, MascoFechNac FechNaci,CONCAT(MascoYear, ' Años ', MascoMes, ' Meses') EdadMascota, 
-        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion, MascoEst Estado FROM tbmascotas";
+        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion, MascoEst Estado FROM tbmascotas 
+        where idTbUsuarios='" . $data['UsuCod'] . "'";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
-        $row = $sql->fetchAll(PDO::FETCH_NAMED);
-        return $row;
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        if ($sql->rowCount() > 0) {
+            return $row;
+        } else {
+            return 'vacio';
+        }
     }
 
     public function InsertMascota($data)
     {
         try {
             $sql = "INSERT INTO tbmascotas (idTbUsuarios, MascoCod, MascoNom, idTbRazas, MascoFechNac, MascoYear, MascoMes, MascoSex, MascoPelaje, 
-                        MascoPeso, MascoComidaHab, MascoVivienda, MascoUltCelo, MascoChip, MascoPatologia, MascoAdop, MascoPic, MascoAgresion) 
+                        MascoPeso, MascoComidaHab, MascoVivienda, MascoUltCelo, MascoChip, MascoPatologia, MascoAdop, MascoPic, MascoAgresion, MascoEst) 
                 VALUES (:idTbUsuarios, :MascoCod, :MascoNom, :idTbRazas, :MascoFechNac, :MascoYear, :MascoMes, :MascoSex, :MascoPelaje, 
-                        :MascoPeso, :MascoComidaHab, :MascoVivienda, :MascoUltCelo, :MascoChip, :MascoPatologia, :MascoAdop, :MascoPic, :MascoAgresion);";
+                        :MascoPeso, :MascoComidaHab, :MascoVivienda, :MascoUltCelo, :MascoChip, :MascoPatologia, :MascoAdop, :MascoPic, :MascoAgresion,:MascoEst);";
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':idTbUsuarios', $data['UsuCod']);
@@ -87,6 +92,7 @@ class modelo
             $stmt->bindParam(':MascoAdop', $data['MascoAdopcion']);
             $stmt->bindParam(':MascoPic', $data['fotoMasco']);
             $stmt->bindParam(':MascoAgresion', $data['Mascoagresividad']);
+            $stmt->bindParam(':MascoEst', $data['Estado']);
             $stmt->execute();
             $lastInsertId = $this->CNX1->lastInsertId();
             return true; // Retornamos la respuesta de la DB

@@ -3,6 +3,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/Mascotas/controller/controller.php');
 $control = new Controller;
 $Modulos = $control->GetModulos();
+$UsuCod = $_SESSION['UsuCod'];
 ?>
 <style>
     .header {
@@ -62,6 +63,7 @@ $Modulos = $control->GetModulos();
 <h5>Gestiona tus Mascotas</h5>
 <hr>
 <div class="row">
+    <input type="hidden" id="UsuCod" value="<?php echo $UsuCod;?>">
     <div class="col-lg-12">
         <div class="header">
             <div>

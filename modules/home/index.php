@@ -8,9 +8,18 @@ $Modulos = $control->GetModulos();
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 <style>
+    #ContMascotasWrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
     .custom-card {
         position: relative;
-        padding-top: 50px;
+        padding-top: 35px;
+        display: inline-block;
+        margin-right: 10px;
+        width: auto;
     }
 
     .circle-img {
@@ -36,15 +45,22 @@ $Modulos = $control->GetModulos();
         border-radius: 15px;
         border: 2px #000;
         background-color: #EAEDED;
+        margin-top: 60px;
     }
 
     .card-body {
         padding: 20px;
     }
 
+    .circle-img img {
+        border-radius: 50%;
+    }
+
+
     #maps {
         border-radius: 12px;
         border: 2px #000;
+        z-index: 3;
     }
 </style>
 
@@ -53,8 +69,11 @@ $Modulos = $control->GetModulos();
 <hr>
 
 <div class="container">
-    <section class="row" style="margin-top:5%;">
-        <div id="ContMascotas"></div>
+    <section class="row">
+        <section id="ContMascotasWrapper" class="col-md-12">
+            <div id="ContMascotas" class="d-flex flex-row overflow-auto">
+            </div>
+        </section>
     </section>
     <br>
     <section class="row">

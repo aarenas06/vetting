@@ -20,7 +20,7 @@ class Controller
         $EmpreAdj = $_FILES['EmpreAdj']['name'];
         $EmpreContr = $_FILES['EmpreContr']['name'];
         $NombreCarpeta = $_POST['EmpreNom'];
-        $rutaGuardar = $_SERVER['DOCUMENT_ROOT'] . "/vetting/asset/documentacion/contratos/$NombreCarpeta/";
+        $rutaGuardar = $_SERVER['DOCUMENT_ROOT'] . "/vetting/asset/documentacion/$NombreCarpeta/contratos/";
         if (!file_exists($rutaGuardar)) {
             mkdir($rutaGuardar, 0777, true);
         }
@@ -34,7 +34,7 @@ class Controller
         }
         if (move_uploaded_file($_FILES['EmpreContr']['tmp_name'], $rutaArchivoEmpreContr)) {
         }
-
+        $tok = $this->GetToken(15);
         $data = array(
             "EmpreNom" => $_POST['EmpreNom'],
             "EmpreNit" => $_POST['EmpreNit'],
@@ -44,6 +44,8 @@ class Controller
             "EmpreRepreTel" => $_POST['EmpreRepreTel'],
             "EmpreContr" => $nuevoNombreEmpreContr,
             "EmpreAdj" => $nuevoNombreEmpreAdj,
+            "EmpreTok" => $tok
+
         );
         $lastId = $this->MODEL->InsertEmp($data);
         $dataPago = array(
@@ -66,6 +68,18 @@ class Controller
             "EmpEmail" => $_POST['EmpreEmail'],
         );
         $this->MODEL->InsertUserAdmin($dataUsuario);
+    }
+    function GetToken($longitud)
+    {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longitudCaracteres = strlen($caracteres);
+        $token = '';
+
+        for ($i = 0; $i < $longitud; $i++) {
+            $token .= $caracteres[rand(0, $longitudCaracteres - 1)];
+        }
+
+        return $token;
     }
     private function getNombre($length)
     {

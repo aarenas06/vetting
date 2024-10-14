@@ -1,7 +1,12 @@
 <?php
-if (!isset($_POST)) {
-    echo 'hay accion';
-    print_r($_POST);
+
+// Verificar si las variables existen en el array $_GET
+if (isset($_GET['PreDict']) && isset($_GET['pack'])) {
+    $PreDict = $_GET['PreDict'];
+    $pack = $_GET['pack'];
+} else {
+    header("Location: /vetting/modules/405.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -17,11 +22,18 @@ if (!isset($_POST)) {
     <meta name="MobileOptimized" content="width" />
     <meta name="author" content="" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <link rel="shortcut icon" href="/vetting/plantilla/assets/img/icon.png" />
+    <link rel="icon" href="/vetting/plantilla/assets/img/icon.png" />
 
     <link id="themeColors" rel="stylesheet" href="/vetting/plantilla/assets/dist/css/style.min.css" />
 </head>
+
+<?php
+$PreDict = $_GET['PreDict'];
+$pack = $_GET['pack']; ?>
+<input type="hidden" id="PreDict" value="<?= $PreDict ?>">
+<input type="hidden" id="pack" value="<?= $pack ?>">
+
 
 <body>
 
@@ -46,30 +58,20 @@ if (!isset($_POST)) {
                                 <p class=" mb-9">Cuidando a tus mascotas, cuidamos de ti.</p>
 
                                 <hr>
-                                <form method="post" action="#">
+                                <div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Usuario</label>
-                                        <input type="text" class="form-control" name="UserEmp" aria-describedby="emailHelp">
+                                        <input type="text" class="form-control" name="UserEmp" id="UserEmp" aria-describedby="emailHelp">
                                     </div>
                                     <div class="mb-4">
                                         <label for="" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" name="PassEmp">
+                                        <input type="password" class="form-control" name="PassEmp" id="PassEmp">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <!-- <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
-                                            <label class="form-check-label text-dark" for="flexCheckChecked">
-                                                Recordar en este dispositivo
-                                            </label>
-                                        </div> -->
-                                        <a class="text-primary fw-medium" href="./authentication-forgot-password.html">¿Olvidaste la contraseña ?</a>
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Entrar</button>
-                                    <!-- <div class="d-flex align-items-center justify-content-center">
-                                        <p class="fs-4 mb-0 fw-medium">¿Nuevo en VetConnect?</p>
-                                        <a class="text-primary fw-medium ms-2" href="/vetting/plantilla/index.php/Portal/Registro">Crear una cuenta</a>
-                                    </div> -->
-                                </form>
+                                    <button type="submit" onclick="ValidarEmpr()" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Entrar</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,6 +80,9 @@ if (!isset($_POST)) {
 
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!--  Import Js Files -->
     <script src="/vetting/plantilla/assets/dist/libs/jquery/dist/jquery.min.js"></script>
@@ -89,6 +94,8 @@ if (!isset($_POST)) {
     <script src="/vetting/plantilla/assets/dist/js/app-style-switcher.js"></script>
     <script src="/vetting/plantilla/assets/dist/js/sidebarmenu.js"></script>
     <script src="/vetting/plantilla/assets/dist/js/custom.js"></script>
+    <script src="script.js"></script>
+
 </body>
 
 </html>

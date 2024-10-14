@@ -117,11 +117,11 @@
                             <span class="hide-menu">Empresas</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./app-calendar.html" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-truck-ramp-box"></i>
+                                    <i class="fa-solid fa-people-line"></i>
                                 </span>
-                                <span class="hide-menu">Inventario</span>
+                                <span class="hide-menu">Personal</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -317,7 +317,7 @@
                                                 </a>
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
-                                                <a href="/vetting/plantilla/" class="btn btn-outline-primary">Cerrar Sesiòn</a>
+                                                <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesiòn</a>
                                             </div>
                                         </div>
                                     </div>

@@ -28,8 +28,8 @@ class Controller
             $_SESSION['Direccion'] = $validar['UsuDirec'];
             $_SESSION['Rol'] = $validar['idTbRoles'];
             $_SESSION['Emp'] = 0;
-
             $_SESSION['RolObs'] = $validar['RolNom'];
+            $_SESSION['Sexo'] = $validar['UsuSex'];
             $_SESSION['UsuEmail'] = $validar['UsuEmail'];
 
             echo json_encode('ok');
@@ -71,6 +71,8 @@ class Controller
             $_SESSION['Rol'] = $validar['idTbRoles'];
             $_SESSION['RolObs'] = $validar['RolNom'];
             $_SESSION['UsuEmail'] = $validar['EmpEmail'];
+            $_SESSION['Sexo'] = $validar['EmpSex'];
+
             echo json_encode(['idTbRoles' => $validar['idTbRoles'], 'success' => 'ok']);
         } else {
             echo json_encode('false');

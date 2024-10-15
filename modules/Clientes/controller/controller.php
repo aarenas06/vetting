@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Propietarios/model/model.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Clientes/model/model.php';
 date_default_timezone_set('America/Bogota');
 
 class Controller
@@ -27,11 +27,11 @@ class Controller
 
     public function listPropietarios()
     {
-        $data = $this->MODEL->listPropietarios();
+        $data = $this->MODEL->listPropietarios($_POST['Emp']);
         if ($data) {
-            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Propietarios/layout/listPropietarios.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Clientes/layout/listPropietarios.php');
         } else {
-            echo 'No Hay Propietarios Agregados...';
+            echo 'No Hay Clientes Agregados...';
         }
     }
 

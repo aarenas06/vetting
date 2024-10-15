@@ -1,10 +1,13 @@
 listPropietarios();
 async function listPropietarios() {
+  var Emp = $("#Emp").val();
+
   let formData = new FormData();
   formData.append("funcion", "listPropietarios");
+  formData.append("Emp", Emp);
   try {
     let req2 = await fetch(
-      "/vetting/modules/Propietarios/controller/controller.php",
+      "/vetting/modules/Clientes/controller/controller.php",
       {
         method: "POST",
         body: formData,
@@ -24,7 +27,7 @@ async function listPropietarios() {
   }
 }
 
-//funcion para ver la clave en el model de insertar Propietarios
+//funcion para ver la clave en el model de insertar Clientes
 document
   .getElementById("togglePassword")
   .addEventListener("click", function () {
@@ -46,8 +49,7 @@ async function InsertPropietarios() {
   var TelPropietarios = $("#TelPropietarios").val();
   var DirPropietarios = $("#DirPropietarios").val();
   var EmailPropietarios = $("#EmailPropietarios").val();
-  var UsuPropietarios = $("#UsuPropietarios").val();
-  var PassPropietarios = $("#PassPropietarios").val();
+  var Emp = $("#Emp").val();
 
   let formData = new FormData();
   formData.append("funcion", "InsertPropietarios");
@@ -56,13 +58,13 @@ async function InsertPropietarios() {
   formData.append("TelPropietarios", TelPropietarios);
   formData.append("DirPropietarios", DirPropietarios);
   formData.append("EmailPropietarios", EmailPropietarios);
-  formData.append("UsuPropietarios", UsuPropietarios);
-  formData.append("PassPropietarios", PassPropietarios);
+  formData.append("Emp", Emp);
+
   formData.append("Rol", "2");
 
   try {
     let req2 = await fetch(
-      "/vetting/modules/Propietarios/controller/controller.php",
+      "/vetting/modules/Clientes/controller/controller.php",
       {
         method: "POST",
         body: formData,
@@ -108,7 +110,7 @@ async function GetDataPropietarios(idUsuario, idRol) {
 
   try {
     let req2 = await fetch(
-      "/vetting/modules/Propietarios/controller/controller.php",
+      "/vetting/modules/Clientes/controller/controller.php",
       {
         method: "POST",
         body: formData,
@@ -153,7 +155,7 @@ async function GetDataPropietarios(idUsuario, idRol) {
   }
 }
 
-//funcion para ver la clave en el model de Update Propietarios
+//funcion para ver la clave en el model de Update Clientes
 document
   .getElementById("togglePasswordUpt")
   .addEventListener("click", function () {
@@ -194,7 +196,7 @@ async function UpdatePropietarios() {
 
   try {
     let req2 = await fetch(
-      "/vetting/modules/Propietarios/controller/controller.php",
+      "/vetting/modules/Clientes/controller/controller.php",
       {
         method: "POST",
         body: formData,
@@ -253,7 +255,7 @@ async function DeletePropietarios(idUsuario) {
       formData.append("idUsuario", idUsuario);
 
       let req = await fetch(
-        "/vetting/modules/Propietarios/controller/controller.php",
+        "/vetting/modules/Clientes/controller/controller.php",
         {
           method: "POST",
           body: formData,
@@ -268,7 +270,7 @@ async function DeletePropietarios(idUsuario) {
           title: "Eliminado!",
           text: "El Propietario ha sido eliminado exitosamente..!.",
         });
-        // Actualiza la tabla principal de Propietarios
+        // Actualiza la tabla principal de Clientes
         listPropietarios();
       } else {
         Swal.fire({

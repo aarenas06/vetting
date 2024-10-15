@@ -74,7 +74,7 @@ $GetRol = $control->GetRol();
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <label for="" class="form-label">Rol</label>
+                        <label for="" class="form-label">Sexo</label>
                         <select class="form-select form-select-sm" aria-label="" id="EmpSex">
                             <option selected></option>
                             <option value="1">Maculino</option>

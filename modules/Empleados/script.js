@@ -74,6 +74,7 @@ async function InsertEmpl(button) {
     });
     $("#insertEmp").modal("hide");
     button.innerHTML = originalContent;
+    ListEmp();
   } catch {
     Swal.fire({
       icon: "error",

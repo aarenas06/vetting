@@ -118,8 +118,7 @@ async function ValidarEmpr() {
       if (res2.idTbRoles === 3) {
         const urlRedireccion = `/vetting/modules/principal.php?p=DashEmp/index`;
         window.location.href = urlRedireccion;
-      }
-      if (res2.idTbRoles === 4) {
+      } else {
         const urlRedireccion = `/vetting/modules/principal.php?p=DashVet/index`;
         window.location.href = urlRedireccion;
       }

@@ -17,8 +17,8 @@ class modelo
     public function InsertPropietarios($data)
     {
         try {
-            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla) 
-                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios)";
+            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla,indEmpr) 
+                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios,:indEmpr)";
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':Rol', $data['Rol'], PDO::PARAM_INT);
@@ -27,8 +27,9 @@ class modelo
             $stmt->bindParam(':TelPropietarios', $data['TelPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':DirPropietarios', $data['DirPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':EmailPropietarios', $data['EmailPropietarios'], PDO::PARAM_STR);
-            $stmt->bindParam(':UsuPropietarios', $data['UsuPropietarios'], PDO::PARAM_STR);
-            $stmt->bindParam(':PassPropietarios', $data['PassPropietarios'], PDO::PARAM_STR);
+            $stmt->bindParam(':UsuPropietarios', $data['EmailPropietarios'], PDO::PARAM_STR);
+            $stmt->bindParam(':PassPropietarios', $data['IdentPropietarios'], PDO::PARAM_STR);
+            $stmt->bindParam(':indEmpr', $data['Emp'], PDO::PARAM_STR);
             $stmt->execute();
             $lastInsertId = $this->CNX1->lastInsertId();
             return true; // Retornamos la respuesta de la DB
@@ -48,9 +49,9 @@ class modelo
         return $row;
     }
 
-    public function listPropietarios()
+    public function listPropietarios($Emp)
     {
-        $sql = "SELECT * FROM `tbusuarios` where idTbRoles='2';";
+        $sql = "SELECT * FROM `tbusuarios` where idTbRoles='2' AND indEmpr=$Emp;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);

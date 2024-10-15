@@ -56,6 +56,7 @@ class Controller
             "EmpCla" => $_POST['EmplCc'],
             "EmpCel" => $_POST['EmplCelu'],
             "EmpEst" => 1,
+            "EmpSex" => $_POST['EmpSex'],
             "EmpEmail" => $_POST['EmplEmail'],
             "EmplUsuCrea" => $_POST['UsuCod'],
         );

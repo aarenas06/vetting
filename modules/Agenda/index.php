@@ -18,7 +18,7 @@
 <br>
 <div class="row">
     <div class="col-lg-8">
-        <div class="container">
+        <div class="container" style="background-color: white;">
             <div id='calendar'></div>
         </div>
     </div>
@@ -54,7 +54,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            locale: 'es', // Cambia el idioma a español
+            locale: 'es',
 
         });
         calendar.render();

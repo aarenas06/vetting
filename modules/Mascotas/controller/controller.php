@@ -123,6 +123,40 @@ class Controller
         $datos = $this->MODEL->HistorialMasco($_POST);
         echo json_encode($datos);
     }
+
+    public function EditDataMasco()
+    {
+        $datos = $this->MODEL->EditDataMasco($_POST);
+        echo json_encode($datos);
+    }
+
+    public function SaveEditMasco()
+    {
+        if (isset($_FILES['EditMascoFoto']) && $_FILES['EditMascoFoto']['tmp_name'] != '') {
+            $FotoTmpPath = $_FILES['EditMascoFoto']['tmp_name'];
+            $imge = file_get_contents($FotoTmpPath);
+            $fotoMasco = base64_encode($imge);
+        } else {
+            $fotoMasco = '';
+        }
+
+        $dataArray = [
+            'IdMascoEdit' => $_POST['IdMascoEdit'],
+            'EditMascoNom' => $_POST['EditMascoNom'],
+            'EditMascoFecNaci' => $_POST['EditMascoFecNaci'],
+            'EditMascoYear' => $_POST['EditMascoYear'],
+            'EditMascoMes' => $_POST['EditMascoMes'],
+            // 'UsuCod' => $_POST['UsuCod'],
+            'fotoMasco' => $fotoMasco
+        ];
+
+        $datos = $this->MODEL->SaveEditMasco($dataArray);
+        if (isset($datos)) {
+            echo json_encode(true);
+        } else {
+            echo json_encode(false);
+        }
+    }
 }
 $controller = new Controller();
 

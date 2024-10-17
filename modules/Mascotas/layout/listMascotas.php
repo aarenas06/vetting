@@ -13,6 +13,7 @@
                 <th scope="col">Patologia</th>
                 <th scope="col">Agresión</th>
                 <th scope="col">Historial</th>
+                <th scope="col">Editar</th>
                 <th scope="col">Estado</th>
             </tr>
         </thead>
@@ -44,7 +45,8 @@
                     <td><?= $dt['Agresion'] ?></td>
                     <td class="text-center"><button class="btn btn-info btn-sm" onclick="HistorialMasco(<?= $dt['idMasco'] ?>)" data-bs-toggle="modal" data-bs-target="#HistorialMasco"> <i class="fa-solid fa-file-medical fa-beat"></i></button></td>
                     <td class="text-center"> <button onclick="ChangeEstMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>',<?= $dt['Estado'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
-                </tr> <!-- Se añade el cierre de la fila -->
+                    <td class="text-center"><button class="btn btn-warning btn-sm" onclick="EditDataMasco(<?= $dt['idMasco'] ?>)"> <i class="fa-solid fa-pen-to-square"></i></button></td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>

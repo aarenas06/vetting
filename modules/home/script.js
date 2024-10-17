@@ -10,36 +10,46 @@ async function listMascotashome() {
     });
 
     let res2 = await req2.json();
-    // console.log(res2[0]);
+    console.log(res2[0]["Foto"]);
+
+    // Limpia el contenedor antes de agregar las tarjetas
+    let ContMascotas = document.getElementById("ContMascotas");
+    ContMascotas.innerHTML = "";
 
     res2.forEach((item) => {
-      let ContMascotas = document.getElementById("ContMascotas");
+      // Si la imagen es válida, genera el formato base64 correcto
+      let base64Image = `data:image/jpeg;base64,${item["Foto"].replace(
+        /\s/g,
+        ""
+      )}`;
+
+      // Inserta el HTML para cada mascota en el contenedor
       ContMascotas.innerHTML += `
-      <br>
-        <section class="row">
-          <section class="col-md-4">
-            <div class="card custom-card">
-              <div class="circle-img">
-                <img src="data:image/jpeg;base64,${item["Foto"]}" alt="Foto" class="img-fluid">
-              </div>
-    
-              <div class="card-body">
-                <div class="text-center">
-                  <h2 class="card-title" style="font-size:19px;"><b>${item["Nombre"]}</b></h2>
-                </div>
-                <div style="text-aling:left;">
-                  <p class="card-text" style="text-aling:left; color:black;"><b>Fec_Nacimiento:</b> ${item["Fech_Naci"]}</p>
-                  <p class="card-text" style="text-aling:left; color:black;"><b>Edad:</b> ${item["EdadMasco"]}</p>
-                  <p class="card-text" style="text-aling:left; color:black;"><b>Raza:</b> ${item["Raza"]}</p>
-                  <p class="card-text" style="text-aling:left; color:black;"><b>Chip:</b> ${item["Chip"]}</p>
-                </div>
-              </div>
-            </div>
+          <br>
+          <section class="row">
+              <section class="col-md-4">
+                  <div class="card custom-card">
+                      <div class="circle-img">
+                          <img src="${base64Image}" alt="Foto" class="img-fluid">
+                      </div>
+                      <div class="card-body">
+                          <div class="text-center">
+                              <h2 class="card-title" style="font-size:19px;"><b>${item["Nombre"]}</b></h2>
+                          </div>
+                          <div style="text-align:left;">
+                              <p class="card-text" style="color:black;"><b>Fec_Nacimiento:</b> ${item["Fech_Naci"]}</p>
+                              <p class="card-text" style="color:black;"><b>Edad:</b> ${item["EdadMasco"]}</p>
+                              <p class="card-text" style="color:black;"><b>Raza:</b> ${item["Raza"]}</p>
+                              <p class="card-text" style="color:black;"><b>Chip:</b> ${item["Chip"]}</p>
+                          </div>
+                      </div>
+                  </div>
+              </section>
           </section>
-        </section>
       `;
     });
   } catch (error) {
+    // Muestra el error con Swal y lo imprime en consola
     Swal.fire({
       icon: "error",
       title: "Error!",
@@ -66,5 +76,3 @@ function maps() {
     .bindPopup("Ubicación en Neiva, Huila, Colombia.")
     .openPopup();
 }
-
-

@@ -55,15 +55,17 @@ $UsuCod = $_SESSION['UsuCod'];
     }
 </style>
 <script type="text/javascript" src="/vetting/modules/Mascotas/script.js" defer></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
 
 <h3 class="title">Modulo Mascotas</h3>
 <h5>Gestiona tus Mascotas</h5>
 <hr>
 <div class="row">
-    <input type="hidden" id="UsuCod" value="<?php echo $UsuCod;?>">
+    <input type="hidden" id="UsuCod" value="<?php echo $UsuCod; ?>">
     <div class="col-lg-12">
         <div class="header">
             <div>
@@ -156,7 +158,7 @@ $UsuCod = $_SESSION['UsuCod'];
                     <div class="col-md-10">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="MascoFotoNombre" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
-                            <input type="file" id="MascoFotoInput" style="display: none;" accept=".jpg,.jpeg,.png" onchange="updateFileName()">
+                            <input type="file" id="MascoFotoInput" style="display: none;" accept=".jpg,.jpeg" onchange="updateFileName()">
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('MascoFotoInput').click();">Seleccionar</button>
                         </div>
                     </div>
@@ -188,21 +190,44 @@ $UsuCod = $_SESSION['UsuCod'];
     </div>
 </div>
 
-<!-- Modal Data -->
-<div class="modal fade" id="ModalData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Edit Masco -->
+<div class="modal fade" id="EditMasco" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modifica Plan</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Mascota</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="ListData" id="ListData"></div>
+                <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod']; ?>">
+                <input type="hidden" id="IdMascoEdit">
+                <label class="form-label ">Nombre</label>
+                <input type="text" class="form-control form-control-sm" id="EditMascoNom">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control form-control-sm" id="EditMascoFecNaci" onchange="EditMascoFecNaci()">
+                <label class="form-label">Edad Mascota</label>
+                <input type="text" class="form-control form-control-sm" id="EditMascoEdad" disabled>
+                <br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="EditMascoFotoNombre" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
+                            <input type="file" id="EditMascoFotoInput" style="display: none;" accept=".jpg,.jpeg" onchange="EditUpdateFileName()">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('EditMascoFotoInput').click();">Seleccionar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-success" type="button" id="button-addon2" onclick="SaveEditMasco();">Guardar <i class="fa-solid fa-floppy-disk"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Modal Historial clinico Masco -->
 <div class="modal fade modal-lg" id="HistorialMasco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

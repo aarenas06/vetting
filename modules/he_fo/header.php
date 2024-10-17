@@ -52,27 +52,30 @@
     .title {
         font-family: 'Kanit', sans-serif;
     }
+
+    #sidebar-nav {
+        text-align: left;
+        margin-left: 0;
+        padding-left: 0;
+    }
 </style>
 
 <body>
-
-
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        <aside class="left-sidebar">
+        <aside class="left-sidebar w-xs-20">
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="./index.html" class="text-nowrap logo-img">
                         <img src="/vetting/plantilla/assets/img/Vetconnect.png" class="dark-logo" width="180" alt="" />
-
                     </a>
                     <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8 text-muted"></i>
                     </div>
                 </div>
-                <nav class="sidebar-nav scroll-sidebar" data-simplebar>
+                <nav class="sidebar-nav scroll-sidebar" id="sidebar-nav" data-simplebar>
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">
                             <span class="hide-menu">Disponibilidad</span>

@@ -304,3 +304,131 @@ async function HistorialMasco(IdMasco) {
     console.log(error);
   }
 }
+
+//FUNCIONES PARA EDITAR MASCOTA
+function EditMascoFecNaci() {
+  let EditMascoFecNaci = document.getElementById("EditMascoFecNaci").value;
+  let birthDate = new Date(EditMascoFecNaci);
+  let currentDate = new Date();
+  let years = currentDate.getFullYear() - birthDate.getFullYear();
+  let months = currentDate.getMonth() - birthDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById(
+    "EditMascoEdad"
+  ).value = `${years} años y ${months} meses`;
+}
+
+function EditUpdateFileName() {
+  const Editinput = document.getElementById("EditMascoFotoInput");
+  const EditfileName = Editinput.files.length > 0 ? Editinput.files[0].name : "";
+  document.getElementById("EditMascoFotoNombre").value = EditfileName;
+}
+
+// Escuchar el evento cuando se oculta el modal, para vaciar el Form
+const EditMascoModal = document.getElementById("EditMasco");
+EditMascoModal.addEventListener("hidden.bs.modal", function () {
+  document.getElementById("EditMascoNom").value = "";
+  document.getElementById("EditMascoFecNaci").value = "";
+  document.getElementById("EditMascoEdad").value = "";
+  document.getElementById("EditMascoFotoNombre").value = "";
+  document.getElementById("EditMascoFotoInput").value = ""; // Limpiar el input file
+});
+
+async function EditDataMasco(IdMasco) {
+  $('#EditMasco').modal('show');
+  let formData = new FormData();
+  formData.append("funcion", "EditDataMasco");
+  formData.append("IdMasco", IdMasco);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.json();
+    let IdMasco = document.getElementById("IdMascoEdit");
+    IdMasco.value = res2[0]["idtbMascotas"];
+    let nomMasco = document.getElementById("EditMascoNom");
+    nomMasco.value = res2[0]["MascoNom"];
+    let FechNaciMasco = document.getElementById("EditMascoFecNaci");
+    FechNaciMasco.value = res2[0]["MascoFechNac"];
+    let EdadMasco = document.getElementById("EditMascoEdad");
+    EdadMasco.value = res2[0]["Edad"];
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "Problema del Servidor",
+    });
+  }
+}
+
+async function SaveEditMasco() {
+  //Separamos el año y el mes de la edad
+  var MascoEdad = $("#EditMascoEdad").val();
+  var regex = /(\d+)\s*años\s*y\s*(\d+)\s*meses/;
+  var match = MascoEdad.match(regex);
+
+  if (match) {
+    var anos = match[1];
+    var meses = match[2];
+
+    var MascoYear = anos;
+    var MascoMes = meses;
+  } else {
+    console.log("Formato no válido");
+  }
+  var IdMascoEdit = $("#IdMascoEdit").val();
+  var EditMascoNom = $("#EditMascoNom").val();
+  var EditMascoFecNaci = $("#EditMascoFecNaci").val();
+  var EditMascoFoto = $("#EditMascoFotoInput").get(0).files[0];
+  var UsuCod = $("#UsuCod").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "SaveEditMasco");
+  formData.append("IdMascoEdit", IdMascoEdit);
+  formData.append("EditMascoNom", EditMascoNom);
+  formData.append("EditMascoFecNaci", EditMascoFecNaci);
+  formData.append("EditMascoYear", MascoYear);
+  formData.append("EditMascoMes", MascoMes);
+  formData.append("EditMascoFoto", EditMascoFoto);
+  // formData.append("UsuCod", UsuCod);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.json();
+    $("#EditMasco").modal('hide');
+    if (res2 === true) {
+      Swal.fire({
+        icon: "success",
+        text: "Mascota Actualizada Correctamente...!",
+      });
+      listMascotas();
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "Problema del Servidor",
+      });
+    }
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "Problema del Servidor",
+    });
+  }
+}

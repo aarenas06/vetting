@@ -102,6 +102,7 @@ class modelo
             return false;
         }
     }
+
     public function HistorialMasco($data)
     {
         $sql = "SELECT citas.idTbCitas,mas.MascoNom,serv.OptNombre,citas.CitaDate,citas.CitaObs FROM tbcitas citas
@@ -113,6 +114,48 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function EditDataMasco($data)
+    {
+        $sql = "SELECT idtbMascotas,MascoNom, MascoFechNac,CONCAT(MascoYear, ' Años y ', MascoMes, ' Meses') AS Edad 
+            FROM tbmascotas WHERE idtbMascotas = '" . $data['IdMasco'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function SaveEditMasco($data)
+    {
+        try {
+            // Verifica si se ha proporcionado una nueva foto
+            $sql = "UPDATE tbmascotas SET MascoNom = :MascoNom, MascoFechNac = :MascoFechNac, MascoYear = :MascoYear, MascoMes = :MascoMes";
+            // Solo agregar el campo de la foto si existe en el arreglo de datos
+            if (!empty($data['fotoMasco'])) {
+                $sql .= ", MascoPic = :MascoPic";
+            }
+            $sql .= " WHERE idtbMascotas = :idtbMascotas";
+            $stmt = $this->CNX1->prepare($sql);
+            // Asignar los valores a los parámetros
+            $stmt->bindParam(':MascoNom', $data['EditMascoNom']);
+            $stmt->bindParam(':MascoFechNac', $data['EditMascoFecNaci']);
+            $stmt->bindParam(':MascoYear', $data['EditMascoYear']);
+            $stmt->bindParam(':MascoMes', $data['EditMascoMes']);
+            // Solo enlazar el parámetro de la foto si se ha proporcionado
+            if (!empty($data['fotoMasco'])) {
+                $stmt->bindParam(':MascoPic', $data['fotoMasco']);
+            }
+            $stmt->bindParam(':idtbMascotas', $data['IdMascoEdit']);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error al actualizar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
 
     public function GetModulos()
     {

@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php session_start();
+// Verifica si las variables de sesión no existen
+if (!isset($_SESSION["UsuCod"])) {
+    // Muestra el mensaje
+    echo '<script>alert("No has iniciado sesión");</script>';
+
+    // Redirige a la pantalla principal
+    echo '<script>window.location.href = "http://localhost/vetting/";</script>';
+    exit; // Agrega exit para detener la ejecución del script después de la redirección
+}
+?> 
 <!DOCTYPE html>
 <html lang="en">
 

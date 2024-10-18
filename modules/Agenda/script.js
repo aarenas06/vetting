@@ -119,3 +119,39 @@ async function CalculeFin() {
     console.log("Fecha inválida");
   }
 }
+
+async function InsertAgen() {
+  var idtbMascotas = $("#idtbMascotas").val();
+  var CitaNom = $("#CitaNom").val();
+  var CitaDate = $("#CitaDate ").val();
+  var CitaDateFin = $("#CitaDateFin").val();
+  var CitaObs = $("#CitaObs").val();
+  var Emp = $("#Emp").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "InsertAgen");
+  formData.append("idtbMascotas", idtbMascotas);
+  formData.append("CitaNom", CitaNom);
+  formData.append("CitaDate", CitaDate);
+  formData.append("CitaDateFin", CitaDateFin);
+  formData.append("CitaObs", CitaObs);
+  formData.append("Emp", Emp);
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Agenda/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.text();
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    btn.innerHTML = originalContent;
+    console.log(error);
+  }
+}

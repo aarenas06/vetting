@@ -32,6 +32,10 @@ class Controller
         $data = $this->MODEL->GetService($idEmp);
         return ($data);
     }
+    public function InsertAgen()
+    {
+        print_r($_POST);
+    }
 }
 $controller = new Controller();
 

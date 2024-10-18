@@ -163,7 +163,7 @@ $GetService = $control->GetService($_SESSION['Emp']);
                             </div>
                             <div class="col-lg-6">
                                 <label for="" class="form-label">Tipo de Servicio :</label>
-                                <select class="form-select form-select-sm" aria-label="Default select example" id="">
+                                <select class="form-select form-select-sm" aria-label="Default select example" id="idTbServicios">
                                     <option selected></option>
                                     <?php foreach ($GetService as $Gs) { ?>
                                         <option value="<?= $Gs['idServi'] ?>"><?= $Gs['Servicio'] ?></option>
@@ -189,7 +189,7 @@ $GetService = $control->GetService($_SESSION['Emp']);
                 <hr>
                 <center>
                     <div class="col-2">
-                        <button class="btn btn-primary btn-sm btn-block"><i class="fa-solid fa-floppy-disk"></i> Agendar</button>
+                        <button class="btn btn-primary btn-sm btn-block" onclick="InsertAgen()"><i class="fa-solid fa-floppy-disk"></i> Agendar</button>
                     </div>
                 </center>
             </div>
@@ -198,6 +198,7 @@ $GetService = $control->GetService($_SESSION['Emp']);
     </div>
 </div>
 
+<input type="text" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <script type="text/javascript" src="/vetting/modules/Agenda/script.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 

@@ -33,5 +33,14 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function maps()
+    {
+        $sql = "SELECT EmpreLatitud, EmpreLongitud from tbempresas where EmpreAct=1";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
     
 }

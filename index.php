@@ -1,928 +1,777 @@
 <!DOCTYPE html>
-<html>
+<html class="wide wow-animation" lang="en">
 
-<style>
-  .slider_img-box img {
-    width: 400px;
-    /* Ancho fijo */
-    height: 300px;
-    /* Altura fija, igual al ancho */
-    object-fit: cover;
-    /* Asegura que la imagen cubra el área sin deformarse */
-    border-radius: 12px;
-    /* Hace la imagen circular */
-    display: block;
-    /* Se asegura que se comporte como un bloque */
-    margin: 0 auto;
-    /* Centra la imagen horizontalmente */
-  }
-
-  /* Estilos para los botones */
-  .quote_btn-container button {
-    color: black;
-    border-radius: 12px;
-    padding: 10px 20px;
-    text-decoration: underline;
-    text-decoration-color: green;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  /* Estilo al pasar el mouse (hover), Subrayado */
-  .quote_btn-container button:hover {
-    background-color: #E7E3E3;
-    color: black;
-  }
-
-  /* ESTOLOS PARA EL BOTON DE whatsapp */
-  .whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: white;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 1000;
-    transition: background-color 0.3s ease;
-  }
-
-  .whatsapp-float i {
-    margin-top: 16px;
-    color: white;
-    font-size: 35px;
-  }
-
-  .whatsapp-float:hover {
-    background-color: #22bb53;
-  }
-
-  .whatsapp-float:hover i {
-    color: #f0f0f0;
-  }
-
-  /* Estilos específicos para el modal de registro */
-  .custom-modal-registrarse .modal-content {
-    background-color: #f8f9fa;
-    /* Fondo claro y elegante */
-    border-radius: 8px;
-    /* Bordes ligeramente redondeados */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    /* Sombra suave */
-    border: none;
-    /* Sin bordes */
-  }
-
-  .custom-modal-registrarse .modal-header {
-    background-color: #E0DEDE;
-    /* Azul Bootstrap para el encabezado */
-    color: black;
-    /* Texto en blanco */
-    border-bottom: none;
-    /* Eliminar borde inferior */
-    text-align: center;
-    /* Centrar el título */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  .custom-modal-registrarse .modal-header h4 {
-    margin: 0;
-    font-size: 22px;
-    /* Tamaño del título */
-    font-weight: bold;
-  }
-
-  .custom-modal-registrarse .modal-body {
-    padding: 20px;
-  }
-
-  .custom-modal-registrarse .input-group {
-    margin-bottom: 15px;
-  }
-
-  .custom-modal-registrarse .input-group .input-group-text {
-    background-color: #6c757d;
-    /* Color gris oscuro para los íconos */
-    color: white;
-    /* Color blanco para los íconos */
-    border: none;
-    /* Sin bordes */
-    border-radius: 0.25rem 0 0 0.25rem;
-    /* Bordes redondeados para los inputs */
-  }
-
-  .custom-modal-registrarse .input-group .form-control {
-    border-left: none;
-    /* Eliminar borde entre el ícono y el input */
-  }
-
-  .custom-modal-registrarse .btn-primary {
-    background-color: #469DFF;
-    /* Verde elegante */
-    border-color: #469DFF;
-    padding: 10px 20px;
-    /* Espacio interno */
-    font-size: 16px;
-    /* Tamaño de fuente adecuado */
-    border-radius: 25px;
-    /* Botón más redondeado */
-    transition: background-color 0.3s ease;
-    /* Efecto suave al pasar el mouse */
-  }
-
-  .custom-modal-registrarse .btn-primary:hover {
-    background-color: #218838;
-    /* Verde oscuro en hover */
-  }
-
-  .custom-modal-registrarse .modal-body hr {
-    border-top: 1px solid #007bff;
-    /* Personalización del <hr> */
-  }
-
-  .custom-modal-registrarse .modal-footer {
-    text-align: center;
-    /* Centrar el botón */
-  }
-
-  /* Extra estilos para una mejor experiencia */
-  .custom-modal-registrarse .modal-body input {
-    padding: 12px;
-    /* Mayor espacio dentro de los inputs */
-  }
-
-  .custom-modal-registrarse .modal-body .input-group-text i {
-    font-size: 18px;
-    /* Tamaño adecuado de los íconos */
-    color: white;
-  }
-
-  .custom-modal-registrarse .modal-body input::placeholder {
-    color: #6c757d;
-    /* Placeholder gris claro */
-    opacity: 1;
-    /* Asegura que el color del placeholder se vea */
-  }
-
-  /*+++++++++ Tamaño slider +++++++*/
-  .hero_area {
-    max-width: auto;
-    max-height: 85vh;
-  }
-
-  /*+++++++++ End slider +++++++*/
-
-  /*++++++++++ setion 2 +++++++++++++*/
-  #imgeSec2 img {
-    transform: translateX(-100%);
-    opacity: 0;
-    transition: transform 1s ease, opacity 1s ease;
-  }
-
-  /* Efecto cortina para el texto */
-  #textSec2 {
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform 1s ease, opacity 1s ease;
-  }
-
-  /* Cuando se activa el scroll y se visualiza */
-  .section-visible #imgeSec2 img {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  .section-visible #textSec2 {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /*+++++++ End section 2 +++++++++++++*/
-
-  /*+++++++ Section Service ++++++++++++*/
-  #imgService {
-    border-radius: 10px;
-    margin-top: 30%;
-  }
-
-  /* Animaciones */
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Mantener los elementos ocultos antes de la animación */
-  .hidden {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  #ServiImg.hidden {
-    transform: translateY(-100%);
-  }
-
-  /* Agregar la clase para activar animaciones */
-  .section-visible {
-    animation: slideInLeft 0.5s forwards;
-    /* Para elementos que entran desde la izquierda */
-  }
-
-  #ServiImg.section-visible {
-    animation: slideInDown 0.5s forwards;
-    /* Para el ServiImg que entra desde arriba */
-  }
-
-  /*+++++++ End Section Service ++++++++*/
-</style>
+<!-- Mirrored from ld-wt73.template-help.com/wt_prod-24921/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2024 14:44:30 GMT -->
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+    <title>VECCONNET</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="/vetting/plantilla/assets/img/icon.png" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Work+Sans:300,700,800%7COswald:300,400,500">
+    <link rel="stylesheet" href="/vetting/landing/css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
-  <title>vetting</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css" />
 
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <!-- Aletar -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .ie-panel {
+            display: none;
+            background: #212121;
+            padding: 10px 0;
+            box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+            clear: both;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="asset/css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="asset/css/responsive.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-
+        html.ie-10 .ie-panel,
+        html.lt-ie-10 .ie-panel {
+            display: block;
+        }
+    </style>
 </head>
 
-<body class="body">
-  <!-- Botón flotante de WhatsApp -->
-  <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
-
-  <div class="hero_area">
-    <!-- header section starts -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/logo.png" alt="">
-            <span>Petology</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav">
-                <!-- Aquí pueden ir los enlaces de navegación -->
-              </ul>
+<body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="/vetting/landing/images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+        <div class="preloader-logo"><img src="plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" />
+        </div>
+        <div class="preloader-body">
+            <div id="loadingProgressG">
+                <div class="loadingProgressG" id="loadingProgressG_1"></div>
             </div>
+        </div>
+    </div>
+    <div class="page">
+        <!-- Page Header-->
+        <header class="section page-header">
+            <!-- RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="118px" data-xl-stick-up-offset="118px" data-xxl-stick-up-offset="118px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
 
-            <!-- Botón "Registrate" -->
-            <div class="quote_btn-container d-flex justify-content-center">
-              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalRegistrase">Registrarse</button>
-            </div>
-
-            <!-- Botón "Iniciar Sesion" con margen a la izquierda -->
-            <div class="quote_btn-container d-flex justify-content-center ms-2">
-              <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar Sesion</button>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-
-    <!-- Slider Section -->
-    <section class="slider_section position-relative">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- Slide 1 -->
-          <div class="carousel-item active">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4 offset-md-2">
-                  <div class="slider_detail-box">
-                    <h1>Professional <span>Care Your Pet</span></h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <div class="btn-box">
-                      <a href="#" class="btn btn-primary">Buy now</a>
-                      <a href="#" class="btn btn-outline-secondary">Contact</a>
+                    <div class="rd-navbar-main-outer">
+                        <div class="rd-navbar-main">
+                            <div class="rd-navbar-nav-wrap" id="rd-navbar-nav-wrap">
+                                <!-- RD Navbar Search-->
+                                <div class="rd-navbar-search" id="rd-navbar-search">
+                                    <img class="rd-navbar-search-toggle" src="/vetting/plantilla/assets/img/Vetconnect.png" alt="" width="50%" height="50%">
+                                </div>
+                                <ul class="rd-navbar-nav">
+                                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index-2.html">Home</a>
+                                    </li>
+                                    <li class="rd-nav-item active"><a class="rd-nav-link" onclick="ModalRegistrarse()">Registrarse</a>
+                                    </li>
+                                    <li class="rd-nav-item active"><a class="rd-nav-link" onclick="ModalIniciosession()">Inciar sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="slider_img-box">
-                    <!-- Imagen del slider con tamaño fijo -->
-                    <img src="asset/images/slider-img-1.png" class="img-fluid" alt="Slider Image 1">
-                  </div>
-                </div>
-              </div>
+                </nav>
             </div>
-          </div>
+        </header>
+        <!-- Modal Iniciar Sesion-->
+        <div class="modal fade custom-modal-iniciosesion" id="ModalIniciosession" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-header">
+                            <!-- <center> -->
+                            <h4>Inicia Sesión</h2>
+                                <!-- </center> -->
+                        </div>
 
-          <!-- Slide 2 -->
-          <div class="carousel-item">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4 offset-md-2">
-                  <div class="slider_detail-box">
-                    <h1>Professional <span>Care Your Pet</span></h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <div class="btn-box">
-                      <a href="#" class="btn btn-primary">Buy now</a>
-                      <a href="#" class="btn btn-outline-secondary">Contact</a>
+                        <br><br><br>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
+                            <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
+                            <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
+                        </div>
+                        <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
+                        <center>
+                            <button style="margin-top: 10px;" class="btn btn-block btn-success btn-sm" onclick="Validar()">Ingresar</button>
+                        </center>
                     </div>
-                  </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="slider_img-box">
-                    <!-- Imagen del slider con tamaño fijo -->
-                    <img src="asset/images/slider-img-2.png" class="img-fluid" alt="Slider Image 1">
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
 
-          <!-- Slide 3 -->
-          <div class="carousel-item">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4 offset-md-2">
-                  <div class="slider_detail-box">
-                    <h1>Professional <span>Care Your Pet</span></h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <div class="btn-box">
-                      <a href="#" class="btn btn-primary">Buy now</a>
-                      <a href="#" class="btn btn-outline-secondary">Contact</a>
+        <!-- Modal Registrarse-->
+        <div class="modal fade custom-modal-registrarse" id="ModalRegistrarse" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Registrarse</h4>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="slider_img-box">
-                    <!-- Imagen del slider con tamaño fijo -->
-                    <img src="asset/images/slider-img-3.png" class="img-fluid" alt="Slider Image 1">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box btn-1" id="basic-addon1">
+                                <i class="fa-solid fa-user-large"></i>
+                            </span>
+                            <input type="text" class="form-control" id="NomPropietarios" placeholder="Nombre" aria-label="NomPropietarios">
+                        </div>
 
-        <!-- Controles de navegación (prev y next) -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </section>
-    <!-- End Slider Section -->
-  </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-address-card"></i>
+                            </span>
+                            <input type="text" class="form-control" id="IdentPropietarios" placeholder="Identificación" aria-label="IdentPropietarios">
+                        </div>
 
-  <!-- Section 2 -->
-  <section class="about_section layout_padding">
-    <div class="container" id="section2">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="img-box" id="imgeSec2">
-            <img src="asset/images/imgSection2.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box" id="textSec2">
-            <h2 class="custom_heading">
-              About Our Pets
-              <span>
-                Clinic
-              </span>
-            </h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since theLorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-            </p>
-            <div>
-              <a href="">
-                About More
-              </a>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </span>
+                            <input type="text" class="form-control" id="TelPropietarios" placeholder="Teléfono" aria-label="TelPropietarios">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </span>
+                            <input type="text" class="form-control" id="DirPropietarios" placeholder="Dir. Residencial" aria-label="DirPropietarios">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control" id="EmailPropietarios" placeholder="Correo Electrónico" aria-label="EmailPropietarios">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </span>
+                            <input type="text" class="form-control" id="UsuPropietarios" placeholder="Usuario" aria-label="UsuPropietarios">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text btn-box">
+                                <i class="fa-solid fa-key""></i>
+                            </span>
+                            <input type=" password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
+                        </div>
+
+                        <center>
+                            <hr>
+                            <button class="btn btn-block btn-primary btn-sm" onclick="InsertPropietarios()">Registrarse</button>
+                        </center>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <!-- End Modals Registrarse-->
+
+
+        <!-- Slider Light-->
+        <section class="swiper-container swiper-slider swiper-slider-light bg-image-1" data-loop="false" data-autoplay="false" data-simulate-touch="false" data-custom-slide-effect="inter-leave-effect" data-inter-leave-offset="-.5">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-inner">
+                        <div class="container">
+                            <div class="swiper-slide-caption">
+                                <div class="row row-30">
+                                    <div class="col-lg-6 text-center text-lg-left">
+                                        <h1><span class="font-weight-light"><span>Haz que tus perros</span></span><span class="font-weight-bold"><span>Luzcan lo mejor posible</span></span></h1>
+                                        <!-- <div class="button-outer"><a class="button button-lg button-primary button-winona" href="#">Free consultation</a></div> -->
+                                    </div>
+                                    <div class="col-lg-6 position-static">
+                                        <div class="floating-image"><img src="/vetting/landing/images/swiper-image-1-960x776.jpg" alt="" width="960" height="776" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-inner">
+                        <div class="container">
+                            <div class="swiper-slide-caption">
+                                <div class="row row-30">
+                                    <div class="col-lg-6 text-center text-lg-left">
+                                        <h1><span class="font-weight-light"><span>Servicios Reales</span></span><span class="font-weight-bold"><span>Para su perro</span></span></h1>
+                                        <!-- <div class="button-outer"><a class="button button-lg button-primary button-winona" href="#">Free consultation</a></div> -->
+                                    </div>
+                                    <div class="col-lg-6 position-static">
+                                        <div class="floating-image"><img src="/vetting/landing/images/swiper-image-2-960x776.jpg" alt="" width="960" height="776" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-inner">
+                        <div class="container">
+                            <div class="swiper-slide-caption">
+                                <div class="row row-30">
+                                    <div class="col-lg-6 text-center text-lg-left">
+                                        <h1><span class="font-weight-light"><span>Excepcional</span></span><span class="font-weight-bold"><span>Peluquería canina</span></span></h1>
+                                        <!-- <div class="button-outer"><a class="button button-lg button-primary button-winona" href="#">Free consultation</a></div> -->
+                                    </div>
+                                    <div class="col-lg-6 position-static">
+                                        <div class="floating-image"><img src="/vetting/landing/images/swiper-image-3-960x776.jpg" alt="" width="960" height="776" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination-outer container">
+                <div class="swiper-pagination swiper-pagination-modern swiper-pagination-marked" data-index-bullet="true"></div>
+            </div>
+        </section>
+        <!-- A Few Words About Us-->
+        <section class="section section-decorated-1">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-219x209.png" alt="" width="219" height="209" />
+            </div>
+            <div class="decor-2"><img src="/vetting/landing/images/bubbles-224x306.png" alt="" width="224" height="306" />
+            </div>
+            <div class="container">
+                <div class="row row-50 justify-content-center justify-content-lg-between flex-lg-row-reverse align-items-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5">
+                        <h3 class="wow-outer"><span class="wow slideInDown">Sobre nosotros</span></h3>
+                        <p class="wow-outer" style="text-align: justify;"><span class="wow slideInDown" data-wow-delay=".05s">
+                                Vetcconet es una plataforma integral diseñada para conectar y optimizar los servicios de diversas veterinarias, con el objetivo de ofrecer un sistema centralizado, eficiente y escalable para empresas medianas del sector veterinario. Este proyecto ha sido creado
+                                pensando en la consolidación de los servicios veterinarios, permitiendo a las clínicas y consultorios acceder a herramientas tecnológicas avanzadas
+                                que faciliten su gestión diaria y potencien su capacidad de crecimiento.
+                            </span></p>
+                        <p class="wow-outer" style="text-align: justify;"><span class="wow slideInDown" data-wow-delay=".1s">
+                                Con Vetcconet, las veterinarias pueden integrar y unificar la gestión de sus operaciones, desde el manejo de expedientes médicos de los animales, hasta la administración de citas, facturación y control de inventarios, todo desde una sola plataforma. Esta integración no solo reduce la complejidad operativa,
+                                sino que también permite a las veterinarias mejorar la calidad de atención al cliente, optimizar sus procesos internos, y aumentar su competitividad en el mercado.
+                            </span></p>
+                        <!-- <div class="wow-outer button-outer"><a class="button button-lg button-primary button-winona" data-wow-delay=".1s" href="about-us.html">Learn more</a></div> -->
+                    </div>
+                    <div class="col-md-10 col-lg-6 wow-outer"><img class="img-responsive wow slideInLeft" src="/vetting/landing/images/about-501-526.jpg" alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Small Features-->
+        <section class="section section-md bg-gray-light">
+            <div class="container">
+                <div class="row row-40 align-items-center">
+                    <div class="col-xl-8">
+                        <div class="row row-xl-60">
+                            <div class="col-sm-6 wow-outer">
+                                <!-- Box Minimal-->
+                                <article class="box-minimal">
+                                    <div class="box-minimal-icon linearicons-star wow fadeIn"></div>
+                                    <div class="box-minimal-main wow-outer">
+                                        <h4 class="box-minimal-title wow slideInDown">Empleados cualificados</h4>
+                                        <p class="wow fadeInUpSmall">
+                                            Nuestro equipo está formado por más de 20 contables, comercializadores y gestores cualificados y experimentados.
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 wow-outer">
+                                <!-- Box Minimal-->
+                                <article class="box-minimal">
+                                    <div class="box-minimal-icon linearicons-heart wow fadeIn" data-wow-delay=".1s"></div>
+                                    <div class="box-minimal-main wow-outer">
+                                        <h4 class="box-minimal-title wow slideInDown" data-wow-delay=".1s">Consultas gratuitas</h4>
+                                        <p class="wow fadeInUpSmall" data-wow-delay=".1s">
+                                            Nuestra relación con el cliente comienza siempre con una consulta gratuita para encontrar posibles soluciones a sus problemas.
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 wow-outer">
+                                <!-- Box Minimal-->
+                                <article class="box-minimal">
+                                    <div class="box-minimal-icon linearicons-scissors wow fadeIn" data-wow-delay=".2s"></div>
+                                    <div class="box-minimal-main wow-outer">
+                                        <h4 class="box-minimal-title wow slideInDown" data-wow-delay=".2s">100% garantizado</h4>
+                                        <p class="wow fadeInUpSmall" data-wow-delay=".2s">
+                                            Todos los resultados que obtenga de nosotros están 100% garantizados para llevarte a un nuevo nivel de rentabilidad y éxito financiero.
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-6 wow-outer">
+                                <!-- Box Minimal-->
+                                <article class="box-minimal">
+                                    <div class="box-minimal-icon linearicons-trophy2 wow fadeIn" data-wow-delay=".2s"></div>
+                                    <div class="box-minimal-main wow-outer">
+                                        <h4 class="box-minimal-title wow slideInDown" data-wow-delay=".2s">100% Recomendados</h4>
+                                        <p class="wow fadeInUpSmall" data-wow-delay=".2s">
+                                            Optimiza tu veterinaria con Vetcconet: una plataforma integral que mejora la atención, agiliza procesos y potencia tu negocio. ¡Únete a quienes ya transformaron su clínica!
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="offset-negative-70"><img src="/vetting/landing/images/home-2-386x503.jpg" alt="" width="386" height="503" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Thin CTA-->
+        <section class="section section-xs bg-primary-darker text-center section-decorated-2">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-225x463.png" alt="" width="225" height="463" />
+            </div>
+            <div class="decor-2"><img src="/vetting/landing/images/bubbles-83x127.png" alt="" width="83" height="127" />
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-10 col-md-12">
+                        <div class="box-cta-thin">
+                            <h4 class="wow-outer"><span class="wow slideInRight">Cuidado personal cualificado para sus mascotas</span></h4>
+                            <!-- <div class="wow-outer button-outer"><a class="button button-primary button-winona wow slideInLeft" href="pricing.html">View all pricing</a></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services-->
+        <section class="section-lg text-center">
+            <div class="container">
+                <h3 class="wow-outer"><span class="wow slideInUp">Servicicos</span></h3>
+                <p class="wow-outer"><span class="wow slideInDown text-width-1">
+                        Ofrecemos una variedad de servicios de peluquería para perros de todas las razas y edades. Sólo utilizamos productos de alta calidad que se adaptan a las necesidades de su mascota. Descubra nuestros servicios más populares a continuación.
+                    </span></p>
+                <div class="row row-30 offset-top-2">
+                    <div class="col-sm-6 col-lg-3 wow-outer">
+                        <!-- Thumbnail Light-->
+                        <article class="thumbnail-light wow slideInLeft"><a class="thumbnail-light-media" href="single-service.html"><img class="thumbnail-light-image" src="/vetting/landing/images/service-thumbnail-1-270x200.jpg" alt="" width="270" height="200" /></a>
+                            <h5 class="thumbnail-light-title"><a href="single-service.html">Estilismo</a></h5>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 wow-outer">
+                        <!-- Thumbnail Light-->
+                        <article class="thumbnail-light wow slideInLeft" data-wow-delay=".05s"><a class="thumbnail-light-media" href="single-service.html"><img class="thumbnail-light-image" src="/vetting/landing/images/service-thumbnail-2-270x200.jpg" alt="" width="270" height="200" /></a>
+                            <h5 class="thumbnail-light-title"><a href="single-service.html">Peluquería integral</a></h5>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 wow-outer">
+                        <!-- Thumbnail Light-->
+                        <article class="thumbnail-light wow slideInLeft" data-wow-delay=".1s"><a class="thumbnail-light-media" href="single-service.html"><img class="thumbnail-light-image" src="/vetting/landing/images/service-thumbnail-3-270x200.jpg" alt="" width="270" height="200" /></a>
+                            <h5 class="thumbnail-light-title"><a href="single-service.html">Baño y aseo</a></h5>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 wow-outer">
+                        <!-- Thumbnail Light-->
+                        <article class="thumbnail-light wow slideInLeft" data-wow-delay=".15s"><a class="thumbnail-light-media" href="single-service.html"><img class="thumbnail-light-image" src="/vetting/landing/images/service-thumbnail-4-270x200.jpg" alt="" width="270" height="200" /></a>
+                            <h5 class="thumbnail-light-title"><a href="single-service.html">Baño de lujo</a></h5>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="wow-outer button-outer"><a class="button button-primary-outline button-winona offset-top-2 wow slideInUp" href="services.html">Ver todos los servicios</a></div>
+        </section>
+        <!-- Pricing-->
+        <section class="section section-lg bg-gray-100 section-decorated-7">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-171x230.png" alt="" width="171" height="230" />
+            </div>
+            <div class="container">
+                <h3 class="wow-outer text-center"><span class="wow slideInDown">Precios</span></h3>
+                <div class="row row-30">
+                    <div class="col-sm-6 col-lg-4 wow-outer">
+                        <!-- Pricing Minimal-->
+                        <article class="pricing-minimal wow slideInRight">
+                            <h5 class="pricing-minimal-title"><a href="single-service.html">Basic Package</a></h5>
+                            <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>49.00</p>
+                            <div class="pricing-minimal-divider"></div>
+                            <p>
+                                Nuestro paquete básico es una parte importante de la peluquería canina, ya que ofrece un baño y cepillado asequibles para perros de cualquier raza.
+                            </p>
+                            <a class="button button-primary button-winona" href="single-service.html">Haz tu pedido</a>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 wow-outer">
+                        <!-- Pricing Minimal-->
+                        <article class="pricing-minimal wow slideInRight" data-wow-delay=".05s">
+                            <h5 class="pricing-minimal-title"><a href="single-service.html">Paquete avanzado</a></h5>
+                            <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>67.00</p>
+                            <div class="pricing-minimal-divider"></div>
+                            <p>
+                                Nuestro paquete mejorado está diseñado para perros que necesitan un poco más de cariño manteniendo la piel hidratada, utilizando un champú y acondicionador especializados.
+                            </p>
+                            <a class="button button-primary button-winona" href="single-service.html">Haz tu pedido</a>
+                        </article>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 wow-outer">
+                        <!-- Pricing Minimal-->
+                        <article class="pricing-minimal wow slideInRight" data-wow-delay=".1s">
+                            <h5 class="pricing-minimal-title"><a href="single-service.html">Paquete Pro</a></h5>
+                            <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>86.00</p>
+                            <div class="pricing-minimal-divider"></div>
+                            <p>
+                                Este paquete de spa definitivo está pensado para el cachorro mimado que necesita el trabajo y quiere disfrutar de un día de relajación y belleza.
+                            </p>
+                            <a class="button button-primary button-winona" href="single-service.html">Haz tu pedido</a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials-->
+        <!-- <section class="section section-lg text-center">
+            <div class="container">
+                <h3 class="wow-outer"><span class="wow slideInDown">Testimonials</span></h3>
+                <div class="owl-carousel wow fadeIn" data-items="1" data-md-items="2" data-lg-items="3" data-dots="true" data-nav="false" data-loop="true" data-margin="30" data-stage-padding="0" data-mouse-drag="false">
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-1-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Kelly McMillan</cite>
+                                <p class="quote-classic-caption">Private Entrepreneur</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>My dog is 10 this year. She has been going to this grooming salon every day for the past five years. Thanks to the care and special shampoos used at SpaDog, she is now in very good health again.</p>
+                        </div>
+                    </blockquote>
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-2-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Harold Barnett</cite>
+                                <p class="quote-classic-caption">Regional Manager</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>I bring my Westie “Dougie” to SpaDog for the past 4 years. Their groomers are fantastic, always do an amazing job and are always so nice and cheerful. Would recommend them to every dog owner!</p>
+                        </div>
+                    </blockquote>
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-3-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Albert Webb</cite>
+                                <p class="quote-classic-caption">CEO at Majestic</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>My Yorkie ‘Toby’ has been coming to this grooming studio for over 8 years and always looks beautiful afterward. Having tried other grooming salons before, I wouldn’t bring him anywhere else.</p>
+                        </div>
+                    </blockquote>
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-4-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Samantha Lee</cite>
+                                <p class="quote-classic-caption">Sales Manager at Hillplan</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>I really feel comfortable leaving my Max at SpaDog. He always comes homes happy and relaxed and the groomers there are warm, friendly and welcoming. They always do what you ask.</p>
+                        </div>
+                    </blockquote>
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-5-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Bill Warner</cite>
+                                <p class="quote-classic-caption">Private Entrepreneur</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>We are in the area for a few months and my 2 furry boys needed grooming. SpaDog team was very friendly and the boys liked it there. They did not have to spend a lot of time there like so many places.</p>
+                        </div>
+                    </blockquote>
+                    <blockquote class="quote-classic">
+                        <div class="quote-classic-meta">
+                            <div class="quote-classic-avatar"><img src="/vetting/landing/images/testimonials-person-6-96x96.jpg" alt="" width="96" height="96" />
+                            </div>
+                            <div class="quote-classic-info">
+                                <cite class="quote-classic-cite">Adam Smith</cite>
+                                <p class="quote-classic-caption">CEO at Majestic</p>
+                            </div>
+                        </div>
+                        <div class="quote-classic-text">
+                            <p>Thank you for making my dog look so fantastic! He was a smelly matted mess and now he looks so handsome! I will surely recommend your grooming salon to my friends and colleagues.</p>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Centered CTA-->
+        <!-- <section class="section section-1 bg-primary-darker text-center section-decorated-3">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-187x131.png" alt="" width="187" height="131" />
+            </div>
+            <div class="decor-2"><img src="/vetting/landing/images/bubbles-295x474.png" alt="" width="295" height="474" />
+            </div>
+            <div class="decor-3"><img src="/vetting/landing/images/home-3-359x546.png" alt="" width="359" height="546" />
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-10 col-lg-7 col-xl-6">
+                        <h3 class="wow-outer"><span class="wow slideInDown">Best Grooming Services for Your Furry Friend</span></h3>
+                        <p class="wow-outer offset-top-3"><span class="wow slideInDown" data-wow-delay=".05s">Our dog grooming salon is always ready to offer the best services for your pets. Schedule an appointment to make your dog look awesome!</span></p>
+                        <div class="wow-outer button-outer"><a class="button button-primary button-winona wow slideInDown" href="#" data-wow-delay=".1s">Free consultation</a></div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+
+        <!-- Latest Blog Posts-->
+        <!-- <section class="section section-lg text-center section-decorated-4">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-187x131.png" alt="" width="187" height="131" />
+            </div>
+            <div class="container">
+                <h3 class="wow-outer text-center"><span class="wow slideInDown">Latest Blog Posts</span></h3>
+                <div class="row row-50">
+                    <div class="col-md-6 wow-outer">
+                        <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="single-blog-post.html"><img src="/vetting/landing/images/grid-blog-1-570x353.jpg" alt="" width="570" height="353" /></a>
+                            <h4 class="post-modern-title"><a href="single-blog-post.html">How To Keep Your Dog Cool In Summer</a></h4>
+                            <ul class="post-modern-meta">
+                                <li>by Theresa Barnes</li>
+                                <li>
+                                    <time datetime="2020">Apr 21, 2020 at 12:05 pm</time>
+                                </li>
+                                <li><a class="button-winona" href="#">News</a></li>
+                            </ul>
+                            <p>With summer upon us, it’s natural for us to all want to get out and enjoy the sunshine. However, if you’re a dog owner, extra care and consideration need to be taken during the warmer months. Sun...</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 wow-outer">
+                        <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="single-blog-post.html"><img src="/vetting/landing/images/grid-blog-2-570x353.jpg" alt="" width="570" height="353" /></a>
+                            <h4 class="post-modern-title"><a href="single-blog-post.html">Top Tips for Grooming an Unruly Doodle Coat</a></h4>
+                            <ul class="post-modern-meta">
+                                <li>by Theresa Barnes</li>
+                                <li>
+                                    <time datetime="2020">Apr 21, 2020 at 12:05 pm</time>
+                                </li>
+                                <li><a class="button-winona" href="#">News</a></li>
+                            </ul>
+                            <p>Doodle breeds have taken the world by storm in recent years. We’ve fallen head over heels in love with Labradoodles, Cockapoos, Cavapoos and Poochons. But with all that wavy fluff comes a...</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="wow-outer button-outer"><a class="button button-primary-outline button-winona wow slideInUp" href="grid-blog.html">View all Blog posts</a></div>
+            </div>
+        </section> -->
+
+        <!-- Contacts-->
+        <section class="section bg-gray-100">
+            <div class="range justify-content-xl-between">
+                <div class="cell-xl-6 align-self-center container">
+                    <div class="row">
+                        <div class="col-lg-9 cell-inner">
+                            <div class="section-lg">
+                                <h3 class="wow-outer"><span class="wow slideInDown">Contact Us</span></h3>
+                                <!-- RD Mailform-->
+                                <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="https://ld-wt73.template-help.com/wt_prod-24921/bat/rd-mailform.php">
+                                    <div class="row row-10">
+                                        <div class="col-md-6 wow-outer">
+                                            <div class="form-wrap wow fadeSlideInUp">
+                                                <label class="form-label-outside" for="contact-first-name">First Name</label>
+                                                <input class="form-input" id="contact-first-name" type="text" name="name" data-constraints="@Required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 wow-outer">
+                                            <div class="form-wrap wow fadeSlideInUp">
+                                                <label class="form-label-outside" for="contact-last-name">Last Name</label>
+                                                <input class="form-input" id="contact-last-name" type="text" name="name" data-constraints="@Required">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 wow-outer">
+                                            <div class="form-wrap wow fadeSlideInUp">
+                                                <label class="form-label-outside" for="contact-email">E-mail</label>
+                                                <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Required @Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 wow-outer">
+                                            <div class="form-wrap wow fadeSlideInUp">
+                                                <label class="form-label-outside" for="contact-phone">Phone</label>
+                                                <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@Required @PhoneNumber">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 wow-outer">
+                                            <div class="form-wrap wow fadeSlideInUp">
+                                                <label class="form-label-outside" for="contact-message">Your Message</label>
+                                                <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group group-middle">
+                                        <div class="wow-outer">
+                                            <button class="button button-primary button-winona wow slideInRight" type="submit">Send Message</button>
+                                        </div>
+                                        <p>or use</p>
+                                        <div class="wow-outer"><a class="button button-primary-outline button-icon button-icon-left button-winona wow slideInLeft" href="#"><span class="icon text-primary mdi mdi-facebook-messenger"></span>Messenger</a></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell-xl-5 height-fill wow fadeIn">
+                    <div class="google-map-container" data-marker="images/gmap_marker.png" data-marker-active="images/gmap_marker_active.png" data-styles="[{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#e9e9e9&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;landscape&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:29},{&quot;weight&quot;:0.2}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:18}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:21}]},{&quot;featureType&quot;:&quot;poi.park&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#dedede&quot;},{&quot;lightness&quot;:21}]},{&quot;elementType&quot;:&quot;labels.text.stroke&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;elementType&quot;:&quot;labels.text.fill&quot;,&quot;stylers&quot;:[{&quot;saturation&quot;:36},{&quot;color&quot;:&quot;#333333&quot;},{&quot;lightness&quot;:40}]},{&quot;elementType&quot;:&quot;labels.icon&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f2f2f2&quot;},{&quot;lightness&quot;:19}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:17},{&quot;weight&quot;:1.2}]}]" data-zoom="5" data-x="-73.9874068" data-y="40.643180">
+                        <div class="google-map"></div>
+                        <ul class="google-map-markers">
+                            <li data-location="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-description="9870 St Vincent Place, Glasgow"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Info-->
+        <section class="section section-sm section-decorated-5">
+            <div class="decor-1"><img src="/vetting/landing/images/bubbles-201x215.png" alt="" width="201" height="215" />
+            </div>
+            <div class="container">
+                <div class="layout-bordered">
+                    <div class="layout-bordered-item wow-outer">
+                        <div class="layout-bordered-item-inner wow slideInUp">
+                            <div class="icon icon-lg mdi mdi-phone text-primary"></div>
+                            <ul class="list-0">
+                                <li><a class="link-default" href="tel:#">+57 305 4648486</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="layout-bordered-item wow-outer">
+                        <div class="layout-bordered-item-inner wow slideInUp">
+                            <div class="icon icon-lg mdi mdi-email text-primary"></div>
+                            <div><a class="link-default" href="mailto:#">v-text="msg"@gmail.org</a></div>
+                        </div>
+                    </div>
+                    <div class="layout-bordered-item wow-outer">
+                        <div class="layout-bordered-item-inner wow slideInUp">
+                            <div class="icon icon-lg mdi mdi-map-marker text-primary"></div>
+                            <div><a class="link-default" href="#">Colombia, Neiva-Huila</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page Footer-->
+        <footer class="section footer-advanced bg-gray-800">
+            <div class="footer-advanced-main">
+                <div class="container">
+                    <div class="row row-50">
+                        <div class="col-lg-4">
+                            <h4>About Us</h4>
+                            <p class="footer-advanced-text">Our firm is one of the leading accounting firms in the area. By combining our expertise, experience and the energy of our staff, each client receives close personal and professional attention. Our high standards, service and specialized staff spell the difference between our outstanding performance and other firms.</p>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <h4>Recent Blog Posts</h4>
+                            <!-- Post Inline-->
+                            <article class="post-inline">
+                                <p class="post-inline-title"><a href="single-blog-post.html">Top Tips from Accountants: How To Handle IRS Scams</a></p>
+                                <ul class="post-inline-meta">
+                                    <li>by Theresa Barnes</li>
+                                    <li><a href="single-blog-post.html">2 days ago</a></li>
+                                </ul>
+                            </article>
+                            <!-- Post Inline-->
+                            <article class="post-inline">
+                                <p class="post-inline-title"><a href="single-blog-post.html">Blogging for Financial Advisors: Build a Trusted Relationship Through Your Blog</a></p>
+                                <ul class="post-inline-meta">
+                                    <li>by Theresa Barnes</li>
+                                    <li><a href="single-blog-post.html">2 days ago</a></li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 block-1">
+                            <h4>Our Projects</h4>
+                            <div class="row row-x-10" data-lightgallery="group">
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-1-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-1-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-2-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-2-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-3-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-3-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-4-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-4-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-5-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-5-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-6-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-6-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"> </div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-7-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-7-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                                <div class="col-3 col-sm-4 col-md-3"><a class="thumbnail-minimal" href="images/gallery-original-8-1200x800.jpg" data-lightgallery="item"><img class="thumbnail-minimal-image" src="/vetting/landing/images/footer-gallery-8-85x85.jpg" alt="" width="85" height="85" />
+                                        <div class="thumbnail-minimal-caption"></div>
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-advanced-aside">
+                <div class="container">
+                    <div class="footer-advanced-layout">
+                        <div>
+                            <ul class="list-nav">
+                                <li><a href="index-2.html">Home</a></li>
+                                <li><a href="about-us.html">About</a></li>
+                                <li><a href="services.html">Services</a></li>
+                                <li><a href="grid-gallery.html">Gallery</a></li>
+                                <li><a href="grid-blog.html">Blog</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="list-inline list-inline-md">
+                                <li><a class="icon icon-sm link-gray-light mdi mdi-facebook" href="#"></a></li>
+                                <li><a class="icon icon-sm link-gray-light mdi mdi-twitter" href="#"></a></li>
+                                <li><a class="icon icon-sm link-gray-light mdi mdi-instagram" href="#"></a></li>
+                                <li><a class="icon icon-sm link-gray-light mdi mdi-google" href="#"></a></li>
+                                <li><a class="icon icon-sm link-gray-light mdi mdi-linkedin" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <hr>
+            </div>
+            <div class="footer-advanced-aside">
+                <div class="container">
+                    <div class="footer-advanced-layout"><a class="brand" href="index-2.html"><img src="/vetting/landing/images/logo-inverse-334x88.png" alt="" width="167" height="44" /></a>
+                        <!-- Rights-->
+                        <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none" /><a href="privacy-policy.html">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-  </section>
-  <!-- End Section 2 -->
-
-  <!-- service section 3 -->
-  <section class="service_section layout_padding" id="service_section">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6 offset-md-2" id="Servi1">
-          <h2 class="custom_heading">
-            Our <span>Services</span>
-          </h2>
-          <div class="container layout_padding2">
-            <div class="row">
-              <div class="col-md-4" id="Servi11">
-                <div class="img_box">
-                  <img src="asset/images/s-1.png" alt="">
-                </div>
-                <div class="detail_box">
-                  <h6>
-                    Pet Care
-                  </h6>
-                  <p>
-                    onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                    enim ad minim veniam, quis nostrud exe
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-4" id="Servi12">
-                <div class="img_box">
-                  <img src="asset/images/s-2.png" alt="">
-                </div>
-                <div class="detail_box">
-                  <h6>
-                    Pet Hotel
-                  </h6>
-                  <p>
-                    onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                    enim ad minim veniam, quis nostrud exe
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-4" id="Servi13">
-                <div class="img_box">
-                  <img src="asset/images/s-3.png" alt="">
-                </div>
-                <div class="detail_box">
-                  <h6>
-                    Emergency
-                  </h6>
-                  <p>
-                    onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                    enim ad minim veniam, quis nostrud exe
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4" id="ServiImg">
-          <img id="imgService" src="asset/images/imgSection3.jpg" alt="" class="w-100">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end service section 3 -->
-
-  <!-- end gallery section -->
-
-  <!-- buy section -->
-
-  <!-- <section class="buy_section layout_padding">
-    <div class="container">
-      <h2>
-        You Can Buy Pet From Our Clinic
-      </h2>
-      <p>
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-      </p>
-      <div class="d-flex justify-content-center">
-        <a href="">
-          Buy Now
-        </a>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- end buy section -->
-
-  <!-- client section -->
-  <!-- <section class="client_section layout_padding-bottom">
-    <div class="container">
-      <h2 class="custom_heading text-center">
-        What Say Our
-        <span>
-          clients
-        </span>
-      </h2>
-      <p class="text-center">
-        orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut la
-      </p>
-      <div id="carouselExample2Indicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExample2Indicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExample2Indicators" data-slide-to="1"></li>
-          <li data-target="#carouselExample2Indicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="layout_padding2 pl-100">
-              <div class="client_container ">
-                <div class="img_box">
-                  <img src="images/client.jpg" alt="">
-                </div>
-                <div class="detail_box">
-                  <h5>
-                    Sandy Mark
-                  </h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="layout_padding2 pl-100">
-              <div class="client_container ">
-                <div class="img_box">
-                  <img src="images/client.jpg" alt="">
-                </div>
-                <div class="detail_box">
-                  <h5>
-                    Sandy Mark
-                  </h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="layout_padding2 pl-100">
-              <div class="client_container ">
-                <div class="img_box">
-                  <img src="images/client.jpg" alt="">
-                </div>
-                <div class="detail_box">
-                  <h5>
-                    Sandy Mark
-                  </h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section> -->
-  <!-- end client section -->
-
-  <!-- map section -->
-
-  <section class="map_section">
-    <div id="map" class="h-100 w-100 ">
-    </div>
-
-    <div class="form_container ">
-      <div class="row">
-        <div class="col-md-8 col-sm-10 offset-md-4">
-          <form action="">
-            <div class="text-center">
-              <h3>
-                Contact Us
-              </h3>
-            </div>
-            <div>
-              <input type="text" placeholder="Name" class="pt-3">
-            </div>
-            <div>
-              <input type=" text" placeholder="Pone Number">
-            </div>
-            <div>
-              <input type="email" placeholder="Email">
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message">
-            </div>
-            <div class="d-flex justify-content-center">
-              <button>
-                SEND
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end map section -->
-
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="info_items">
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-1">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                Location
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-2">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                +02 1234567890
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-3">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                demo@gmail.com
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-  <!-- end info_section -->
-
-  <!-- Modals Sections -->
-  <!-- Modal Iniciar Sesion-->
-  <div class="modal fade" id="exampleModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <center>
-
-            <h2>Inicia Sesión</h2>
-
-          </center>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
-            <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
-            <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
-          </div>
-          <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
-          <center>
-            <button style="margin-top: 10px;" class="btn btn-block btn-success btn-sm" onclick="Validar()">Ingresar</button>
-          </center>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Registrarse-->
-  <div class="modal fade custom-modal-registrarse" id="exampleModalRegistrase" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Registrarse</h4>
-        </div>
-        <div class="modal-body">
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box btn-1" id="basic-addon1">
-              <i class="fa-solid fa-user-large"></i>
-            </span>
-            <input type="text" class="form-control" id="NomPropietarios" placeholder="Nombre" aria-label="NomPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="IdentPropietarios" placeholder="Identificación" aria-label="IdentPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-phone-volume" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="TelPropietarios" placeholder="Teléfono" aria-label="TelPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="DirPropietarios" placeholder="Dir. Residencial" aria-label="DirPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
-            </span>
-            <input type="email" class="form-control" id="EmailPropietarios" placeholder="Correo Electrónico" aria-label="EmailPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-user-plus" style="color: #ffffff;"></i>
-            </span>
-            <input type="text" class="form-control" id="UsuPropietarios" placeholder="Usuario" aria-label="UsuPropietarios">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text btn-box">
-              <i class="fa-solid fa-key" style="color: #ffffff;"></i>
-            </span>
-            <input type="password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
-          </div>
-
-          <center>
-            <hr>
-            <button class="btn btn-block btn-primary btn-sm" onclick="InsertPropietarios()">Registrarse</button>
-          </center>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Modals Sections -->
-
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <p>
-      &copy; 2019 All Rights Reserved By
-      <a href="https://html.design/">Free Html Templates</a>
-    </p>
-  </section>
-  <!-- footer section -->
-
-  <script type="text/javascript" src="assets/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-
-  <script>
-    // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-    // Australia.
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13, // Nivel de zoom actualizado
-        center: {
-          lat: 2.9386, // Coordenada de latitud para Neiva
-          lng: -75.2715 // Coordenada de longitud para Neiva
-        },
-      });
-
-      var image = 'images/maps-and-flags.png';
-      var beachMarker = new google.maps.Marker({
-        position: {
-          lat: 2.9386, // Coordenada de latitud para Neiva
-          lng: -75.2715 // Coordenada de longitud para Neiva
-        },
-        map: map,
-        icon: image
-      });
-    }
-
-    //FUNCTION FOR SECTION 2 
-    window.addEventListener('scroll', function() {
-      const section = document.querySelector('#section2');
-      const sectionPosition = section.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.3;
-
-      if (sectionPosition < screenPosition) {
-        section.classList.add('section-visible');
-      }
-    });
-    //END FUNCTION FOR SECTION 2 
-
-    //FUNTION SERVICE SECTION 3
-    document.addEventListener("DOMContentLoaded", function() {
-      const serviSection = document.getElementById("service_section");
-      const serviElements = document.querySelectorAll("#Servi1, #Servi11, #Servi12, #Servi13");
-      const serviImg = document.getElementById("ServiImg");
-      let hasAnimated = false; // Para evitar que la animación se ejecute varias veces
-
-      // Función para verificar si la sección está visible en el viewport
-      function animateOnScroll() {
-        const sectionPosition = serviSection.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3; // Ajustar para activar un poco antes
-
-        if (sectionPosition < screenPosition && !hasAnimated) {
-          // Agregar la clase 'section-visible' para activar las animaciones
-          serviElements.forEach(function(element) {
-            element.classList.add("section-visible");
-          });
-          serviImg.classList.add("section-visible");
-
-          hasAnimated = true; // Evitar que se repita la animación
-        }
-      }
-
-      // Añadir la clase 'hidden' inicialmente a todos los elementos
-      serviElements.forEach(function(element) {
-        element.classList.add("hidden");
-      });
-      serviImg.classList.add("hidden");
-
-      // Detectar el evento de scroll para animar los elementos cuando la sección entre en el viewport
-      window.addEventListener("scroll", animateOnScroll);
-
-      // Llamar a la función por si la sección ya está en el viewport al cargar la página
-      animateOnScroll();
-    });
-
-    //END FUNTION SERVICE SECTION 3
-  </script>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- google map js -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="/vetting/landing/js/core.min.js"></script>
+    <script src="/vetting/landing/js/script.js"></script>
 </body>
-</body>
+
+<!-- Mirrored from ld-wt73.template-help.com/wt_prod-24921/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2024 14:44:50 GMT -->
 
 </html>

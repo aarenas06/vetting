@@ -23,6 +23,12 @@ class Controller
         echo json_encode($datos);
     }
 
+    public function maps()
+    {
+        $datos = $this->MODEL->maps();
+        echo json_encode($datos);
+    }
+
     
 }
 

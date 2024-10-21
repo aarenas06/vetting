@@ -127,6 +127,9 @@ async function InsertAgen() {
   var CitaDateFin = $("#CitaDateFin").val();
   var CitaObs = $("#CitaObs").val();
   var Emp = $("#Emp").val();
+  var UsuCod = $("#UsuCod").val();
+  var idTbServicios = $("#idTbServicios").val();
+  var citaPre = $("#citaPre").val();
 
   let formData = new FormData();
   formData.append("funcion", "InsertAgen");
@@ -136,6 +139,49 @@ async function InsertAgen() {
   formData.append("CitaDateFin", CitaDateFin);
   formData.append("CitaObs", CitaObs);
   formData.append("Emp", Emp);
+  formData.append("UsuCod", UsuCod);
+  formData.append("idTbServicios", idTbServicios);
+  formData.append("citaPre", citaPre);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Agenda/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.json();
+    if (res2.cod === 1) {
+      var icon = "success";
+    } else {
+      var icon = "info";
+    }
+    Swal.fire({
+      icon: icon,
+      text: res2.msm,
+    });
+    if (res2.cod === 1) {
+      $("#CrearAgenda").modal("hide");
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    btn.innerHTML = originalContent;
+    console.log(error);
+  }
+}
+citasHoy();
+async function citasHoy() {
+  var Emp = $("#Emp").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "citasHoy");
+  formData.append("Emp", Emp);
+
   try {
     let req2 = await fetch(
       "/vetting/modules/Agenda/controller/controller.php",
@@ -145,13 +191,13 @@ async function InsertAgen() {
       }
     );
     let res2 = await req2.text();
+    $("#citasHoyFor").html(res2);
   } catch (error) {
     Swal.fire({
       icon: "error",
       title: "Error!",
       text: `Problema del Servidor: ${error.message}`,
     });
-    btn.innerHTML = originalContent;
     console.log(error);
   }
 }

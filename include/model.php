@@ -24,7 +24,18 @@ class modelo
         $row = $sql->fetch(PDO::FETCH_NAMED);
         return $row;
     }
-
+    public function ValidarEmpr($user, $pass, $pack, $PreDict)
+    {
+        $sql = "SELECT tb1.*,tb3.RolNom FROM tbempleados tb1
+        INNER JOIN tbempresas tb2 on tb2.idTbEmpresas=tb1.idTbEmpresas
+        INNER JOIN tbroles tb3 on tb3.idTbRoles=tb1.idTbRoles
+        where tb1.EmpUsu='$user' AND tb1.EmpCla='$pass' AND EmpEst=1 AND tb2.EmpreTok='$pack' AND EmpreNit=$PreDict AND tb2.EmpreEst=1
+        Limit 1";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_NAMED);
+        return $row;
+    }
     public function ValidaExitencia($idPropietario)
     {
         $sql = "SELECT idTbUsuarios, UsuCC FROM tbusuarios WHERE UsuCC = :idPropietario";
@@ -62,5 +73,13 @@ class modelo
             return false;
         }
     }
-    
+
+    public function GetTok($ind)
+    {
+        $sql = "SELECT EmpreNit nit,EmpreTok tok FROM `tbempresas` where idTbEmpresas=$ind;";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_NAMED);
+        return $row;
+    }
 }

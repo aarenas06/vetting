@@ -12,12 +12,13 @@ async function Validar() {
       method: "POST",
       body: formData,
     });
-    let res2 = await req2.json();    
+    let res2 = await req2.json();
     if (res2.success === "ok") {
-      if (res2.idTbRoles === 2) {//Vista propietarios
+      if (res2.idTbRoles === 2) {
+        //Vista propietarios
         const urlRedireccion = `/vetting/modules/principal.php`;
         window.location.href = urlRedireccion;
-      } 
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -85,6 +86,52 @@ async function InsertPropietarios() {
   } catch {
     Swal.fire({
       icon: "error",
+      text: "Problema del Servidor",
+    });
+  }
+}
+async function ValidarEmpr() {
+  var User = $("#UserEmp").val();
+  var Pass = $("#PassEmp").val();
+  var pack = $("#pack").val();
+  var PreDict = $("#PreDict").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "ValidarEmpr");
+  formData.append("User", User);
+  formData.append("Pass", Pass);
+  formData.append("pack", pack);
+  formData.append("PreDict", PreDict);
+
+  try {
+    let req2 = await fetch("/vetting/include/controller.php", {
+      method: "POST",
+      body: formData,
+    });
+    let res2 = await req2.json();
+
+    if (res2.success === "ok") {
+      Swal.fire({
+        icon: "success",
+        text: "Bienvenido.",
+      });
+      if (res2.idTbRoles === 3) {
+        const urlRedireccion = `/vetting/modules/principal.php?p=DashEmp/index`;
+        window.location.href = urlRedireccion;
+      } else {
+        const urlRedireccion = `/vetting/modules/principal.php?p=DashVet/index`;
+        window.location.href = urlRedireccion;
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "Error al ingresar",
+      });
+    }
+  } catch {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
       text: "Problema del Servidor",
     });
   }

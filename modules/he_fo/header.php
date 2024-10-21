@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php session_start();
+// Verifica si las variables de sesión no existen
+if (!isset($_SESSION["UsuCod"])) {
+    // Muestra el mensaje
+    echo '<script>alert("No has iniciado sesión");</script>';
+
+    // Redirige a la pantalla principal
+    echo '<script>window.location.href = "http://localhost/vetting/";</script>';
+    exit; // Agrega exit para detener la ejecución del script después de la redirección
+}
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,41 +114,42 @@
                                 <span class="hide-menu">Empresas</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-aperture"></i>
-                                </span>
-                                <span class="hide-menu">Propietarios</span>
-                            </a>
-                        </li>
+
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Empresas</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./app-calendar.html" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-truck-ramp-box"></i>
+                                    <i class="fa-solid fa-people-line"></i>
                                 </span>
-                                <span class="hide-menu">Inventario</span>
+                                <span class="hide-menu">Personal</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=Clientes/index" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-aperture"></i>
                                 </span>
-                                <span class="hide-menu">Propietarios</span>
+                                <span class="hide-menu">Clientes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="?p=Agenda/index" aria-expanded="false">
+                                <span>
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </span>
+                                <span class="hide-menu">Agenda</span>
                             </a>
                         </li>
 
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Propietarios</span>
+                            <span class="hide-menu">Clientes</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Propietarios/index" aria-expanded="false">
+                            <a class="sidebar-link" href="?p=Home/index" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-aperture"></i>
                                 </span>
@@ -193,77 +204,7 @@
                                 <i class="ti ti-align-justified fs-7"></i>
                             </a>
                             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ti ti-bell-ringing"></i>
-                                        <div class="notification bg-primary rounded-circle"></div>
-                                    </a>
-                                    <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                                        <div class="d-flex align-items-center justify-content-between py-3 px-7">
-                                            <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-                                            <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
-                                        </div>
-                                        <div class="message-body" data-simplebar>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
 
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">Roman Joined the Team!</h6>
-                                                    <span class="d-block">Congratulate him</span>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
-
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">New message</h6>
-                                                    <span class="d-block">Salma sent you new message</span>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
-
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">Bianca sent payment</h6>
-                                                    <span class="d-block">Check your earnings</span>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
-
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">Jolly completed tasks</h6>
-                                                    <span class="d-block">Assign her new tasks</span>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
-
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">John received payment</h6>
-                                                    <span class="d-block">$230 deducted from account</span>
-                                                </div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                                <span class="me-3">
-
-                                                </span>
-                                                <div class="w-75 d-inline-block v-middle">
-                                                    <h6 class="mb-1 fw-semibold">Roman Joined the Team!</h6>
-                                                    <span class="d-block">Congratulate him</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="py-6 px-7 mb-1">
-                                            <button class="btn btn-outline-primary w-100"> See All Notifications </button>
-                                        </div>
-                                    </div>
-                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
@@ -288,7 +229,7 @@
                                                 </div>
                                             </div>
                                             <div class="message-body">
-                                                <a href="/vetting/plantilla/index.php/PerfilUser/Empresa" class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                <a href="/vetting/modules/principal.php?p=perfilUser/index" class="py-8 px-7 mt-8 d-flex align-items-center">
                                                     <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
                                                         <img src="/vetting/plantilla/assets/img/home/icon-account.svg" alt="" width="24" height="24">
                                                     </span>
@@ -297,27 +238,18 @@
                                                         <span class="d-block text-dark">Configuraciòn cuenta</span>
                                                     </div>
                                                 </a>
-                                                <a href="./app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                                    <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="/vetting/plantilla/assets/img/home/icon-inbox.svg" alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">My correo</h6>
-                                                        <span class="d-block text-dark">Mensajes </span>
-                                                    </div>
-                                                </a>
                                                 <a href="./app-notes.html" class="py-8 px-7 d-flex align-items-center">
                                                     <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
                                                         <img src="/vetting/plantilla/assets/img/home/icon-tasks.svg" alt="" width="24" height="24">
                                                     </span>
                                                     <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">Deberes</h6>
+                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">Agenda</h6>
                                                         <span class="d-block text-dark">Pendientes</span>
                                                     </div>
                                                 </a>
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
-                                                <a href="/vetting/plantilla/" class="btn btn-outline-primary">Cerrar Sesiòn</a>
+                                                <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesiòn</a>
                                             </div>
                                         </div>
                                     </div>

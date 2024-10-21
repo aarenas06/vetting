@@ -12,93 +12,157 @@ class modelo
         $conexion = new conexion(); // Crear una instancia de la clase conexion
         $this->CNX1 = $conexion->mysql(); // Llamar al método mysql() de la instancia
     }
-    public function InsertPlan($data)
+
+    public function selectRaza()
+    {
+        $sql = "SELECT * FROM tbrazas";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+    //FUNCION PARA VALIDAR SI EL CODE DEL CHIP EXISTE
+    public function checkIfCodeExists($code)
+    {
+        $sql = "SELECT * FROM `tbmascotas` WHERE MascoChip='" . $code . "'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+    public function ChangeEstMasco($data, $new)
+    {
+        $sql = "UPDATE tbmascotas SET MascoEst=$new WHERE  idtbMascotas='" . $data['idMasco'] . "' and MascoChip='" . $data['chip'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+    }
+
+    public function ObtRaza($razaId)
+    {
+        $sql = "SELECT RazNom FROM tbrazas WHERE idTbRazas = :razaId";
+        $stmt = $this->CNX1->prepare($sql);
+        $stmt->bindParam(':razaId', $razaId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['RazNom'] : null;
+    }
+
+
+    public function listMascotas($data)
+    {
+        $sql = "SELECT 	idtbMascotas idMasco, MascoCod Cod, MascoChip Chip, MascoNom Nombre, idTbRazas Raza, MascoFechNac FechNaci,CONCAT(MascoYear, ' Años ', MascoMes, ' Meses') EdadMascota, 
+        MascoSex Sexo, MascoPeso Peso, MascoPatologia Patologia, MascoAgresion Agresion, MascoEst Estado FROM tbmascotas 
+        where idTbUsuarios='" . $data['UsuCod'] . "'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        if ($sql->rowCount() > 0) {
+            return $row;
+        } else {
+            return 'vacio';
+        }
+    }
+
+    public function InsertMascota($data)
     {
         try {
-            $columnas = implode(", ", array_keys($data));
-            $valores = array_values($data);
-            $placeholders = implode(", ", array_fill(0, count($valores), "?"));
-            $sql = "INSERT INTO tbplanes ($columnas) VALUES ($placeholders)";
+            $sql = "INSERT INTO tbmascotas (idTbUsuarios, MascoCod, MascoNom, idTbRazas, MascoFechNac, MascoYear, MascoMes, MascoSex, MascoPelaje, 
+                        MascoPeso, MascoComidaHab, MascoVivienda, MascoUltCelo, MascoChip, MascoPatologia, MascoAdop, MascoPic, MascoAgresion, MascoEst) 
+                VALUES (:idTbUsuarios, :MascoCod, :MascoNom, :idTbRazas, :MascoFechNac, :MascoYear, :MascoMes, :MascoSex, :MascoPelaje, 
+                        :MascoPeso, :MascoComidaHab, :MascoVivienda, :MascoUltCelo, :MascoChip, :MascoPatologia, :MascoAdop, :MascoPic, :MascoAgresion,:MascoEst);";
             $stmt = $this->CNX1->prepare($sql);
-            $stmt->execute($valores);
+            // Asignar los valores a los parámetros
+            $stmt->bindParam(':idTbUsuarios', $data['UsuCod']);
+            $stmt->bindParam(':MascoCod', $data['MascoChip']);
+            $stmt->bindParam(':MascoNom', $data['MascoNom']);
+            $stmt->bindParam(':idTbRazas', $data['MascoRaza']);
+            $stmt->bindParam(':MascoFechNac', $data['MascoFecNaci']);
+            $stmt->bindParam(':MascoYear', $data['MascoYear']);
+            $stmt->bindParam(':MascoMes', $data['MascoMes']);
+            $stmt->bindParam(':MascoSex', $data['MascoSexo']);
+            $stmt->bindParam(':MascoPelaje', $data['MascoPelaje']);
+            $stmt->bindParam(':MascoPeso', $data['MascoPeso']);
+            $stmt->bindParam(':MascoComidaHab', $data['MascoComida']);
+            $stmt->bindParam(':MascoVivienda', $data['MascoVivienda']);
+            $stmt->bindParam(':MascoUltCelo', $data['MascoCelo']);
+            $stmt->bindParam(':MascoChip', $data['MascoChip']);
+            $stmt->bindParam(':MascoPatologia', $data['MascoPatologia']);
+            $stmt->bindParam(':MascoAdop', $data['MascoAdopcion']);
+            $stmt->bindParam(':MascoPic', $data['fotoMasco']);
+            $stmt->bindParam(':MascoAgresion', $data['Mascoagresividad']);
+            $stmt->bindParam(':MascoEst', $data['Estado']);
+            $stmt->execute();
             $lastInsertId = $this->CNX1->lastInsertId();
-
-            return $lastInsertId;
+            return true; // Retornamos la respuesta de la DB
         } catch (PDOException $e) {
-            die("Error al insertar los datos: " . $e->getMessage());
+            // Manejar el error
+            error_log("Error al insertar los datos: " . $e->getMessage());
             return false;
         }
     }
-    public function GetModulos()
 
+    public function HistorialMasco($data)
+    {
+        $sql = "SELECT citas.idTbCitas,mas.MascoNom,serv.OptNombre,citas.CitaDate,citas.CitaObs FROM tbcitas citas
+            LEFT JOIN tbmascotas mas ON mas.idtbMascotas=citas.idtbMascotas
+            LEFT JOIN tboptservicios serv ON serv.IdoptServicios=citas.idTbServicios 
+            WHERE mas.idtbMascotas='" . $data['IdMasco'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function EditDataMasco($data)
+    {
+        $sql = "SELECT idtbMascotas,MascoNom, MascoFechNac,CONCAT(MascoYear, ' Años y ', MascoMes, ' Meses') AS Edad 
+            FROM tbmascotas WHERE idtbMascotas = '" . $data['IdMasco'] . "' ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function SaveEditMasco($data)
+    {
+        try {
+            // Verifica si se ha proporcionado una nueva foto
+            $sql = "UPDATE tbmascotas SET MascoNom = :MascoNom, MascoFechNac = :MascoFechNac, MascoYear = :MascoYear, MascoMes = :MascoMes";
+            // Solo agregar el campo de la foto si existe en el arreglo de datos
+            if (!empty($data['fotoMasco'])) {
+                $sql .= ", MascoPic = :MascoPic";
+            }
+            $sql .= " WHERE idtbMascotas = :idtbMascotas";
+            $stmt = $this->CNX1->prepare($sql);
+            // Asignar los valores a los parámetros
+            $stmt->bindParam(':MascoNom', $data['EditMascoNom']);
+            $stmt->bindParam(':MascoFechNac', $data['EditMascoFecNaci']);
+            $stmt->bindParam(':MascoYear', $data['EditMascoYear']);
+            $stmt->bindParam(':MascoMes', $data['EditMascoMes']);
+            // Solo enlazar el parámetro de la foto si se ha proporcionado
+            if (!empty($data['fotoMasco'])) {
+                $stmt->bindParam(':MascoPic', $data['fotoMasco']);
+            }
+            $stmt->bindParam(':idtbMascotas', $data['IdMascoEdit']);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error al actualizar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
+
+    public function GetModulos()
     {
         $sql = "SELECT * FROM tboptservicios WHERE OptEst=1";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
         return $row;
-    }
-    public function InsertPlanServices($data)
-    {
-        try {
-            $columnas = implode(", ", array_keys($data));
-            $valores = array_values($data);
-            $placeholders = implode(", ", array_fill(0, count($valores), "?"));
-            $sql = "INSERT INTO tbservicios ($columnas) VALUES ($placeholders)";
-            $stmt = $this->CNX1->prepare($sql);
-            $stmt->execute($valores);
-            return 1;
-        } catch (PDOException $e) {
-            die("Error al insertar los datos: " . $e->getMessage());
-            return false;
-        }
-    }
-    public function listPlanes()
-    {
-        $sql = "SELECT tb1.* ,COUNT(tb2.idTbServicios) C
-        FROM tbplanes  tb1 
-        LEFT JOIN tbservicios tb2 on tb2.idTbPlanes=tb1.idTbPlanes
-        GROUP BY idTbPlanes;";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
-        $row = $sql->fetchAll(PDO::FETCH_NAMED);
-        return $row;
-    }
-    public function tbdetalle($idPlan)
-    {
-        $sql = "SELECT tb2.*  ,tb1.ServiciosEst Est,tb1.idTbPlanes idPlan
-        FROM  tbservicios tb1
-        inner JOIN  tboptservicios tb2 on tb2.IdoptServicios=tb1.idTbServicios
-        WHERE tb1.idTbPlanes=$idPlan";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
-        $row = $sql->fetchAll(PDO::FETCH_NAMED);
-        return $row;
-    }
-    public function ChangeEst($idPlan, $idServicio, $new)
-    {
-        $sql = "UPDATE tbservicios SET ServiciosEst=$new WHERE  idTbServicios=$idServicio AND idTbPlanes=$idPlan";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
-    }
-    public function ChangeEstPlan($idPlan, $new)
-    {
-        $sql = "UPDATE tbplanes SET PlanEst=$new WHERE  idTbPlanes=$idPlan";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
-    }
-    public function ListData($idPlan)
-    {
-        $sql = "SELECT * FROM tbplanes where idTbPlanes =$idPlan";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
-        $row = $sql->fetch(PDO::FETCH_NAMED);
-        return $row;
-    }
-    public function UpdatePlan($idPlan, $PlanNom, $PlanVigenciaDia, $PlanCosto, $PlanVigenciaMes)
-    {
-        $sql = "UPDATE tbplanes SET PlanNom='$PlanNom',PlanVigenciaDia=$PlanVigenciaDia,PlanCosto=$PlanCosto, PlanVigenciaMes=$PlanVigenciaMes WHERE  idTbPlanes=$idPlan";
-        $sql = $this->CNX1->prepare($sql);
-        $sql->execute();
     }
 }

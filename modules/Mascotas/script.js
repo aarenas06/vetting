@@ -1,8 +1,42 @@
-listPlanes();
+function updatePorcentaje(slider) {
+  let porcentaje = slider.value;
+  document.getElementById("porcentaje").textContent = porcentaje + "%";
+  slider.style.backgroundSize = porcentaje + "% 100%";
+}
 
-async function listPlanes() {
+window.onload = function () {
+  let slider = document.getElementById("agresividad");
+  updatePorcentaje(slider);
+};
+
+function updateFileName() {
+  const input = document.getElementById("MascoFotoInput");
+  const fileName = input.files.length > 0 ? input.files[0].name : "";
+  document.getElementById("MascoFotoNombre").value = fileName;
+}
+
+//CALCULAMOS LA EDAD DE LA MASCOTA EN EL MODAL
+function MascoFecNaci() {
+  let MascoFecNaci = document.getElementById("MascoFecNaci").value;
+  let birthDate = new Date(MascoFecNaci);
+  let currentDate = new Date();
+  let years = currentDate.getFullYear() - birthDate.getFullYear();
+  let months = currentDate.getMonth() - birthDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById(
+    "MascoEdad"
+  ).value = `${years} años y ${months} meses`;
+}
+
+generarMascoIdChip();
+async function generarMascoIdChip() {
   let formData = new FormData();
-  formData.append("funcion", "listPlanes");
+  formData.append("funcion", "generarMascoIdChip");
   try {
     let req2 = await fetch(
       "/vetting/modules/Mascotas/controller/controller.php",
@@ -11,10 +45,9 @@ async function listPlanes() {
         body: formData,
       }
     );
-
-    let res2 = await req2.text();
-    $("#listPlanes").html(res2);
-    $("#tb1").DataTable();
+    let res2 = await req2.json();
+    let codigo = document.getElementById("MascoChip");
+    codigo.value = res2["codigo"];
   } catch (error) {
     Swal.fire({
       icon: "error",
@@ -25,28 +58,111 @@ async function listPlanes() {
   }
 }
 
-async function InsertPlan() {
-  var PlanNom = $("#PlanNom").val();
-  var PlanVigenciaDia = $("#PlanVigenciaDia").val();
-  var PlanCosto = $("#PlanCosto").val();
-  var PlanVigenciaMes = $("#PlanVigenciaMes").val();
-  PlanCosto = PlanCosto.replace(/[,\.]/g, ""); // Eliminar comas y puntos
-  // Capturar los IDs de los checkboxes seleccionados
-  var selectedServices = [];
-  $("input[type=checkbox]:checked").each(function () {
-    selectedServices.push($(this).attr("id"));
-  });
+listMascotas();
+
+async function listMascotas() {
   let formData = new FormData();
-  formData.append("funcion", "InsertPlan");
-  formData.append("PlanNom", PlanNom);
-  formData.append("PlanVigenciaDia", PlanVigenciaDia);
-  formData.append("PlanCosto", PlanCosto);
-  formData.append("PlanVigenciaMes", PlanVigenciaMes);
-  formData.append("selectedServices", JSON.stringify(selectedServices)); // Añadir el array de IDs como JSON
+  formData.append("funcion", "listMascotas");
+  formData.append("UsuCod", $("#UsuCod").val());
 
   try {
     let req2 = await fetch(
-      "/vetting/modules/Planes/controller/controller.php",
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.text();
+    $("#listMascotas").html(res2);
+    $("#tbMascotas").DataTable();
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    console.log(error);
+  }
+}
+
+async function InsertMascota() {
+  //Separamos el año y el mes de la edad
+  var MascoEdad = $("#MascoEdad").val();
+  var regex = /(\d+)\s*años\s*y\s*(\d+)\s*meses/;
+  var match = MascoEdad.match(regex);
+
+  if (match) {
+    var anos = match[1];
+    var meses = match[2];
+
+    var MascoYear = anos;
+    var MascoMes = meses;
+  } else {
+    console.log("Formato no válido");
+  }
+
+  var MascoFecNaci = $("#MascoFecNaci").val();
+  var MascoNom = $("#MascoNom").val();
+  var MascoSexo = $("#MascoSexo").val();
+  var MascoPelaje = $("#MascoPelaje").val();
+  var MascoComida = $("#MascoComida").val();
+  var MascoCelo = $("#MascoCelo").val();
+  var MascoAdopcion = $("#MascoAdopcion").val();
+  var MascoEspecie = $("#MascoEspecie").val();
+  var MascoRaza = $("#MascoRaza").val();
+  var MascoPeso = $("#MascoPeso").val();
+  var MascoVivienda = $("#MascoVivienda").val();
+  var MascoChip = $("#MascoChip").val();
+  var Mascoagresividad = $("#Mascoagresividad").val();
+  var MascoPatologia = $("#MascoPatologia").val();
+  var MascoFoto = $("#MascoFotoInput").get(0).files[0];
+  var UsuCod = $("#UsuCod").val();
+  var Estado = "1"; //Activo
+
+  //Validación si los hay campos vacios
+  if (
+    MascoFecNaci == "" ||
+    MascoNom == "" ||
+    MascoSexo == "" ||
+    MascoEspecie == "" ||
+    MascoRaza == "" ||
+    Mascoagresividad == "" ||
+    MascoFoto == ""
+  ) {
+    Swal.fire({
+      icon: "error",
+      text: "Todos los campos deben ser diligenciados...!",
+    });
+    return;
+  }
+
+  let formData = new FormData();
+  formData.append("funcion", "InsertMascota");
+  formData.append("MascoNom", MascoNom);
+  formData.append("MascoFecNaci", MascoFecNaci);
+  formData.append("MascoYear", MascoYear);
+  formData.append("MascoMes", MascoMes);
+  formData.append("MascoSexo", MascoSexo);
+  formData.append("MascoPelaje", MascoPelaje);
+  formData.append("MascoComida", MascoComida);
+  formData.append("MascoCelo", MascoCelo);
+  formData.append("MascoAdopcion", MascoAdopcion);
+  formData.append("MascoEspecie", MascoEspecie);
+  formData.append("MascoRaza", MascoRaza);
+  formData.append("MascoPeso", MascoPeso);
+  formData.append("MascoVivienda", MascoVivienda);
+  formData.append("MascoChip", MascoChip);
+  formData.append("Mascoagresividad", Mascoagresividad);
+  formData.append("MascoPatologia", MascoPatologia);
+  formData.append("MascoFoto", MascoFoto);
+  formData.append("UsuCod", UsuCod);
+  formData.append("Estado", Estado);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
       {
         method: "POST",
         body: formData,
@@ -57,17 +173,19 @@ async function InsertPlan() {
     if (res2 === true) {
       Swal.fire({
         icon: "success",
-        text: "Plan Agregado",
+        text: "Mascota Agregada Correctamente...!",
       });
-      $("#insertPlanModal").modal("hide");
-      listPlanes();
+      $("#insertMascota").modal("hide");
+      // listPropietarios();
 
       // Limpiar campos del formulario y desmarcar checkboxes
-      $("#PlanNom").val("");
-      $("#PlanVigenciaDia").val("");
-      $("#PlanCosto").val("");
-      $("#PlanVigenciaMes").val("");
-      $("input[type=checkbox]").prop("checked", false);
+      // $("#NomPropietarios").val("");
+      // $("#IdentPropietarios").val("");
+      // $("#TelPropietarios").val("");
+      // $("#DirPropietarios").val("");
+      // $("#EmailPropietarios").val("");
+      // $("#UsuPropietarios").val("");
+      // $("#PassPropietarios").val("");
     } else {
       Swal.fire({
         icon: "error",
@@ -82,46 +200,23 @@ async function InsertPlan() {
   }
 }
 
-async function TbDetalle(idPlan) {
-  let formData = new FormData();
-  formData.append("funcion", "TbDetalle");
-  formData.append("idPlan", idPlan);
-
-  try {
-    let req2 = await fetch(
-      "/vetting/modules/Planes/controller/controller.php",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    let res2 = await req2.text();
-    $("#tbDetalle").html(res2);
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Error!",
-      text: `Problema del Servidor: ${error.message}`,
-    });
-    console.log(error);
-  }
-}
-async function ChangeEstPlan(idPlan, Est) {
+async function ChangeEstMasco(idMasco, chip, Est) {
   Swal.fire({
-    text: "¿Enserio Quieres cambiar de estado?",
+    icon: "info",
+    text: "¿Quieres cambiar de estado?",
     showCancelButton: true,
     confirmButtonText: "Aceptar",
   }).then(async (result) => {
     if (result.isConfirmed) {
       let formData = new FormData();
-      formData.append("funcion", "ChangeEstPlan");
-      formData.append("idPlan", idPlan);
+      formData.append("funcion", "ChangeEstMasco");
+      formData.append("idMasco", idMasco);
+      formData.append("chip", chip);
       formData.append("Est", Est);
 
       try {
         let req2 = await fetch(
-          "/vetting/modules/Planes/controller/controller.php",
+          "/vetting/modules/Mascotas/controller/controller.php",
           {
             method: "POST",
             body: formData,
@@ -130,9 +225,9 @@ async function ChangeEstPlan(idPlan, Est) {
         let res2 = await req2.text();
         Swal.fire({
           icon: "success",
-          text: `Estado Actualizado`,
+          text: `Estado Actualizado...!`,
         });
-        listPlanes();
+        listMascotas();
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -145,105 +240,195 @@ async function ChangeEstPlan(idPlan, Est) {
   });
 }
 
-async function ChangeEst(idServicio, idPlan, Est) {
-  Swal.fire({
-    text: "¿Enserio Quieres cambiar de estado?",
-    showCancelButton: true,
-    confirmButtonText: "Aceptar",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      let formData = new FormData();
-      formData.append("funcion", "ChangeEst");
-      formData.append("idPlan", idPlan);
-      formData.append("idServicio", idServicio);
-      formData.append("Est", Est);
-
-      try {
-        let req2 = await fetch(
-          "/vetting/modules/Planes/controller/controller.php",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-        let res2 = await req2.text();
-        Swal.fire({
-          icon: "success",
-          text: `Estado Actualizado`,
-        });
-        TbDetalle(idPlan);
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          text: `Problema del Servidor: ${error.message}`,
-        });
-        console.log(error);
-      }
-    } else if (result.isDenied) {
-    }
-  });
-}
-async function listData(idPlan) {
+async function HistorialMasco(IdMasco) {
   let formData = new FormData();
-  formData.append("funcion", "ListData");
-  formData.append("idPlan", idPlan);
-
+  formData.append("funcion", "HistorialMasco");
+  formData.append("IdMasco", IdMasco);
   try {
     let req2 = await fetch(
-      "/vetting/modules/Planes/controller/controller.php",
+      "/vetting/modules/Mascotas/controller/controller.php",
       {
         method: "POST",
         body: formData,
       }
     );
 
-    let res2 = await req2.text();
-    $("#ListData").html(res2);
+    let res2 = await req2.json();
+
+    // Limpiar el contenido del modal antes de agregar los nuevos datos
+    let ContMascotas = document.getElementById("InfoHistorial");
+    ContMascotas.innerHTML = ""; // Limpia el contenido previo
+
+    let hc = document.getElementById("Hc");
+    hc.innerHTML = "Historial Clínico" + " - " + res2[0]["MascoNom"];
+
+    // Verificar si hay más de 3 registros para agregar scroll
+    if (res2.length > 3) {
+      ContMascotas.style.maxHeight = "400px"; // Ajusta el tamaño máximo del contenedor
+      ContMascotas.style.overflowY = "auto"; // Activa el scroll vertical
+    } else {
+      ContMascotas.style.maxHeight = "none"; // Si hay 3 o menos, sin límite
+      ContMascotas.style.overflowY = "visible"; // Sin scroll
+    }
+
+    // Iterar sobre la respuesta para mostrar los nuevos datos
+    res2.forEach((item) => {
+      ContMascotas.innerHTML += `
+      <br>
+        <section class="row">
+          <section class="col-md-12">
+            <div class="card custom-card">
+              <div class="card-header">
+                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["OptNombre"]}</p>
+                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["CitaDate"]}</p>
+              </div>
+
+              <div class="card-body">
+                <div style="text-align:left;">
+                  <p class="card-text" style="text-align:left; color:black;">
+                    <b>Observaciones:</b> <br> ${item["CitaObs"]}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      `;
+    });
   } catch (error) {
     Swal.fire({
-      icon: "error",
-      title: "Error!",
-      text: `Problema del Servidor: ${error.message}`,
+      icon: "info",
+      title: "Upss!!",
+      text: `No hay Historial para esta mascota`,
     });
     console.log(error);
   }
 }
-async function UpdatePlan(idPlan) {
-  var PlanNom = $("#PlanNomUp").val();
-  var PlanVigenciaDia = $("#PlanVigenciaDiaUp").val();
-  var PlanCosto = $("#PlanCostoUp").val();
-  var PlanVigenciaMes = $("#PlanVigenciaMesUp").val();
-  PlanCosto = PlanCosto.replace(/[,\.]/g, ""); // Eliminar comas y puntos
 
+//FUNCIONES PARA EDITAR MASCOTA
+function EditMascoFecNaci() {
+  let EditMascoFecNaci = document.getElementById("EditMascoFecNaci").value;
+  let birthDate = new Date(EditMascoFecNaci);
+  let currentDate = new Date();
+  let years = currentDate.getFullYear() - birthDate.getFullYear();
+  let months = currentDate.getMonth() - birthDate.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById(
+    "EditMascoEdad"
+  ).value = `${years} años y ${months} meses`;
+}
+
+function EditUpdateFileName() {
+  const Editinput = document.getElementById("EditMascoFotoInput");
+  const EditfileName = Editinput.files.length > 0 ? Editinput.files[0].name : "";
+  document.getElementById("EditMascoFotoNombre").value = EditfileName;
+}
+
+// Escuchar el evento cuando se oculta el modal, para vaciar el Form
+const EditMascoModal = document.getElementById("EditMasco");
+EditMascoModal.addEventListener("hidden.bs.modal", function () {
+  document.getElementById("EditMascoNom").value = "";
+  document.getElementById("EditMascoFecNaci").value = "";
+  document.getElementById("EditMascoEdad").value = "";
+  document.getElementById("EditMascoFotoNombre").value = "";
+  document.getElementById("EditMascoFotoInput").value = ""; // Limpiar el input file
+});
+
+async function EditDataMasco(IdMasco) {
+  $('#EditMasco').modal('show');
   let formData = new FormData();
-  formData.append("funcion", "UpdatePlan");
-  formData.append("idPlan", idPlan);
-  formData.append("PlanNom", PlanNom);
-  formData.append("PlanVigenciaDia", PlanVigenciaDia);
-  formData.append("PlanCosto", PlanCosto);
-  formData.append("PlanVigenciaMes", PlanVigenciaMes);
+  formData.append("funcion", "EditDataMasco");
+  formData.append("IdMasco", IdMasco);
 
   try {
     let req2 = await fetch(
-      "/vetting/modules/Planes/controller/controller.php",
+      "/vetting/modules/Mascotas/controller/controller.php",
       {
         method: "POST",
         body: formData,
       }
     );
-    let res2 = await req2.text();
-    Swal.fire({
-      icon: "success",
-      text: `información Actualizada`,
-    });
-    $("#ModalData").modal("hide");
-    listPlanes();
-  } catch (error) {
+
+    let res2 = await req2.json();
+    let IdMasco = document.getElementById("IdMascoEdit");
+    IdMasco.value = res2[0]["idtbMascotas"];
+    let nomMasco = document.getElementById("EditMascoNom");
+    nomMasco.value = res2[0]["MascoNom"];
+    let FechNaciMasco = document.getElementById("EditMascoFecNaci");
+    FechNaciMasco.value = res2[0]["MascoFechNac"];
+    let EdadMasco = document.getElementById("EditMascoEdad");
+    EdadMasco.value = res2[0]["Edad"];
+  } catch {
     Swal.fire({
       icon: "error",
-      title: "Error!",
-      text: `Problema del Servidor: ${error.message}`,
+      text: "Problema del Servidor",
     });
-    console.log(error);
+  }
+}
+
+async function SaveEditMasco() {
+  //Separamos el año y el mes de la edad
+  var MascoEdad = $("#EditMascoEdad").val();
+  var regex = /(\d+)\s*años\s*y\s*(\d+)\s*meses/;
+  var match = MascoEdad.match(regex);
+
+  if (match) {
+    var anos = match[1];
+    var meses = match[2];
+
+    var MascoYear = anos;
+    var MascoMes = meses;
+  } else {
+    console.log("Formato no válido");
+  }
+  var IdMascoEdit = $("#IdMascoEdit").val();
+  var EditMascoNom = $("#EditMascoNom").val();
+  var EditMascoFecNaci = $("#EditMascoFecNaci").val();
+  var EditMascoFoto = $("#EditMascoFotoInput").get(0).files[0];
+  var UsuCod = $("#UsuCod").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "SaveEditMasco");
+  formData.append("IdMascoEdit", IdMascoEdit);
+  formData.append("EditMascoNom", EditMascoNom);
+  formData.append("EditMascoFecNaci", EditMascoFecNaci);
+  formData.append("EditMascoYear", MascoYear);
+  formData.append("EditMascoMes", MascoMes);
+  formData.append("EditMascoFoto", EditMascoFoto);
+  // formData.append("UsuCod", UsuCod);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.json();
+    $("#EditMasco").modal('hide');
+    if (res2 === true) {
+      Swal.fire({
+        icon: "success",
+        text: "Mascota Actualizada Correctamente...!",
+      });
+      listMascotas();
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: "Problema del Servidor",
+      });
+    }
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "Problema del Servidor",
+    });
   }
 }

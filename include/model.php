@@ -73,6 +73,7 @@ class modelo
             return false;
         }
     }
+
     public function GetTok($ind)
     {
         $sql = "SELECT EmpreNit nit,EmpreTok tok FROM `tbempresas` where idTbEmpresas=$ind;";

@@ -14,9 +14,10 @@ async function Validar() {
     });
     let res2 = await req2.json();
     if (res2.success === "ok") {
-      if (res2.idTbRoles === 2) {
-        //Vista propietarios
-        const urlRedireccion = `/vetting/modules/principal.php`;
+
+      if (res2.idTbRoles === 2) {//Vista propietarios
+        const urlRedireccion = `/vetting/modules/principal.php?p=home/index`;
+
         window.location.href = urlRedireccion;
       }
     } else {

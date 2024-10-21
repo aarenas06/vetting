@@ -10,13 +10,30 @@ class Controller
     {
         $this->MODEL = new modelo();
     }
-    // public function InsertPropietarios()
-    // {
-    //     $datos = $this->MODEL->InsertPropietarios($_POST);
-    //     if (isset($datos)) {
-    //         echo json_encode(true);
-    //     } else {
-    //         echo json_encode(true);
-    //     }
-    // }
+
+    public function GetModulos()
+    {
+        $data = $this->MODEL->GetModulos();
+        return $data;
+    }
+
+    public function listMascotashome()
+    {
+        $datos = $this->MODEL->listMascotashome($_POST);
+        echo json_encode($datos);
+    }
+
+    public function maps()
+    {
+        $datos = $this->MODEL->maps();
+        echo json_encode($datos);
+    }
+
+    
+}
+
+$controller = new Controller();
+
+if (isset($_POST['funcion'])) {
+    call_user_func(array(new Controller, $_POST['funcion']));
 }

@@ -4,7 +4,7 @@
 <!-- Mirrored from ld-wt73.template-help.com/wt_prod-24921/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2024 14:44:30 GMT -->
 
 <head>
-    <title>VECCONNET</title>
+    <title>VET CONNET</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -581,19 +581,19 @@
                     <div class="row">
                         <div class="col-lg-9 cell-inner">
                             <div class="section-lg">
-                                <h3 class="wow-outer"><span class="wow slideInDown">Contact Us</span></h3>
+                                <h3 class="wow-outer"><span class="wow slideInDown">Contactenos</span></h3>
                                 <!-- RD Mailform-->
                                 <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="https://ld-wt73.template-help.com/wt_prod-24921/bat/rd-mailform.php">
                                     <div class="row row-10">
                                         <div class="col-md-6 wow-outer">
                                             <div class="form-wrap wow fadeSlideInUp">
-                                                <label class="form-label-outside" for="contact-first-name">First Name</label>
+                                                <label class="form-label-outside" for="contact-first-name">Nombre</label>
                                                 <input class="form-input" id="contact-first-name" type="text" name="name" data-constraints="@Required">
                                             </div>
                                         </div>
                                         <div class="col-md-6 wow-outer">
                                             <div class="form-wrap wow fadeSlideInUp">
-                                                <label class="form-label-outside" for="contact-last-name">Last Name</label>
+                                                <label class="form-label-outside" for="contact-last-name">Apellidos</label>
                                                 <input class="form-input" id="contact-last-name" type="text" name="name" data-constraints="@Required">
                                             </div>
                                         </div>
@@ -605,23 +605,23 @@
                                         </div>
                                         <div class="col-md-6 wow-outer">
                                             <div class="form-wrap wow fadeSlideInUp">
-                                                <label class="form-label-outside" for="contact-phone">Phone</label>
+                                                <label class="form-label-outside" for="contact-phone">Teléfono</label>
                                                 <input class="form-input" id="contact-phone" type="text" name="phone" data-constraints="@Required @PhoneNumber">
                                             </div>
                                         </div>
                                         <div class="col-12 wow-outer">
                                             <div class="form-wrap wow fadeSlideInUp">
-                                                <label class="form-label-outside" for="contact-message">Your Message</label>
+                                                <label class="form-label-outside" for="contact-message">Tu Mensaje</label>
                                                 <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="group group-middle">
                                         <div class="wow-outer">
-                                            <button class="button button-primary button-winona wow slideInRight" type="submit">Send Message</button>
+                                            <button class="button button-primary button-winona wow slideInRight" type="submit">Enviar mensaje</button>
                                         </div>
-                                        <p>or use</p>
-                                        <div class="wow-outer"><a class="button button-primary-outline button-icon button-icon-left button-winona wow slideInLeft" href="#"><span class="icon text-primary mdi mdi-facebook-messenger"></span>Messenger</a></div>
+                                        <!-- <p>or use</p>
+                                        <div class="wow-outer"><a class="button button-primary-outline button-icon button-icon-left button-winona wow slideInLeft" href="#"><span class="icon text-primary mdi mdi-facebook-messenger"></span>Messenger</a></div> -->
                                     </div>
                                 </form>
                             </div>
@@ -629,7 +629,10 @@
                     </div>
                 </div>
                 <div class="cell-xl-5 height-fill wow fadeIn">
-                    <div class="google-map-container" data-marker="images/gmap_marker.png" data-marker-active="images/gmap_marker_active.png" data-styles="[{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#e9e9e9&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;landscape&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:29},{&quot;weight&quot;:0.2}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:18}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:21}]},{&quot;featureType&quot;:&quot;poi.park&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#dedede&quot;},{&quot;lightness&quot;:21}]},{&quot;elementType&quot;:&quot;labels.text.stroke&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;elementType&quot;:&quot;labels.text.fill&quot;,&quot;stylers&quot;:[{&quot;saturation&quot;:36},{&quot;color&quot;:&quot;#333333&quot;},{&quot;lightness&quot;:40}]},{&quot;elementType&quot;:&quot;labels.icon&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f2f2f2&quot;},{&quot;lightness&quot;:19}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:17},{&quot;weight&quot;:1.2}]}]" data-zoom="5" data-x="-73.9874068" data-y="40.643180">
+                    <!-- <section class="col-md-12" style="background-color:red;">
+                        <div id="maps" style="height: 350px; width: 100%;"></div>
+                    </section> -->
+                    <div class="google-map-container" data-marker="asset/imagesP/gmap_marker.png" data-marker-active="asset/imagesP/gmap_marker_active.png" data-styles="[{&quot;featureType&quot;:&quot;water&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#e9e9e9&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;landscape&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:17}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:29},{&quot;weight&quot;:0.2}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:18}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f5f5f5&quot;},{&quot;lightness&quot;:21}]},{&quot;featureType&quot;:&quot;poi.park&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#dedede&quot;},{&quot;lightness&quot;:21}]},{&quot;elementType&quot;:&quot;labels.text.stroke&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;on&quot;},{&quot;color&quot;:&quot;#ffffff&quot;},{&quot;lightness&quot;:16}]},{&quot;elementType&quot;:&quot;labels.text.fill&quot;,&quot;stylers&quot;:[{&quot;saturation&quot;:36},{&quot;color&quot;:&quot;#333333&quot;},{&quot;lightness&quot;:40}]},{&quot;elementType&quot;:&quot;labels.icon&quot;,&quot;stylers&quot;:[{&quot;visibility&quot;:&quot;off&quot;}]},{&quot;featureType&quot;:&quot;transit&quot;,&quot;elementType&quot;:&quot;geometry&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#f2f2f2&quot;},{&quot;lightness&quot;:19}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.fill&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:20}]},{&quot;featureType&quot;:&quot;administrative&quot;,&quot;elementType&quot;:&quot;geometry.stroke&quot;,&quot;stylers&quot;:[{&quot;color&quot;:&quot;#fefefe&quot;},{&quot;lightness&quot;:17},{&quot;weight&quot;:1.2}]}]" data-zoom="5" data-x="-73.9874068" data-y="40.643180">
                         <div class="google-map"></div>
                         <ul class="google-map-markers">
                             <li data-location="9870 St Vincent Place, Glasgow, DC 45 Fr 45." data-description="9870 St Vincent Place, Glasgow"></li>
@@ -655,7 +658,7 @@
                     <div class="layout-bordered-item wow-outer">
                         <div class="layout-bordered-item-inner wow slideInUp">
                             <div class="icon icon-lg mdi mdi-email text-primary"></div>
-                            <div><a class="link-default" href="mailto:#">v-text="msg"@gmail.org</a></div>
+                            <div><a class="link-default" href="mailto:#">vetconnet@gmail.com</a></div>
                         </div>
                     </div>
                     <div class="layout-bordered-item wow-outer">
@@ -669,7 +672,7 @@
         </section>
         <!-- Page Footer-->
         <footer class="section footer-advanced bg-gray-800">
-            <div class="footer-advanced-main">
+            <!-- <div class="footer-advanced-main">
                 <div class="container">
                     <div class="row row-50">
                         <div class="col-lg-4">
@@ -678,7 +681,7 @@
                         </div>
                         <div class="col-sm-6 col-lg-4">
                             <h4>Recent Blog Posts</h4>
-                            <!-- Post Inline-->
+                
                             <article class="post-inline">
                                 <p class="post-inline-title"><a href="single-blog-post.html">Top Tips from Accountants: How To Handle IRS Scams</a></p>
                                 <ul class="post-inline-meta">
@@ -686,7 +689,6 @@
                                     <li><a href="single-blog-post.html">2 days ago</a></li>
                                 </ul>
                             </article>
-                            <!-- Post Inline-->
                             <article class="post-inline">
                                 <p class="post-inline-title"><a href="single-blog-post.html">Blogging for Financial Advisors: Build a Trusted Relationship Through Your Blog</a></p>
                                 <ul class="post-inline-meta">
@@ -726,11 +728,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="footer-advanced-aside">
                 <div class="container">
                     <div class="footer-advanced-layout">
-                        <div>
+                        <!-- <div>
                             <ul class="list-nav">
                                 <li><a href="index-2.html">Home</a></li>
                                 <li><a href="about-us.html">About</a></li>
@@ -739,7 +741,7 @@
                                 <li><a href="grid-blog.html">Blog</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                         <div>
                             <ul class="list-inline list-inline-md">
                                 <li><a class="icon icon-sm link-gray-light mdi mdi-facebook" href="#"></a></li>
@@ -749,17 +751,12 @@
                                 <li><a class="icon icon-sm link-gray-light mdi mdi-linkedin" href="#"></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <hr>
-            </div>
-            <div class="footer-advanced-aside">
-                <div class="container">
-                    <div class="footer-advanced-layout"><a class="brand" href="index-2.html"><img src="/vetting/landing/images/logo-inverse-334x88.png" alt="" width="167" height="44" /></a>
-                        <!-- Rights-->
-                        <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none" /><a href="privacy-policy.html">Privacy Policy</a></p>
+                        <div class="container">
+                            <div class="footer-advanced-layout"><a class="brand" href="index-2.html"><img src="plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" /></a>
+                                <!-- Rights-->
+                                <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>Todos los derechos reservados Para Vetcconnet.</span><span>&nbsp;</span><br class="d-sm-none" /></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

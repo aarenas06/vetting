@@ -27,12 +27,12 @@ class Controller
             $_SESSION['Celular'] = $validar['UsuCel'];
             $_SESSION['Direccion'] = $validar['UsuDirec'];
             $_SESSION['Rol'] = $validar['idTbRoles'];
-
+            $_SESSION['Emp'] = 0;
             $_SESSION['RolObs'] = $validar['RolNom'];
+            $_SESSION['Sexo'] = $validar['UsuSex'];
             $_SESSION['UsuEmail'] = $validar['UsuEmail'];
 
            echo json_encode(['idTbRoles' => $validar['idTbRoles'],'success' => 'ok']);
-
         } else {
             echo json_encode('false');
         }
@@ -50,7 +50,35 @@ class Controller
             echo json_encode(true);
         }
     }
-    
+
+    public function ValidarEmpr()
+    {
+
+        $user = $_POST['User'];
+        $pass = $_POST['Pass'];
+        $pack = $_POST['pack'];
+        $PreDict = $_POST['PreDict'];
+        $validar = $this->MODEL->ValidarEmpr($user, $pass, $pack, $PreDict);
+        if ($validar) {
+            session_start();
+            // Almacenar datos en la sesión
+            $_SESSION['UsuCod'] = $validar['idTbEmpleados'];
+            $_SESSION['Emp'] = $validar['idTbEmpresas'];
+            $_SESSION['User'] = $validar['EmpUsu'];
+            $_SESSION['Nombre'] = $validar['EmpNom'];
+            $_SESSION['Celular'] = $validar['EmpCel'];
+            $_SESSION['Direccion'] = '';
+            $_SESSION['Rol'] = $validar['idTbRoles'];
+            $_SESSION['RolObs'] = $validar['RolNom'];
+            $_SESSION['UsuEmail'] = $validar['EmpEmail'];
+            $_SESSION['Sexo'] = $validar['EmpSex'];
+
+            echo json_encode(['idTbRoles' => $validar['idTbRoles'], 'success' => 'ok']);
+        } else {
+            echo json_encode('false');
+        }
+    }
+
 }
 $controller = new Controller();
 

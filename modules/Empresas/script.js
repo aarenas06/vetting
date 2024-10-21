@@ -138,3 +138,11 @@ async function ChangeEstEmp(IdEmp, Est) {
     }
   });
 }
+
+async function ModalPdf(Archivo, Emp) {
+  var Url = `/vetting/asset/documentacion/${Emp}/contratos/${Archivo}`;
+  console.log(Url);
+  document.getElementById(
+    "viewPdf"
+  ).innerHTML = `<iframe src="${Url}" style="width: 100%; height: 500px;" frameborder="0"></iframe>`;
+}

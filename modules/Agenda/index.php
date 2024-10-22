@@ -51,7 +51,6 @@ $GetService = $control->GetService($_SESSION['Emp']);
     </div>
 </div>
 
-<?php print_r($_SESSION) ?>
 <!-- Modal -->
 <div class="modal fade" id="CrearAgenda" data-bs-target="#staticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">

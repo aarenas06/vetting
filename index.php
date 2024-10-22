@@ -187,7 +187,7 @@
                             <div class="swiper-slide-caption">
                                 <div class="row row-30">
                                     <div class="col-lg-6 text-center text-lg-left">
-                                        <h1><span class="font-weight-light"><span>Haz que tus perros</span></span><span class="font-weight-bold"><span>Luzcan lo mejor posible</span></span></h1>
+                                        <h1><span class="font-weight-light"><span>Haz que tus Mascotas</span></span><span class="font-weight-bold"><span>Luzcan lo mejor posible</span></span></h1>
                                         <!-- <div class="button-outer"><a class="button button-lg button-primary button-winona" href="#">Free consultation</a></div> -->
                                     </div>
                                     <div class="col-lg-6 position-static">
@@ -251,12 +251,12 @@
                     <div class="col-md-10 col-lg-6 col-xl-5">
                         <h3 class="wow-outer"><span class="wow slideInDown">Sobre nosotros</span></h3>
                         <p class="wow-outer" style="text-align: justify;"><span class="wow slideInDown" data-wow-delay=".05s">
-                                Vetcconet es una plataforma integral diseñada para conectar y optimizar los servicios de diversas veterinarias, con el objetivo de ofrecer un sistema centralizado, eficiente y escalable para empresas medianas del sector veterinario. Este proyecto ha sido creado
+                                Vetconect es una plataforma integral diseñada para conectar y optimizar los servicios de diversas veterinarias, con el objetivo de ofrecer un sistema centralizado, eficiente y escalable para empresas medianas del sector veterinario. Este proyecto ha sido creado
                                 pensando en la consolidación de los servicios veterinarios, permitiendo a las clínicas y consultorios acceder a herramientas tecnológicas avanzadas
                                 que faciliten su gestión diaria y potencien su capacidad de crecimiento.
                             </span></p>
                         <p class="wow-outer" style="text-align: justify;"><span class="wow slideInDown" data-wow-delay=".1s">
-                                Con Vetcconet, las veterinarias pueden integrar y unificar la gestión de sus operaciones, desde el manejo de expedientes médicos de los animales, hasta la administración de citas, facturación y control de inventarios, todo desde una sola plataforma. Esta integración no solo reduce la complejidad operativa,
+                                Con Vetconect, las veterinarias pueden integrar y unificar la gestión de sus operaciones, desde el manejo de expedientes médicos de los animales, hasta la administración de citas, facturación y control de inventarios, todo desde una sola plataforma. Esta integración no solo reduce la complejidad operativa,
                                 sino que también permite a las veterinarias mejorar la calidad de atención al cliente, optimizar sus procesos internos, y aumentar su competitividad en el mercado.
                             </span></p>
                         <!-- <div class="wow-outer button-outer"><a class="button button-lg button-primary button-winona" data-wow-delay=".1s" href="about-us.html">Learn more</a></div> -->
@@ -315,7 +315,7 @@
                                     <div class="box-minimal-main wow-outer">
                                         <h4 class="box-minimal-title wow slideInDown" data-wow-delay=".2s">100% Recomendados</h4>
                                         <p class="wow fadeInUpSmall" data-wow-delay=".2s">
-                                            Optimiza tu veterinaria con Vetcconet: una plataforma integral que mejora la atención, agiliza procesos y potencia tu negocio. ¡Únete a quienes ya transformaron su clínica!
+                                            Optimiza tu veterinaria con Vetconect: una plataforma integral que mejora la atención, agiliza procesos y potencia tu negocio. ¡Únete a quienes ya transformaron su clínica!
                                         </p>
                                     </div>
                                 </article>
@@ -383,14 +383,14 @@
             <div class="wow-outer button-outer"><a class="button button-primary-outline button-winona offset-top-2 wow slideInUp" href="services.html">Ver todos los servicios</a></div>
         </section>
         <!-- Pricing-->
-        <section class="section section-lg bg-gray-100 section-decorated-7">
+        <!-- <section class="section section-lg bg-gray-100 section-decorated-7">
             <div class="decor-1"><img src="/vetting/landing/images/bubbles-171x230.png" alt="" width="171" height="230" />
             </div>
             <div class="container">
                 <h3 class="wow-outer text-center"><span class="wow slideInDown">Precios</span></h3>
                 <div class="row row-30">
                     <div class="col-sm-6 col-lg-4 wow-outer">
-                        <!-- Pricing Minimal-->
+                        
                         <article class="pricing-minimal wow slideInRight">
                             <h5 class="pricing-minimal-title"><a href="single-service.html">Basic Package</a></h5>
                             <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>49.00</p>
@@ -402,7 +402,6 @@
                         </article>
                     </div>
                     <div class="col-sm-6 col-lg-4 wow-outer">
-                        <!-- Pricing Minimal-->
                         <article class="pricing-minimal wow slideInRight" data-wow-delay=".05s">
                             <h5 class="pricing-minimal-title"><a href="single-service.html">Paquete avanzado</a></h5>
                             <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>67.00</p>
@@ -414,7 +413,6 @@
                         </article>
                     </div>
                     <div class="col-sm-6 col-lg-4 wow-outer">
-                        <!-- Pricing Minimal-->
                         <article class="pricing-minimal wow slideInRight" data-wow-delay=".1s">
                             <h5 class="pricing-minimal-title"><a href="single-service.html">Paquete Pro</a></h5>
                             <p class="pricing-minimal-price"><span class="pricing-minimal-price-currency">$</span>86.00</p>
@@ -427,7 +425,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Testimonials-->
         <!-- <section class="section section-lg text-center">
@@ -754,7 +752,7 @@
                         <div class="container">
                             <div class="footer-advanced-layout"><a class="brand" href="index-2.html"><img src="plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" /></a>
                                 <!-- Rights-->
-                                <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>Todos los derechos reservados Para Vetcconnet.</span><span>&nbsp;</span><br class="d-sm-none" /></p>
+                                <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>Todos los derechos reservados Para Vetconect.</span><span>&nbsp;</span><br class="d-sm-none" /></p>
                             </div>
                         </div>
                     </div>

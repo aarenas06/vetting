@@ -15,7 +15,7 @@ class modelo
     public function Validar($user, $pass)
     {
 
-        $sql = "SELECT tb1.* , tb2.RolNom FROM tbusuarios tb1 
+        $sql = "SELECT tb1.* , tb2.RolNom ,tb2.RolTipo  Tip FROM tbusuarios tb1 
         INNER JOIN tbroles tb2 on tb2.idTbRoles=tb1.idTbRoles
         WHERE tb1.UsuUser='$user' AND tb1.UsuCla='$pass'";
 
@@ -26,7 +26,7 @@ class modelo
     }
     public function ValidarEmpr($user, $pass, $pack, $PreDict)
     {
-        $sql = "SELECT tb1.*,tb3.RolNom FROM tbempleados tb1
+        $sql = "SELECT tb1.*,tb3.RolNom ,tb3.RolTipo Tip FROM tbempleados tb1
         INNER JOIN tbempresas tb2 on tb2.idTbEmpresas=tb1.idTbEmpresas
         INNER JOIN tbroles tb3 on tb3.idTbRoles=tb1.idTbRoles
         where tb1.EmpUsu='$user' AND tb1.EmpCla='$pass' AND EmpEst=1 AND tb2.EmpreTok='$pack' AND EmpreNit=$PreDict AND tb2.EmpreEst=1

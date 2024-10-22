@@ -3,6 +3,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/Agenda/controller/controller.php');
 $control = new Controller;
 $GetService = $control->GetService($_SESSION['Emp']);
+$ListEmp = $control->ListEmpl($_SESSION['Emp']);
 ?>
 <style>
     .header {
@@ -21,6 +22,10 @@ $GetService = $control->GetService($_SESSION['Emp']);
 </style>
 <h3 class="title">Modulo de Agenda:</h3>
 <h5>Gestiona Tu calendario</h5>
+
+
+
+
 <hr>
 <div class="header">
     <div>
@@ -44,18 +49,7 @@ $GetService = $control->GetService($_SESSION['Emp']);
             </div>
             <div class="card-body">
                 <div class="" style="max-height: 710px;overflow-y: auto;">
-                    <?php for ($i = 0; $i < 4; $i++) {  ?>
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Propietario:Alejandro Palencia</h5>
-                                <p class="card-text">MascoTa:Chandoza</p>
-                                <p class="card-text">Edad: 3 años </p>
-                                <p class="card-text">Hora:2:00pm </p>
-                                <p class="card-text">Sevicio:Cita Veterinarias</p>
-                            </div>
-                        </div>
-                    <?php  } ?>
-
+                    <div class="citasHoyFor" id="citasHoyFor"></div>
                 </div>
             </div>
         </div>
@@ -71,7 +65,6 @@ $GetService = $control->GetService($_SESSION['Emp']);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- <?php print_r($_SESSION) ?> -->
                 <div style="display: flex; justify-content: space-between; ">
                     <div>
                         <p class="title">Usuario:<?= $_SESSION['Nombre'] ?> <br>
@@ -156,6 +149,17 @@ $GetService = $control->GetService($_SESSION['Emp']);
                     </div>
                     <div class="col-lg-6">
                         <h5 class="title text-center">Datos Cita</h5>
+                        <?php if ($_SESSION['Rol'] == 4) { ?>
+                            <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
+                        <?php } else { ?>
+                            <label for="" class="form-label">Personal Encargado :</label>
+                            <select class="form-select form-select-sm" id="UsuCod" aria-label="Small select example">
+                                <option selected></option>
+                                <?php foreach ($ListEmp as $Le) {
+                                    echo '<option value="' . $Le['idTbEmpleados'] . '">' . $Le['EmpNom'] . '</option>';
+                                } ?>
+                            </select>
+                        <?php  } ?>
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="" class="form-label">Nombre de Cita :</label>
@@ -183,6 +187,10 @@ $GetService = $control->GetService($_SESSION['Emp']);
                                 <label for="" class="form-label">Observación :</label>
                                 <textarea class="form-control" placeholder="Comentarios importantes " id="CitaObs" style="height: 100px"></textarea>
                             </div>
+                            <div class="col-lg-12">
+                                <label for="" class="form-label">Id Cita Previa:</label>
+                                <input type="number" class="form-control form-control-sm " id="citaPre">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,19 +205,10 @@ $GetService = $control->GetService($_SESSION['Emp']);
         </div>
     </div>
 </div>
-
-<input type="text" id="Emp" value="<?= $_SESSION['Emp'] ?>">
+<input type="hidden" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <script type="text/javascript" src="/vetting/modules/Agenda/script.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-
+<input type="hidden" id="View" value="1">
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-
-        });
-        calendar.render();
-    });
+    PintarCalen();
 </script>

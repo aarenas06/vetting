@@ -60,6 +60,7 @@ async function listMascotashome() {
 }
 
 maps();
+
 async function maps() {
   let formData = new FormData();
   formData.append("funcion", "maps");
@@ -81,21 +82,66 @@ async function maps() {
         'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    // Recorre la variable res2 para añadir los marcadores
-    res2.forEach(function (item) {
-      // Convertir las coordenadas de latitud y longitud en números
-      var latitud = parseFloat(item.EmpreLatitud);
-      var longitud = parseFloat(item.EmpreLongitud.split(",")[0]); // Ignora lo que está después de la coma si hay valores adicionales
+    let markers = [];
 
-      // Verifica que latitud y longitud son válidas antes de añadir el marcador
-      if (!isNaN(latitud) && !isNaN(longitud)) {
-        // Añade un marcador en cada ubicación
-        L.marker([latitud, longitud])
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        let userLat = position.coords.latitude;
+        let userLng = position.coords.longitude;
+
+        console.log("User Latitude: " + userLat);
+        console.log("User Longitude: " + userLng);
+
+        // Añade un marcador para la ubicación actual del usuario
+        let userMarker = L.marker([userLat, userLng])
           .addTo(map)
-          .bindPopup(`Ubicación en latitud: ${latitud}, longitud: ${longitud}`)
+          .bindPopup("Tu ubicación actual")
           .openPopup();
+
+        markers.push(userMarker.getLatLng());
+
+        // Añadir marcadores de las veterinarias
+        res2.forEach(function (item) {
+          let latitud = parseFloat(item.EmpreLatitud);
+          let longitud = parseFloat(item.EmpreLongitud.split(",")[0]); // Ignora lo que está después de la coma
+
+          if (!isNaN(latitud) && !isNaN(longitud)) {
+            let marker = L.marker([latitud, longitud])
+              .addTo(map)
+              .bindPopup(
+                `Ubicación de veterinaria en latitud: ${latitud}, longitud: ${longitud}`
+              );
+
+            markers.push(marker.getLatLng());
+          }
+        });
+
+        // Ajustar la vista del mapa para mostrar todos los marcadores
+        if (markers.length > 0) {
+          let bounds = L.latLngBounds(markers);
+          map.fitBounds(bounds);
+        }
+      }, showError);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          console.log("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          console.log("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          console.log("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          console.log("An unknown error occurred.");
+          break;
       }
-    });
+    }
   } catch (error) {
     // Muestra el error con Swal y lo imprime en consola
     Swal.fire({

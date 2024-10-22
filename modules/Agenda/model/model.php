@@ -70,7 +70,7 @@ class modelo
             return false;
         }
     }
-    public function citasHoy($Emp)
+    public function citasHoy($Emp, $usu, $view)
     {
         $fechaActual = date('Y-m-d');
 
@@ -80,20 +80,36 @@ class modelo
         INNER JOIN tbmascotas tb3 on tb3.idtbMascotas=tb1.idtbMascotas
         INNER JOIN tbusuarios tb4 on tb4.idTbUsuarios=tb3.idTbUsuarios
         INNER JOIN tboptservicios tb5 on tb5.IdoptServicios=tb1.idTbServicios
-        where tb1.CitaDate like '%$fechaActual%' AND tb1.id_EmpCrea=$Emp;";
+        where tb1.CitaDate like '%$fechaActual%' AND tb1.id_EmpCrea=$Emp";
+        if ($view == 2) {
+            $sql .= " AND tb1.idTbEmAsig =$usu";
+        }
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
         return $row;
     }
-    public function PintarCalen($Emp, $usu)
+    public function PintarCalen($Emp, $usu, $view)
     {
         $fechaActual = date('Y-m-d');
 
         $sql = "SELECT tb1.idTbCitas 'id', tb2.OptNombre 'title' ,tb1.CitaDate 'start',tb1.CitaDateFin 'end' ,false 'allDay'  
         FROM `tbcitas` tb1
         INNER JOIN tboptservicios tb2 on tb2.IdoptServicios=tb1.idTbServicios
-        WHERE id_EmpCrea=$Emp;";
+        WHERE id_EmpCrea=$Emp";
+        if ($view == 2) {
+            $sql .= " AND idTbEmAsig =$usu";
+        }
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+    public function ListEmpl($Emp)
+    {
+        $fechaActual = date('Y-m-d');
+
+        $sql = "SELECT tb1.idTbEmpleados ,tb1.EmpNom from tbempleados tb1 where tb1.idTbEmpresas=$Emp AND tb1.idTbRoles IN (4,5,6,10,11);";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);

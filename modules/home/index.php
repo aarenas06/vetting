@@ -68,21 +68,37 @@ $Modulos = $control->GetModulos();
 <h4>Bienvenido <?= $_SESSION['Nombre']; ?> </h4>
 <hr>
 
-<div class="container">
-    <section class="row">
-        <section id="ContMascotasWrapper" class="col-md-12">
-            <div id="ContMascotas" class="d-flex flex-row overflow-auto">
+
+<section class="row">
+    <section id="ContMascotasWrapper" class="col-md-12">
+        <div id="ContMascotas" class="d-flex flex-row overflow-auto">
+        </div>
+    </section>
+</section>
+<section class="row">
+    <section class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Mapa Interactivo
             </div>
-        </section>
+            <div class="card-body bg-white">
+                <div id="maps" style="height: 350px; width: 100%;"></div>
+
+            </div>
+        </div>
     </section>
-    <br>
-    <section class="row">
-        <section class="col-md-12">
-            <div id="maps" style="height: 350px; width: 100%;"></div>
-        </section>
+    <section class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Veterinarias Activas
+            </div>
+            <div class="card-body bg-white">
+            </div>
+        </div>
     </section>
-    <br>
-</div>
+</section>
+<br>
+
 
 
 <script type="text/javascript" src="/vetting/modules/home/script.js"></script>

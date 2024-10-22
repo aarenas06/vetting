@@ -91,9 +91,22 @@ async function maps() {
 
         console.log("User Latitude: " + userLat);
         console.log("User Longitude: " + userLng);
+        // Definir un nuevo ícono con color verde
+        let greenIcon = L.icon({
+          iconUrl:
+            "https://cdn-icons-png.freepik.com/256/6645/6645221.png?semt=ais_hybrid", // URL de tu icono personalizado
+          shadowUrl:
+            "https://leafletjs.com/examples/custom-icons/leaf-shadow.png", // URL de la sombra del icono
 
-        // Añade un marcador para la ubicación actual del usuario
-        let userMarker = L.marker([userLat, userLng])
+          iconSize: [28, 65], // tamaño del icono
+          shadowSize: [50, 64], // tamaño de la sombra
+          iconAnchor: [22, 94], // punto del icono que se ancla al mapa
+          shadowAnchor: [4, 62], // punto de la sombra que se ancla al mapa
+          popupAnchor: [-3, -76], // posición del popup relativa al icono
+        });
+
+        // Añadir un marcador para la ubicación actual del usuario con el ícono verde
+        let userMarker = L.marker([userLat, userLng], { icon: greenIcon })
           .addTo(map)
           .bindPopup("Tu ubicación actual")
           .openPopup();

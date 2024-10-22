@@ -83,7 +83,7 @@ class Controller
     public function citasHoy()
     {
         $Emp = $_POST['Emp'];
-        $data = $this->MODEL->citasHoy($Emp);
+        $data = $this->MODEL->citasHoy($Emp, $_POST['UsuCod'], $_POST['View']);
         if ($data) {
             include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Agenda/layout/forCita.php');
         } else {
@@ -93,8 +93,13 @@ class Controller
     }
     public function PintarCalen()
     {
-        $data = $this->MODEL->PintarCalen($_POST['Emp'], $_POST['UsuCod']);
+        $data = $this->MODEL->PintarCalen($_POST['Emp'], $_POST['UsuCod'], $_POST['View']);
         echo json_encode($data);
+    }
+    public function ListEmpl($Emp)
+    {
+        $data = $this->MODEL->ListEmpl($Emp);
+        return $data;
     }
 }
 $controller = new Controller();

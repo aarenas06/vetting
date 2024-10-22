@@ -3,6 +3,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/Agenda/controller/controller.php');
 $control = new Controller;
 $GetService = $control->GetService($_SESSION['Emp']);
+$ListEmp = $control->ListEmpl($_SESSION['Emp']);
 ?>
 <style>
     .header {
@@ -21,6 +22,10 @@ $GetService = $control->GetService($_SESSION['Emp']);
 </style>
 <h3 class="title">Modulo de Agenda:</h3>
 <h5>Gestiona Tu calendario</h5>
+
+
+
+
 <hr>
 <div class="header">
     <div>
@@ -60,7 +65,6 @@ $GetService = $control->GetService($_SESSION['Emp']);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- <?php print_r($_SESSION) ?> -->
                 <div style="display: flex; justify-content: space-between; ">
                     <div>
                         <p class="title">Usuario:<?= $_SESSION['Nombre'] ?> <br>
@@ -145,6 +149,17 @@ $GetService = $control->GetService($_SESSION['Emp']);
                     </div>
                     <div class="col-lg-6">
                         <h5 class="title text-center">Datos Cita</h5>
+                        <?php if ($_SESSION['Rol'] == 4) { ?>
+                            <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
+                        <?php } else { ?>
+                            <label for="" class="form-label">Personal Encargado :</label>
+                            <select class="form-select form-select-sm" id="UsuCod" aria-label="Small select example">
+                                <option selected></option>
+                                <?php foreach ($ListEmp as $Le) {
+                                    echo '<option value="' . $Le['idTbEmpleados'] . '">' . $Le['EmpNom'] . '</option>';
+                                } ?>
+                            </select>
+                        <?php  } ?>
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="" class="form-label">Nombre de Cita :</label>
@@ -190,76 +205,10 @@ $GetService = $control->GetService($_SESSION['Emp']);
         </div>
     </div>
 </div>
-<input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
-<input type="hidden" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <input type="hidden" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <script type="text/javascript" src="/vetting/modules/Agenda/script.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-
+<input type="hidden" id="View" value="1">
 <script>
     PintarCalen();
-
-    async function PintarCalen() {
-        var Emp = $("#Emp").val();
-        var UsuCod = $("#UsuCod").val();
-
-
-        var calendarEl = document.getElementById('calendar');
-
-        // Crear el formulario y agregar datos
-        let formData = new FormData();
-        formData.append("funcion", "PintarCalen");
-        formData.append("Emp", Emp); // Ejemplo de valor
-        formData.append("UsuCod", UsuCod);
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            headerToolbar: {
-                left: 'prev,next today', // Botones de navegación
-                center: 'title', // Título del calendario
-                right: 'dayGridMonth,timeGridWeek,timeGridDay' // Vistas
-            },
-            views: {
-                timeGridWeek: { // Vistas de semana
-                    titleFormat: {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    }
-                },
-                timeGridDay: { // Vista de día
-                    titleFormat: {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    }
-                }
-            },
-            navLinks: true, // Permite hacer clic en los días o semanas para cambiar la vista
-            businessHours: true, // Horas laborales destacadas
-            nowIndicator: true, // Indicador de la hora actual
-            events: function(fetchInfo, successCallback, failureCallback) {
-                // Fetch de eventos como lo tienes ahora
-                fetch("/vetting/modules/Agenda/controller/controller.php", {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Error en la respuesta');
-                        }
-                        return response.json(); // Obtener la respuesta en JSON
-                    })
-                    .then(data => {
-                        successCallback(data); // Pasar los eventos a FullCalendar
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        failureCallback(error);
-                    });
-            }
-        });
-        calendar.render();
-    };
 </script>

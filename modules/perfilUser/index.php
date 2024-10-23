@@ -1,5 +1,16 @@
-<div class="contenido">
+<?php
+include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/perfilUser/controller/controller.php');
+$control = new Controller;
+$Modulos = $control->GetModulos();
+$UsuCod = $_SESSION['UsuCod'];
+$User = $_SESSION['User'];
+?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/vetting/modules/perfilUser/script.js"></script>
 
+<input type="hidden" id="UsuCod" value="<?= $UsuCod; ?>">
+<input type="hidden" id="User" value="<?= $User; ?>">
+<div class="contenido">
     <div class="container-fluid">
         <div class="card overflow-hidden">
             <div class="card-body p-0">
@@ -28,8 +39,8 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h5 class="fs-5 mb-0 fw-semibold">Karla Charry</h5>
-                                <p class="mb-0 fs-4">Usuario</p>
+                                <h5 class="fs-5 mb-0 fw-semibold" id="Nombre"></h5>
+                                <p class="mb-0 fs-4" id="Rol"></p>
                             </div>
                         </div>
                     </div>

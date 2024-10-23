@@ -14,14 +14,28 @@ class Controller
     public function ObtDataPerfil()
     {
         $data = $this->MODEL->ObtDataPerfil($_POST);
-        var_dump($data);
         echo json_encode($data);
     }
 
+    public function UpdateDataPerfil()
+    {
+        $datos = $this->MODEL->UpdateDataPerfil($_POST);
+        if ($datos == true) {
+            echo json_encode(true);
+        } else {
+            echo json_encode(false);
+        }
+    }
 
     public function GetModulos()
     {
         $data = $this->MODEL->GetModulos();
         return $data;
     }
+}
+
+$controller = new Controller();
+
+if (isset($_POST['funcion'])) {
+    call_user_func(array(new Controller, $_POST['funcion']));
 }

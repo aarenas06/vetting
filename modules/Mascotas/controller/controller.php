@@ -52,7 +52,6 @@ class Controller
         echo json_encode(['codigo' => $codigo]);
     }
 
-
     public function ChangeEstMasco()
     {
         if ($_POST['Est'] == 1) {

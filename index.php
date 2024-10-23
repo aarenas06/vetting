@@ -162,7 +162,7 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text btn-box">
-                                <i class="fa-solid fa-key""></i>
+                                <i class="fa-solid fa-key"></i>
                             </span>
                             <input type=" password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
                         </div>

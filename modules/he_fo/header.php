@@ -8,7 +8,7 @@ if (!isset($_SESSION["UsuCod"])) {
     echo '<script>window.location.href = "http://localhost/vetting/";</script>';
     exit; // Agrega exit para detener la ejecución del script después de la redirección
 }
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,95 +87,100 @@ if (!isset($_SESSION["UsuCod"])) {
                 </div>
                 <nav class="sidebar-nav scroll-sidebar" id="sidebar-nav" data-simplebar>
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">
-                            <span class="hide-menu">Disponibilidad</span>
-                            <div class="switch-container">
-                                <label class="switch">
-                                    <input type="checkbox" id="toggleSwitch">
-                                    <span class="slider"></span>
-                                </label> </br></br>
+                        <?php if ($_SESSION['Tip'] == 1 || $_SESSION['Tip'] == 3) { ?>
+                            <li class="nav-small-cap">
+                                <span class="hide-menu">Disponibilidad</span>
+                                <div class="switch-container">
+                                    <label class="switch">
+                                        <input type="checkbox" id="toggleSwitch">
+                                        <span class="slider"></span>
+                                    </label> </br></br>
 
-                            </div>
-                        </li>
-                        <li class="nav-small-cap" style="margin-top:0px;">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Admin</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Planes/index" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-aperture"></i>
-                                </span>
-                                <span class="hide-menu">Planes</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Empresas/index" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-aperture"></i>
-                                </span>
+                                </div>
+                            </li>
+                        <?php } ?>
+
+
+                        <?php if ($_SESSION['Tip'] == 3) { ?>
+                            <li class="nav-small-cap" style="margin-top:0px;">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Admin</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Planes/index" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-aperture"></i>
+                                    </span>
+                                    <span class="hide-menu">Planes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Empresas/index" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-aperture"></i>
+                                    </span>
+                                    <span class="hide-menu">Empresas</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+
+
+                        <?php if ($_SESSION['Tip'] == 1 || $_SESSION['Tip'] == 3) { ?>
+                            <li class="nav-small-cap" style="margin-top: 0px;">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                 <span class="hide-menu">Empresas</span>
-                            </a>
-                        </li>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-people-line"></i>
+                                    </span>
+                                    <span class="hide-menu">Personal</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Clientes/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-person"></i>
+                                    </span>
 
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Empresas</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-people-line"></i>
-                                </span>
-                                <span class="hide-menu">Personal</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Clientes/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-person"></i>
-                                </span>
+                                    <span class="hide-menu">Clientes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Agenda/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                    </span>
+                                    <span class="hide-menu">Agenda</span>
 
-                                <span class="hide-menu">Clientes</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Agenda/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-calendar-days"></i>
-                                </span>
-                                <span class="hide-menu">Agenda</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        <?php if ($_SESSION['Tip'] == 2 || $_SESSION['Tip'] == 3) { ?>
 
-                            </a>
-                        </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Usuarios</span>
+                            </li>
+                            <li class="sidebar-item">
 
-                        <li class="nav-small-cap">
-                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                            <span class="hide-menu">Clientes</span>
-                        </li>
-                        <li class="sidebar-item">
-
-                            <a class="sidebar-link" href="?p=Home/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-house"></i>
-                                </span>
-                                <span class="hide-menu">Home</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="?p=Mascotas/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-paw"></i>
-                                </span>
-                                <span class="hide-menu">Mascotas </span>
-                            </a>
-                            <a class="sidebar-link" href="?p=Conoce/index" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-truck-ramp-box"></i>
-                                </span>
-                                <span class="hide-menu">Conoce nuestras Clinicas</span>
-                            </a>
-                        </li>
+                                <a class="sidebar-link" href="?p=Home/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-house"></i>
+                                    </span>
+                                    <span class="hide-menu">Home</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Mascotas/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-paw"></i>
+                                    </span>
+                                    <span class="hide-menu">Mascotas </span>
+                                </a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </nav>
 
@@ -244,15 +249,7 @@ if (!isset($_SESSION["UsuCod"])) {
                                                         <span class="d-block text-dark">Configuraciòn cuenta</span>
                                                     </div>
                                                 </a>
-                                                <a href="./app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                                    <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="/vetting/plantilla/assets/img/home/icon-tasks.svg" alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">Agenda</h6>
-                                                        <span class="d-block text-dark">Pendientes</span>
-                                                    </div>
-                                                </a>
+
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
                                                 <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesiòn</a>

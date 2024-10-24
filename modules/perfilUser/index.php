@@ -177,17 +177,8 @@ $User = $_SESSION['User'];
                 </div>
                 <div class="row">
                     <div class=" col-md-6 col-xl-4">
-                        <div class="card" id ="cartaMasco">
-                            <div class="card-body p-4 d-flex align-items-center gap-3">
-                                <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle" width="40"
-                                    height="40">
-                                <div>
-                                    <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                                    <span class="fs-2 d-flex align-items-center"><i
-                                            class="ti ti-map-pin text-dark fs-3 me-1"></i>Sint Maarten</span>
-                                </div>
-                                <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                            </div>
+                        <div class="card" id="cartaMasco">
+                            
                         </div>
                     </div>
                 </div>

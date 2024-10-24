@@ -99,8 +99,11 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 	color: #6c757d;
 	opacity: 1;
   }
+
+  
   
   /* Estilos específicos para el modal de Inicio Sesion */
+
   .custom-modal-iniciosesion .modal-content {
 	background-color: #f8f9fa;
 	border-radius: 8px;
@@ -163,6 +166,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   .custom-modal-iniciosesion .modal-footer {
 	text-align: center;
   }
+  
   
   /* Extra estilos para una mejor experiencia */
   .custom-modal-iniciosesion .modal-body input {

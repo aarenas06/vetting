@@ -32,6 +32,12 @@ class Controller
         $data = $this->MODEL->GetModulos();
         return $data;
     }
+
+    public function ObtMascoPerfil()
+    {
+        $data = $this->MODEL->ObtMascoPerfil($_POST);
+        echo json_encode($data);
+    }
 }
 
 $controller = new Controller();

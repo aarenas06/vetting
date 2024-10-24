@@ -43,6 +43,16 @@ class modelo
         }
     }
 
+    public function ObtMascoPerfil($data)
+    {
+        $sql = "SELECT idtbMascotas, MascoNom, concat(MascoYear, ' Años - ', MascoMes, ' Meses') Edad, MascoPic FROM tbmascotas 
+            where idTbUsuarios='".$data['UsuCod']."'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
     public function GetModulos()
     {
         $sql = "SELECT * FROM tboptservicios WHERE OptEst=1";

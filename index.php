@@ -86,9 +86,13 @@
         <div class="modal fade custom-modal-iniciosesion" id="ModalIniciosession" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header bg-light">
-                        <h4 class="modal-title mx-auto">Inicia Sesión</h4>
+                    <div class="modal-header bg-light d-flex flex-column align-items-center">
+                        <img src="plantilla/assets/img/Vetconnect.png" alt="Vetconnect Logo" width="167" height="40" class="mt-2" />
+                        <br>
+                        <h3 class="modal-title"><b>Inicia Sesión</b></h3>
                     </div>
+
+                    <hr>
                     <div class="modal-body px-4 py-3"> <!-- Ajusta padding -->
                         <div class="input-group mb-3">
                             <span class="input-group-text btn-box btn-1"><i class="fa-solid fa-user"></i></span>

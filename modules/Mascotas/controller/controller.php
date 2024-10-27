@@ -52,7 +52,6 @@ class Controller
         echo json_encode(['codigo' => $codigo]);
     }
 
-
     public function ChangeEstMasco()
     {
         if ($_POST['Est'] == 1) {
@@ -73,10 +72,11 @@ class Controller
     public function listMascotas()
     {
         $datos = $this->MODEL->listMascotas($_POST);
-        if ($datos == 'vacio') {  // Se usa == para comparar
+        if ($datos == "vacio") {  // Se usa == para comparar
             echo 'No Hay Mascotas Aún Creadas';
+        } else {
+            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Mascotas/layout/listMascotas.php');
         }
-        include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/Mascotas/layout/listMascotas.php');
     }
 
     public function InsertMascota()

@@ -81,30 +81,33 @@
                 </nav>
             </div>
         </header>
-        <!-- Modal Iniciar Sesion-->
-        <div class="modal fade custom-modal-iniciosesion" id="ModalIniciosession" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-header">
-                            <!-- <center> -->
-                            <h4>Inicia Sesión</h2>
-                                <!-- </center> -->
-                        </div>
 
-                        <br><br><br>
+        <!-- Modal Iniciar Sesion-->
+        <div class="modal fade custom-modal-iniciosesion" id="ModalIniciosession" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-light d-flex flex-column align-items-center">
+                        <img src="plantilla/assets/img/Vetconnect.png" alt="Vetconnect Logo" width="167" height="40" class="mt-2" />
+                        <br>
+                        <h3 class="modal-title"><b>Inicia Sesión</b></h3>
+                    </div>
+
+                    <hr>
+                    <div class="modal-body px-4 py-3"> <!-- Ajusta padding -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text btn-box btn-1" id="basic-addon1"><i style="color: black;" class="fa-solid fa-user"></i></span>
+                            <span class="input-group-text btn-box btn-1"><i class="fa-solid fa-user"></i></span>
                             <input type="text" class="form-control" id="User" placeholder="Usuario" aria-label="Usuario">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text btn-box" id="basic-addon1"><i style="color: black;" class="fa-solid fa-key"></i></span>
+                            <span class="input-group-text btn-box"><i class="fa-solid fa-key"></i></span>
                             <input type="password" class="form-control" id="Pass" placeholder="Contraseña" aria-label="Contraseña">
                         </div>
-                        <span>¿Aún no tienes cuenta? <a href="registro.php">Registrate Gratis</a></span> <br>
-                        <center>
-                            <button style="margin-top: 10px;" class="btn btn-block btn-success btn-sm" onclick="Validar()">Ingresar</button>
-                        </center>
+                        <div class="text-center mb-2">
+                            <span>¿Aún no tienes cuenta? <a href="registro.php" class="text-primary">Registrate Gratis</a></span>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success w-100" onclick="Validar()">Ingresar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,7 +165,7 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text btn-box">
-                                <i class="fa-solid fa-key""></i>
+                                <i class="fa-solid fa-key"></i>
                             </span>
                             <input type=" password" class="form-control" id="PassPropietarios" placeholder="Contraseña" aria-label="PassPropietarios">
                         </div>

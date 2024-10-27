@@ -28,6 +28,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 	border: none;
+	overflow-y: none;
+	height: 100%;
   }
   
   .custom-modal-registrarse .modal-header {
@@ -99,14 +101,18 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 	color: #6c757d;
 	opacity: 1;
   }
+
+  
   
   /* Estilos específicos para el modal de Inicio Sesion */
+
   .custom-modal-iniciosesion .modal-content {
 	background-color: #f8f9fa;
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 	border: none;
-	height: 100%;
+	height: 80%;
+	overflow-y: none;
   }
   
   .custom-modal-iniciosesion .modal-header {
@@ -126,6 +132,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   
   .custom-modal-iniciosesion .modal-body {
 	padding: 20px;
+	overflow-y: none;
   }
   
   .custom-modal-iniciosesion .input-group {
@@ -163,6 +170,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   .custom-modal-iniciosesion .modal-footer {
 	text-align: center;
   }
+  
   
   /* Extra estilos para una mejor experiencia */
   .custom-modal-iniciosesion .modal-body input {
@@ -4414,8 +4422,8 @@ button.close {
 }
 
 .modal-open .modal {
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-x: none;
+	overflow-y: none;
 }
 
 .modal {
@@ -4426,7 +4434,8 @@ button.close {
 	left: 0;
 	z-index: 1150;
 	display: none;
-	overflow: hidden;
+	overflow-x: none;
+	overflow-y: none;
 	outline: 0;
 }
 
@@ -4440,6 +4449,7 @@ button.close {
 .modal.fade .modal-dialog {
 	transition: transform 0.3s ease-out;
 	transform: translate(0, -25%);
+	overflow-y: none;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -4475,6 +4485,8 @@ button.close {
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 0.3rem;
 	outline: 0;
+	overflow-x: none;
+	overflow-y: none;
 }
 
 .modal-backdrop {

@@ -62,6 +62,11 @@ $Modulos = $control->GetModulos();
         border: 2px #000;
         z-index: 3;
     }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
 </style>
 
 <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
@@ -93,6 +98,7 @@ $Modulos = $control->GetModulos();
                 Veterinarias Activas
             </div>
             <div class="card-body bg-white">
+                <div class="ForVet" id="ForVet"></div>
             </div>
         </div>
     </section>

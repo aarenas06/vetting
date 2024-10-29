@@ -185,6 +185,7 @@ async function PintarCalen() {
           failureCallback(error);
         });
     },
+
   });
   calendar.render();
 }
@@ -244,34 +245,4 @@ async function InsertAgen() {
     console.log(error);
   }
 }
-citasHoy();
-async function citasHoy() {
-  var Emp = $("#Emp").val();
-  var View = $("#View").val();
-  var Usucod = $("#UsuCod").val();
 
-  let formData = new FormData();
-  formData.append("funcion", "citasHoy");
-  formData.append("Emp", Emp);
-  formData.append("View", View);
-  formData.append("UsuCod", Usucod);
-
-  try {
-    let req2 = await fetch(
-      "/vetting/modules/Agenda/controller/controller.php",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    let res2 = await req2.text();
-    $("#citasHoyFor").html(res2);
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Error!",
-      text: `Problema del Servidor: ${error.message}`,
-    });
-    console.log(error);
-  }
-}

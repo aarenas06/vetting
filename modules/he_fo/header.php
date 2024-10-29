@@ -131,6 +131,14 @@ if (!isset($_SESSION["UsuCod"])) {
                                 <span class="hide-menu">Empresas</span>
                             </li>
                             <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=DashVet/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-people-line"></i>
+                                    </span>
+                                    <span class="hide-menu">Home</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
                                     <span>
                                         <i class="fa-solid fa-people-line"></i>

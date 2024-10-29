@@ -28,8 +28,15 @@ class Controller
         $datos = $this->MODEL->maps();
         echo json_encode($datos);
     }
-
-    
+    public function ListVetActive()
+    {
+        $datos = $this->MODEL->ListVetActive();
+        if ($datos) {
+            include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/home/layout/forVet.php');
+        } else {
+            echo 'No hay vet Disponibles';
+        }
+    }
 }
 
 $controller = new Controller();

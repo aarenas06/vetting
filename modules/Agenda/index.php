@@ -22,10 +22,6 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
 </style>
 <h3 class="title">Modulo de Agenda:</h3>
 <h5>Gestiona Tu calendario</h5>
-
-
-
-
 <hr>
 <div class="header">
     <div>
@@ -187,10 +183,8 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
                                 <label for="" class="form-label">Observación :</label>
                                 <textarea class="form-control" placeholder="Comentarios importantes " id="CitaObs" style="height: 100px"></textarea>
                             </div>
-                            <div class="col-lg-12">
-                                <label for="" class="form-label">Id Cita Previa:</label>
-                                <input type="number" class="form-control form-control-sm " id="citaPre">
-                            </div>
+
+                            <input type="hidden" class="form-control form-control-sm " id="citaPre">
                         </div>
                     </div>
                 </div>

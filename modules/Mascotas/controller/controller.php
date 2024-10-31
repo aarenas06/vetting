@@ -17,12 +17,18 @@ class Controller
         return $data;
     }
 
+    public function selectEspecie()
+    {
+        $data = $this->MODEL->selectEspecie();
+        foreach ($data as $row) {
+            echo '<option class="form-control" value="' . $row['idTbEspecies'] . '">' . $row['EspeNom'] . '</option>';
+        }
+    }
+
     public function selectRaza()
     {
-        $data = $this->MODEL->selectRaza();
-        foreach ($data as $row) {
-            echo '<option class="form-control" value="' . $row['idTbRazas'] . '">' . $row['RazNom'] . '</option>';
-        }
+        $datos = $this->MODEL->selectRaza($_POST);
+        echo json_encode($datos);
     }
 
     //FUNCION PARA GENERAR EL CODIGO UNICO DEL CHIP
@@ -49,6 +55,34 @@ class Controller
     public function generarMascoIdChip()
     {
         $codigo = $this->MascoIdChip();
+        echo json_encode(['codigo' => $codigo]);
+    }
+
+
+    //FUNCION PARA GENERAR EL CODIGO UNICO MASCOCOD
+    public function MascoCod()
+    {
+        // Define el conjunto de caracteres numéricos
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+
+        // Bucle para generar códigos hasta encontrar uno que no exista
+        do {
+            $randomString = '';
+            for ($i = 0; $i < 8; $i++) { // Longitud fija de 8 dígitos
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            // Verifica si el código ya existe en la base de datos
+            $existingCode = $this->MODEL->checkIfMacoCodeExists($randomString);
+        } while ($existingCode);
+
+        return $randomString;
+    }
+    
+    //FUNCION PARA RETORNAR EL CODIGO DEL CHIP
+    public function generarMascoCod()
+    {
+        $codigo = $this->MascoCod();
         echo json_encode(['codigo' => $codigo]);
     }
 
@@ -82,10 +116,12 @@ class Controller
     public function InsertMascota()
     {
         // Verifica que el archivo se haya subido correctamente
-
         $FotoTmpPath = $_FILES['MascoFoto']['tmp_name'];
         $imge = file_get_contents($FotoTmpPath);
         $fotoMasco = base64_encode($imge);
+
+        //Bloque para sacar el codigo de mascota "Solo numeros"
+
 
         // Prepara el arreglo de datos
         $dataArray = [
@@ -102,6 +138,7 @@ class Controller
             'MascoRaza' => $_POST['MascoRaza'],
             'MascoPeso' => $_POST['MascoPeso'],
             'MascoVivienda' => $_POST['MascoVivienda'],
+            'MascoCod' => $_POST['MascoCod'],
             'MascoChip' => $_POST['MascoChip'],
             'Mascoagresividad' => $_POST['Mascoagresividad'],
             'MascoPatologia' => $_POST['MascoPatologia'],

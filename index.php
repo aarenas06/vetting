@@ -106,7 +106,7 @@
 
                         <div class="text-center mb-2">
                             <span>¿Aún no tienes cuenta?
-                                <a href="javascript:void(0);" class="text-primary" onclick="ModalRegistrarse()">Regístrate Gratis</a>
+                                <a href="javascript:void(0);" class="text-primary" onclick="ModalRegistrarseIni()">Regístrate Gratis</a>
                             </span>
                         </div>
 

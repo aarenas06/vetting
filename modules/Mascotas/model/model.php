@@ -13,12 +13,23 @@ class modelo
         $this->CNX1 = $conexion->mysql(); // Llamar al método mysql() de la instancia
     }
 
-    public function selectRaza()
+    public function selectEspecie()
     {
-        $sql = "SELECT * FROM tbrazas";
+        $sql = "SELECT * from tbespecies";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+    public function selectRaza($data)
+    {
+        $sql = " SELECT r.* from tbrazas r
+            left join tbespecies e on e.idTbEspecies=r.idTbEspecies
+            where e.idTbEspecies='" . $data['MascoEpecie'] . "'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
 
@@ -26,6 +37,16 @@ class modelo
     public function checkIfCodeExists($code)
     {
         $sql = "SELECT * FROM `tbmascotas` WHERE MascoChip='" . $code . "'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+    //FUNCION PARA VALIDAR SI EL MacoCos EXISTE
+    public function checkIfMacoCodeExists($code)
+    {
+        $sql = "SELECT * FROM `tbmascotas` WHERE MascoCod='" . $code . "'";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
@@ -75,7 +96,7 @@ class modelo
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':idTbUsuarios', $data['UsuCod']);
-            $stmt->bindParam(':MascoCod', $data['MascoChip']);
+            $stmt->bindParam(':MascoCod', $data['MascoCod']);
             $stmt->bindParam(':MascoNom', $data['MascoNom']);
             $stmt->bindParam(':idTbRazas', $data['MascoRaza']);
             $stmt->bindParam(':MascoFechNac', $data['MascoFecNaci']);

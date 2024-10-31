@@ -48,6 +48,23 @@ async function ObtDataPerfil() {
   }
 }
 
+// Función para ocultar o visualizar la contraseña
+function togglePassword() {
+  const passwordField = document.getElementById("InputContrasena");
+  const toggleIcon = document.getElementById("toggleIcon");
+
+  // Verifica el tipo de input y alterna
+  if (passwordField.type === "password") {
+    passwordField.type = "text"; // Muestra la contraseña
+    toggleIcon.classList.remove("fa-eye"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye-slash"); // Cambia el ícono a "ocultar"
+  } else {
+    passwordField.type = "password"; // Oculta la contraseña
+    toggleIcon.classList.remove("fa-eye-slash"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye"); // Cambia el ícono a "mostrar"
+  }
+}
+
 async function UpdateDataPerfil() {
   let formData = new FormData();
   formData.append("funcion", "UpdateDataPerfil");
@@ -106,7 +123,7 @@ async function ObtMascoPerfil() {
         body: formData,
       }
     );
-    let res2 = await req2.json(); 
+    let res2 = await req2.json();
     console.log(res2);
     let cartaMasco = document.getElementById("cartaMasco");
     cartaMasco.innerHTML = "";

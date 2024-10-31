@@ -34,13 +34,23 @@ async function listMascotashome() {
                       </div>
                       <div class="card-body">
                           <div class="text-center">
-                              <h2 class="card-title" style="font-size:19px;"><b>${item["Nombre"]}</b></h2>
+                              <h2 class="card-title" style="font-size:19px;"><b>${
+                                item["Nombre"]
+                              }</b></h2>
                           </div>
                           <div style="text-align:left;">
-                              <p class="card-text" style="color:black;"><b>Fec_Nacimiento:</b> ${item["Fech_Naci"]}</p>
-                              <p class="card-text" style="color:black;"><b>Edad:</b> ${item["EdadMasco"]}</p>
-                              <p class="card-text" style="color:black;"><b>Raza:</b> ${item["Raza"]}</p>
-                              <p class="card-text" style="color:black;"><b>Chip:</b> ${item["Chip"]}</p>
+                              <p class="card-text" style="color:black;"><b>Fec_Nacimiento:</b> ${
+                                item["Fech_Naci"]
+                              }</p>
+                              <p class="card-text" style="color:black;"><b>Edad:</b> ${calculateAge(
+                                item["Fech_Naci"]
+                              )}</p>
+                              <p class="card-text" style="color:black;"><b>Raza:</b> ${
+                                item["Raza"]
+                              }</p>
+                              <p class="card-text" style="color:black;"><b>Chip:</b> ${
+                                item["Chip"]
+                              }</p>
                           </div>
                       </div>
                   </div>
@@ -57,6 +67,21 @@ async function listMascotashome() {
     });
     console.log(error);
   }
+}
+
+// Función para calcular la edad (puedes dejarla como está)
+function calculateAge(fechaNacimiento) {
+  let today = new Date();
+  let nacimiento = new Date(fechaNacimiento);
+  let edadAnios = today.getFullYear() - nacimiento.getFullYear();
+  let edadMeses = today.getMonth() - nacimiento.getMonth();
+
+  if (edadMeses < 0) {
+    edadAnios--;
+    edadMeses += 12;
+  }
+
+  return `${edadAnios} Años - ${edadMeses} Meses`;
 }
 
 maps();

@@ -2421,6 +2421,11 @@ function ModalIniciosession() {
 
 // Función para abrir el modal de registrarse
 function ModalRegistrarse() {
+  $("#ModalRegistrarse").modal("show");
+}
+
+//Cuando le de click en registrase gratis en modal Inicio de session
+function ModalRegistrarseIni() {
   $("#ModalIniciosession").modal("hide");
   $("#ModalRegistrarse").modal("show");
 }
@@ -2494,13 +2499,12 @@ async function InsertPropietarios() {
       });
 
       let res2 = await req2.json();
-      console.log();
       if (res2 === true) {
+        $("#ModalRegistrarse").modal('hide');
         Swal.fire({
           icon: "success",
           text: "Propietario Agregado Correctamente...!",
         });
-        $("#exampleModalRegistrase").modal("hide");
         // Limpiar campos del formulario
         $("#NomPropietarios").val("");
         $("#IdentPropietarios").val("");

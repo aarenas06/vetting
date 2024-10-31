@@ -72,7 +72,7 @@ $UsuCod = $_SESSION['UsuCod'];
                 <h4 class="title">Macotas Creadas</h4>
             </div>
             <div>
-                <button class="btn btn-primary btn-sm title" data-bs-toggle="modal" data-bs-target="#insertMascota"> <i class="fa-solid fa-plus"></i> Agregar</button>
+                <button class="btn btn-primary btn-sm title" data-bs-toggle="modal" onclick="ModalInsertMascota()"> <i class="fa-solid fa-plus"></i> Agregar</button>
             </div>
         </div>
         <hr>
@@ -81,7 +81,7 @@ $UsuCod = $_SESSION['UsuCod'];
 
 </div>
 <!-- Modal New Mascota -->
-<div class="modal fade" id="insertMascota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="insertMascota" tabindex="-1" aria-labelledby="ModalInsertMascota" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" style="background-color:#F2F3F4;">
             <div class="modal-header">
@@ -91,6 +91,7 @@ $UsuCod = $_SESSION['UsuCod'];
             <div class="modal-body">
                 <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod']; ?>">
                 <div class="row">
+                    <input type="hidden" id="MascoCod">
                     <div class="col-md-6">
                         <label class="form-label ">Nombre</label>
                         <input type="text" class="form-control form-control-sm" id="MascoNom">
@@ -117,15 +118,17 @@ $UsuCod = $_SESSION['UsuCod'];
 
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label ">Especie</label>
+                        <Select class="form-control form-control-sm" id="MascoEpecie" onchange="selectRaza()">
+                            <option value="" disabled selected>Seleccione...</option>
+                            <?php $controller->selectEspecie(); ?>
+                        </Select>
                         <label class="form-label ">Raza</label>
                         <Select class="form-control form-control-sm" id="MascoRaza">
-                            <option value="" disabled selected>Seleccione...</option>
-                            <?php $controller->selectRaza(); ?>
+                            <!-- Select Raza -->
                         </Select>
                         <label class="form-label">Edad Mascota</label>
                         <input type="text" class="form-control form-control-sm" id="MascoEdad" disabled>
-                        <!-- <label class="form-label">Raza</label>
-                        <input type="text" class="form-control form-control-sm" id="MascoRaza"> -->
                         <label class="form-label">Peso</label>
                         <input type="text" class="form-control form-control-sm" id="MascoPeso">
                         <label class="form-label">Vivienda / ¿Con qué otros animales convive?</label>

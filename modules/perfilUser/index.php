@@ -45,7 +45,7 @@ $User = $_SESSION['User'];
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 order-last">
+                    <!-- <div class="col-lg-4 order-last">
                         <ul
                             class="list-unstyled d-flex align-items-center justify-content-center justify-content-lg-start my-3 gap-3">
                             <li class="position-relative">
@@ -73,7 +73,7 @@ $User = $_SESSION['User'];
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 bg-light-info rounded-2"
                     id="pills-tab" role="tablist">
@@ -95,15 +95,15 @@ $User = $_SESSION['User'];
                             <span class="d-none d-md-block">Mascotas</span>
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <button
                             class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                             id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button"
                             role="tab" aria-controls="pills-friends" aria-selected="false">
                             <i class="ti ti-user-circle me-2 fs-6"></i>
-                            <!-- <span class="d-none d-md-block">Trabajadores</span> -->
+                            <span class="d-none d-md-block">Trabajadores</span> 
                         </button>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -154,8 +154,12 @@ $User = $_SESSION['User'];
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="InputContrasena"
-                                    placeholder="Contraseña...">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="InputContrasena" placeholder="Contraseña...">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" onclick="togglePassword()" style="border: none;">
+                                        <i class="fa-solid fa-eye" id="toggleIcon"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,7 +172,7 @@ $User = $_SESSION['User'];
                 tabindex="0">
                 <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                     <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Mascotas <!-- <span
-                            class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span>--></h3> 
+                            class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span>--></h3>
                     <form class="position-relative">
                         <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
                             placeholder="Search Followers">
@@ -178,7 +182,7 @@ $User = $_SESSION['User'];
                 <div class="row">
                     <div class=" col-md-6 col-xl-4">
                         <div class="card" id="cartaMasco">
-                            
+
                         </div>
                     </div>
                 </div>

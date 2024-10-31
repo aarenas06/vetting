@@ -10,7 +10,7 @@
     if ($dt['CitaEst'] == 0) {
         $btn = 'warning';
     } else {
-        $btn = 'Success';
+        $btn = 'success';
     }
 ?>
     <div class="card" style="box-shadow: 4px 4px 4px 4px gray;">

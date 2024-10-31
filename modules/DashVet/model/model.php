@@ -18,7 +18,7 @@ class modelo
     {
         $sql = "SELECT tb1.idTbCitas ,tb1.CitaNom ,tb1.CitaDate ,tb1.CitaObs,tb1.CitaDateCre,tb2.MascoNom,tb2.MascoFechNac,tb2.MascoPelaje,tb2.MascoAgresion,
         tb2.MascoPatologia,tb2.MascoComidaHab,tb2.MascoSex,tb2.MascoCod ,tb3.UsuNom,tb3.UsuEmail,tb3.UsuCel,tb3.UsuCC,tb3.UsuDirec,
-        tb4.OptNombre,tb6.RazNom,tb7.EspeNom, tb2.MascoPic pic
+        tb4.OptNombre,tb6.RazNom,tb7.EspeNom, tb2.MascoPic pic,tb5.EmpNom
         FROM tbcitas tb1
         INNER JOIN  tbmascotas tb2 on tb2.idtbMascotas=tb1.idtbMascotas
         INNER JOIN tbusuarios tb3 on tb3.idTbUsuarios=tb2.idTbUsuarios
@@ -49,5 +49,29 @@ class modelo
             die("Error al insertar los datos: " . $e->getMessage());
             return false;
         }
+    }
+    public function InsertHisto($data)
+    {
+        try {
+            $columnas = implode(", ", array_keys($data));
+            $valores = array_values($data);
+            $placeholders = implode(", ", array_fill(0, count($valores), "?"));
+            $sql = "INSERT INTO tbhisclinica ($columnas) VALUES ($placeholders)";
+            $stmt = $this->CNX1->prepare($sql);
+            $stmt->execute($valores);
+            $lastInsertId = $this->CNX1->lastInsertId();
+
+            return $lastInsertId;
+        } catch (PDOException $e) {
+            die("Error al insertar los datos: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function Updatecita($idCita)
+    {
+        $sql = "Update tbcitas set CitaEst=1 where idTbCitas=$idCita";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
     }
 }

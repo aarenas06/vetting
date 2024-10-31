@@ -128,3 +128,61 @@ async function DataCita(id) {
     console.log(error);
   }
 }
+async function InsertHisto() {
+  var HisObserv = $("#HisObserv").val();
+  var idTbCitas = $("#idTbCitas").val();
+  var UsuCod = $("#UsuCod").val();
+  var HisEst = $("#HisEst").val();
+  var MascoCod = $("#MacoCod").val();
+  var HisAdj = $("#HisAdj")[0].files[0];
+
+  if (HisEst === "" || HisObserv === "") {
+    Swal.fire({
+      icon: "info",
+      text: `Campos con * son obligatorios`,
+    });
+    return;
+  }
+
+  if (HisAdj && HisAdj.type !== "application/pdf") {
+    Swal.fire({
+      icon: "info",
+      text: `Solo Archivos Pdf`,
+    });
+    return;
+  }
+
+  let formData = new FormData();
+  formData.append("funcion", "InsertHisto");
+  formData.append("idTbCitas", idTbCitas);
+  formData.append("HisObserv", HisObserv);
+  formData.append("HisAdj", HisAdj);
+  formData.append("UsuCod", UsuCod);
+  formData.append("MascoCod", MascoCod);
+  formData.append("HisEst", HisEst);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/DashVet/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.text();
+    Swal.fire({
+      icon: "success",
+      text: `Agenda Gestionada`,
+    });
+    $("#MdDesarrollo").modal("hide");
+    citasHoy();
+    PintarCalen();
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    console.log(error);
+  }
+}

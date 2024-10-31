@@ -33,12 +33,12 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
 </div>
 <br>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-8" style="margin-top:10px;">
         <div class="container" style="background-color: white;">
             <div id='calendar'></div>
         </div>
-    </div>
-    <div class="col-lg-4">
+    </div> <br><br>
+    <div class="col-lg-4" style="margin-top:10px;">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 Citas de Hoy

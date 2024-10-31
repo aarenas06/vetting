@@ -67,10 +67,13 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
             </div>
             <div class="col-lg-6">
                 <label for="" class="form-label">Patologias:</label>
-                <textarea name="" class="form-control" id="MascoPatologia"><?= $dt['MascoPatologia'] ?></textarea>
+                <textarea name="" class="form-control readonly-input" id="MascoPatologia"><?= $dt['MascoPatologia'] ?></textarea>
             </div>
         </div>
         <hr>
+
+    </div>
+    <div class="col-lg-4">
         <h5 class="title text-center">Datos Propietario</h5>
         <div class="row">
             <div class="col-lg-6">
@@ -90,25 +93,28 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
                 <input type="text" class="form-control form-control-sm readonly-input" value="<?= $dt['UsuDirec'] ?>" id="UsuDirec" readonly>
             </div>
         </div>
-    </div>
-    <div class="col-lg-4">
+        <hr>
         <h5 class="title text-center">Datos Cita</h5>
         <div class="row">
             <div class="col-lg-6">
                 <label for="" class="form-label">Nombre de Cita :</label>
-                <input type="text" class="form-control form-control-sm" value="<?= $dt['CitaNom'] ?>" id="CitaNom">
+                <input type="text" class="form-control form-control-sm readonly-input" value="<?= $dt['CitaNom'] ?>" id="CitaNom">
             </div>
             <div class="col-lg-6">
                 <label for="" class="form-label">Tipo de Servicio :</label>
-                <input type="text" class="form-control form-control-sm" value="<?= $dt['OptNombre'] ?>" id="OptNombre">
+                <input type="text" class="form-control form-control-sm readonly-input" value="<?= $dt['OptNombre'] ?>" id="OptNombre">
             </div>
             <div class="col-lg-6">
                 <label for="" class="form-label">Fecha/hora inicio:</label>
-                <input type="datetime-local" class="form-control form-control-sm " value="<?= $dt['CitaDate'] ?>" id="CitaDate">
+                <input type="datetime-local" class="form-control form-control-sm readonly-input " value="<?= $dt['CitaDate'] ?>" id="CitaDate">
+            </div>
+            <div class="col-lg-6">
+                <label for="" class="form-label">Usuario Programa:</label>
+                <input type="text" class="form-control form-control-sm readonly-input " value="<?= $dt['EmpNom'] ?>" id="CitaDate">
             </div>
             <div class="col-lg-12"> <br>
                 <label for="" class="form-label">Observación :</label>
-                <textarea class="form-control" placeholder="" id="CitaObs" style="height: 100px"><?= $dt['CitaObs'] ?></textarea>
+                <textarea class="form-control readonly-input" placeholder="" id="CitaObs" style="height: 100px"><?= $dt['CitaObs'] ?></textarea>
             </div>
         </div>
     </div>
@@ -116,5 +122,21 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
         <div style="flex-grow: 1; text-align: center;">
             <h5 class="title">Gestión Agenda</h5>
         </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Estado Cita: <span style="color:red;">*</span></label>
+            <select class="form-select" aria-label="Default select example" id="HisEst">
+                <option selected></option>
+                <option value="1">Confirmada</option>
+                <option value="0">Rechazada</option>
+            </select>
+            <label for="" class="form-label">Resultados-Recomendaciones: <span style="color:red;">*</span></label>
+            <textarea class="form-control" id="HisObserv" rows="3"></textarea>
+            <label for="" class="form-label">Adjunto Soporte :</label>
+            <input type="file" class="form-control" id="HisAdj">
+        </div>
+        <br><br>
+        <center>
+            <button class="btn btn-primary btn-sm" onclick="InsertHisto()"><i class="fa-solid fa-floppy-disk"></i> Guardar Proceso</button>
+        </center>
     </div>
 </div>

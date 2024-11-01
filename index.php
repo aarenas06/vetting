@@ -39,10 +39,39 @@
         html.lt-ie-10 .ie-panel {
             display: block;
         }
+
+        /* Estilos del botón flotante */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            z-index: 1000;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
 <body>
+    <!-- BOTON FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/573054648486" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="/vetting/landing/images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
         <div class="preloader-logo"><img src="plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" />
@@ -67,7 +96,7 @@
                                 </div>
 
                                 <ul class="rd-navbar-nav" id="navbarItems">
-                                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index-2.html">Home</a></li>
+                                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.php">Home</a></li>
                                     <li class="rd-nav-item active"><a class="rd-nav-link" onclick="ModalRegistrarse()">Registrarse</a></li>
                                     <li class="rd-nav-item active"><a class="rd-nav-link" onclick="ModalIniciosession()">Iniciar sesión</a></li>
                                 </ul>

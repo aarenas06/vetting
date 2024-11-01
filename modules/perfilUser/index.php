@@ -6,6 +6,23 @@ $UsuCod = $_SESSION['UsuCod'];
 $User = $_SESSION['User'];
 ?>
 
+<style>
+    /* Flex container para organizar las cartas */
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        /* Espacio entre cartas */
+    }
+
+    /* Cada carta ocupa el 25% del ancho del contenedor */
+    .card-item {
+        width: calc(25% - 16px);
+        /* Ajuste para el margen */
+        box-sizing: border-box;
+    }
+</style>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
@@ -95,15 +112,6 @@ $User = $_SESSION['User'];
                             <span class="d-none d-md-block">Mascotas</span>
                         </button>
                     </li>
-                    <!-- <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
-                            id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button"
-                            role="tab" aria-controls="pills-friends" aria-selected="false">
-                            <i class="ti ti-user-circle me-2 fs-6"></i>
-                            <span class="d-none d-md-block">Trabajadores</span> 
-                        </button>
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -163,6 +171,16 @@ $User = $_SESSION['User'];
                             </div>
                         </div>
                     </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="FotoNombre" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
+                                <input type="file" id="FotoInput" style="display: none;" accept=".jpg,.jpeg" onchange="updateFileName()">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('FotoInput').click();">Seleccionar</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <center>
                         <button class="btn btn-primary" onclick="UpdateDataPerfil()">Actualizar</button>
                     </center>
@@ -171,71 +189,16 @@ $User = $_SESSION['User'];
             <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab"
                 tabindex="0">
                 <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                    <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Mascotas <!-- <span
-                            class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span>--></h3>
-                    <form class="position-relative">
-                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                            placeholder="Search Followers">
-                        <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                    </form>
+                    <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Mascotas </h3>
                 </div>
                 <div class="row">
-                    <div class=" col-md-6 col-xl-4">
-                        <div class="card" id="cartaMasco">
-
+                    <div class="col-md-12">
+                        <div id="cartaMasco" class="card-container">
+                            <!-- Aquí se añadirán las cartas dinámicamente -->
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab"
-                tabindex="0">
-                <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                    <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Empleados <span
-                            class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span></h3>
-                    <form class="position-relative">
-                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                            placeholder="Search Friends">
-                        <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                    </form>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card hover-img">
-                            <div class="card-body p-4 text-center border-bottom">
-                                <img src="user-5.jpg" alt="" class="rounded-circle mb-3"
-                                    width="80" height="80">
-                                <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                                <span class="text-dark fs-2">Recepcionista</span>
-                            </div>
-                            <button class="btn btn-success">Escribir Nota</button>
-                            <button class="btn btn-primary">Ver Perfil</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card hover-img">
-                            <div class="card-body p-4 text-center border-bottom">
-                                <img src="profile.jpg" alt="" class="rounded-circle mb-3"
-                                    width="80" height="80">
-                                <h5 class="fw-semibold mb-0">Inez Lyons</h5>
-                                <span class="text-dark fs-2">Medico General</span>
-                            </div>
-                            <button class="btn btn-success">Escribir Nota</button>
-                            <button class="btn btn-primary">Ver Perfil</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card hover-img">
-                            <div class="card-body p-4 text-center border-bottom">
-                                <img src="user-5.jpg" alt="" class="rounded-circle mb-3"
-                                    width="80" height="80">
-                                <h5 class="fw-semibold mb-0">Lydia Bryan</h5>
-                                <span class="text-dark fs-2">Girujano</span>
-                            </div>
-                            <button class="btn btn-success">Escribir Nota</button>
-                            <button class="btn btn-primary">Ver Perfil</button>
-                        </div>
-                    </div>
-                </div>
+                <br>
             </div>
         </div>
     </div>

@@ -65,6 +65,13 @@ function togglePassword() {
   }
 }
 
+//FUNCION APRA QUE EL INPUT TOME EL NOMBRE DEL ARCHIVO CARGADO
+function updateFileName() {
+  const input = document.getElementById("FotoInput");
+  const fileName = input.files.length > 0 ? input.files[0].name : "";
+  document.getElementById("FotoNombre").value = fileName;
+}
+
 async function UpdateDataPerfil() {
   let formData = new FormData();
   formData.append("funcion", "UpdateDataPerfil");
@@ -75,7 +82,8 @@ async function UpdateDataPerfil() {
   formData.append("Contrasena", $("#InputContrasena").val());
   formData.append("UsuCod", $("#UsuCod").val());
   formData.append("User", $("#User").val());
-
+  formData.append("fotoPerfil", $("#FotoInput").get(0).files[0]);
+ 
   try {
     let req2 = await fetch(
       "/vetting/modules/perfilUser/controller/controller.php",
@@ -126,10 +134,11 @@ async function ObtMascoPerfil() {
     let res2 = await req2.json();
     console.log(res2);
     let cartaMasco = document.getElementById("cartaMasco");
-    cartaMasco.innerHTML = "";
+    cartaMasco.innerHTML = ""; // Limpiar el contenedor
+
     res2.forEach((masco) => {
       let card = `
-        <div class="card-body p-4 d-flex align-items-center gap-3">
+        <div class="card-item card-body p-4 d-flex align-items-center gap-3">
             <img src="data:image/png;base64,${masco.MascoPic}" alt="${masco.MascoNom}" class="rounded-circle" width="40" height="40">
             <div>
                 <h5 class="fw-semibold mb-0">${masco.MascoNom}</h5>
@@ -138,8 +147,8 @@ async function ObtMascoPerfil() {
                 </span>
             </div>
         </div>
-    `;
-      cartaMasco.innerHTML += card;
+      `;
+      cartaMasco.innerHTML += card; // Agregar cada carta al contenedor
     });
   } catch (error) {
     Swal.fire({

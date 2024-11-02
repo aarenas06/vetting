@@ -42,14 +42,14 @@ async function ObtDataPerfil() {
     let FotoInput = document.getElementById("FotoPerfil");
     // Crea la imagen con base64 o URL predeterminada como src
     let img = document.createElement("img");
-    img.src = res2[0]["UsuPic"] ? "data:image/jpeg;base64," + res2[0]["UsuPic"]
+    img.src = res2[0]["UsuPic"]
+      ? "data:image/jpeg;base64," + res2[0]["UsuPic"]
       : "/vetting/plantilla/assets/img/home/profile.jpg";
     img.alt = "Foto de Perfil";
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
     FotoInput.appendChild(img);
-  
   } catch (error) {
     Swal.fire({
       icon: "error",
@@ -109,8 +109,10 @@ async function UpdateDataPerfil() {
     if (res2 === true) {
       Swal.fire({
         icon: "success",
-        title: "Exito.!",
-        text: `Actualizado correctamente...!`,
+        title: "¡Éxito!",
+        text: "Actualizado correctamente...",
+      }).then(() => {
+        location.reload(); // Recarga la página completamente
       });
     } else {
       Swal.fire({

@@ -15,6 +15,10 @@ function updateFileName() {
   document.getElementById("MascoFotoNombre").value = fileName;
 }
 
+function ModalInsertMascota() {
+  $("#insertMascota").modal("show");
+}
+
 //CALCULAMOS LA EDAD DE LA MASCOTA EN EL MODAL
 function MascoFecNaci() {
   let MascoFecNaci = document.getElementById("MascoFecNaci").value;
@@ -58,6 +62,31 @@ async function generarMascoIdChip() {
   }
 }
 
+generarMascoCod();
+async function generarMascoCod() {
+  let formData = new FormData();
+  formData.append("funcion", "generarMascoCod");
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.json();
+    let codigo = document.getElementById("MascoCod");
+    codigo.value = res2["codigo"];
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    console.log(error);
+  }
+}
+
 listMascotas();
 
 async function listMascotas() {
@@ -77,6 +106,50 @@ async function listMascotas() {
     let res2 = await req2.text();
     $("#listMascotas").html(res2);
     $("#tbMascotas").DataTable();
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+    console.log(error);
+  }
+}
+
+async function selectRaza() {
+  let formData = new FormData();
+  formData.append("funcion", "selectRaza");
+  formData.append("MascoEpecie", $("#MascoEpecie").val());
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Mascotas/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    let res2 = await req2.json();
+
+    let selectElement = document.getElementById("MascoRaza");
+    selectElement.innerHTML = "";
+
+    let defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Seleccione...";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    selectElement.appendChild(defaultOption);
+
+    // Recorrer res2 y agregar cada opción al select
+    res2.forEach((item) => {
+      let option = document.createElement("option");
+      option.value = item.idTbRazas; // Establece el valor de la opción
+      option.textContent = item.RazNom; // Texto visible de la opción
+
+      selectElement.appendChild(option);
+    });
   } catch (error) {
     Swal.fire({
       icon: "error",
@@ -114,6 +187,7 @@ async function InsertMascota() {
   var MascoRaza = $("#MascoRaza").val();
   var MascoPeso = $("#MascoPeso").val();
   var MascoVivienda = $("#MascoVivienda").val();
+  var MascoCod = $("#MascoCod").val();
   var MascoChip = $("#MascoChip").val();
   var Mascoagresividad = $("#Mascoagresividad").val();
   var MascoPatologia = $("#MascoPatologia").val();
@@ -153,6 +227,7 @@ async function InsertMascota() {
   formData.append("MascoRaza", MascoRaza);
   formData.append("MascoPeso", MascoPeso);
   formData.append("MascoVivienda", MascoVivienda);
+  formData.append("MascoCod", MascoCod);
   formData.append("MascoChip", MascoChip);
   formData.append("Mascoagresividad", Mascoagresividad);
   formData.append("MascoPatologia", MascoPatologia);
@@ -171,12 +246,12 @@ async function InsertMascota() {
 
     let res2 = await req2.json();
     if (res2 === true) {
+      $("#insertMascota").modal("hide");
       Swal.fire({
         icon: "success",
         text: "Mascota Agregada Correctamente...!",
       });
-      $("#insertMascota").modal("hide");
-      // listPropietarios();
+      listMascotas();
 
       // Limpiar campos del formulario y desmarcar checkboxes
       // $("#NomPropietarios").val("");
@@ -325,7 +400,8 @@ function EditMascoFecNaci() {
 
 function EditUpdateFileName() {
   const Editinput = document.getElementById("EditMascoFotoInput");
-  const EditfileName = Editinput.files.length > 0 ? Editinput.files[0].name : "";
+  const EditfileName =
+    Editinput.files.length > 0 ? Editinput.files[0].name : "";
   document.getElementById("EditMascoFotoNombre").value = EditfileName;
 }
 
@@ -340,7 +416,7 @@ EditMascoModal.addEventListener("hidden.bs.modal", function () {
 });
 
 async function EditDataMasco(IdMasco) {
-  $('#EditMasco').modal('show');
+  $("#EditMasco").modal("show");
   let formData = new FormData();
   formData.append("funcion", "EditDataMasco");
   formData.append("IdMasco", IdMasco);
@@ -412,7 +488,7 @@ async function SaveEditMasco() {
     );
 
     let res2 = await req2.json();
-    $("#EditMasco").modal('hide');
+    $("#EditMasco").modal("hide");
     if (res2 === true) {
       Swal.fire({
         icon: "success",

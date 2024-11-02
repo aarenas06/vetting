@@ -2380,6 +2380,40 @@
   });
 })();
 
+//Funcion para ocutal o visualizar la contraseña  modal Iniciar session
+function togglePasswordInicio() {
+  const passwordField = document.getElementById("Pass");
+  const toggleIcon = document.getElementById("toggleIcon");
+
+  // Verifica el tipo de input y alterna
+  if (passwordField.type === "password") {
+    passwordField.type = "text"; // Muestra la contraseña
+    toggleIcon.classList.remove("fa-eye"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye-slash"); // Cambia el ícono a "ocultar"
+  } else {
+    passwordField.type = "password"; // Oculta la contraseña
+    toggleIcon.classList.remove("fa-eye-slash"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye"); // Cambia el ícono a "mostrar"
+  }
+}
+
+//Funcion para ocutar o visualizar la contraseña modal Registrar
+function togglePasswordRegistrar() {
+  const passwordField = document.getElementById("PassPropietarios");
+  const toggleIcon = document.getElementById("toggleIcon");
+
+  // Verifica el tipo de input y alterna
+  if (passwordField.type === "password") {
+    passwordField.type = "text"; // Muestra la contraseña
+    toggleIcon.classList.remove("fa-eye"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye-slash"); // Cambia el ícono a "ocultar"
+  } else {
+    passwordField.type = "password"; // Oculta la contraseña
+    toggleIcon.classList.remove("fa-eye-slash"); // Cambia el ícono
+    toggleIcon.classList.add("fa-eye"); // Cambia el ícono a "mostrar"
+  }
+}
+
 // Función para abrir el modal de inicio de sesión
 function ModalIniciosession() {
   $("#ModalIniciosession").modal("show");
@@ -2387,6 +2421,12 @@ function ModalIniciosession() {
 
 // Función para abrir el modal de registrarse
 function ModalRegistrarse() {
+  $("#ModalRegistrarse").modal("show");
+}
+
+//Cuando le de click en registrase gratis en modal Inicio de session
+function ModalRegistrarseIni() {
+  $("#ModalIniciosession").modal("hide");
   $("#ModalRegistrarse").modal("show");
 }
 
@@ -2429,62 +2469,70 @@ async function Validar() {
 }
 
 async function InsertPropietarios() {
-  var NomPropietarios = $("#NomPropietarios").val();
-  var IdentPropietarios = $("#IdentPropietarios").val();
-  var TelPropietarios = $("#TelPropietarios").val();
-  var DirPropietarios = $("#DirPropietarios").val();
-  var EmailPropietarios = $("#EmailPropietarios").val();
-  var UsuPropietarios = $("#UsuPropietarios").val();
-  var PassPropietarios = $("#PassPropietarios").val();
+  let termsConditions = document.getElementById("termsConditions");
+  if (termsConditions.checked) {
+    var NomPropietarios = $("#NomPropietarios").val();
+    var IdentPropietarios = $("#IdentPropietarios").val();
+    var SexPropietarios = $("#SexPropietarios").val();
+    var TelPropietarios = $("#TelPropietarios").val();
+    var DirPropietarios = $("#DirPropietarios").val();
+    var EmailPropietarios = $("#EmailPropietarios").val();
+    var UsuPropietarios = $("#UsuPropietarios").val();
+    var PassPropietarios = $("#PassPropietarios").val();
 
-  let formData = new FormData();
-  formData.append("funcion", "InsertPropietarios");
-  formData.append("NomPropietarios", NomPropietarios);
-  formData.append("IdentPropietarios", IdentPropietarios);
-  formData.append("TelPropietarios", TelPropietarios);
-  formData.append("DirPropietarios", DirPropietarios);
-  formData.append("EmailPropietarios", EmailPropietarios);
-  formData.append("UsuPropietarios", UsuPropietarios);
-  formData.append("PassPropietarios", PassPropietarios);
-  formData.append("Rol", "2");
+    let formData = new FormData();
+    formData.append("funcion", "InsertPropietarios");
+    formData.append("NomPropietarios", NomPropietarios);
+    formData.append("IdentPropietarios", IdentPropietarios);
+    formData.append("SexPropietarios", SexPropietarios);
+    formData.append("TelPropietarios", TelPropietarios);
+    formData.append("DirPropietarios", DirPropietarios);
+    formData.append("EmailPropietarios", EmailPropietarios);
+    formData.append("UsuPropietarios", UsuPropietarios);
+    formData.append("PassPropietarios", PassPropietarios);
+    formData.append("Rol", "2");
 
-  try {
-    let req2 = await fetch("/vetting/include/controller.php", {
-      method: "POST",
-      body: formData,
-    });
-
-    let res2 = await req2.json();
-    console.log();
-    if (res2 === true) {
-      Swal.fire({
-        icon: "success",
-        text: "Propietario Agregado Correctamente...!",
+    try {
+      let req2 = await fetch("/vetting/include/controller.php", {
+        method: "POST",
+        body: formData,
       });
-      $("#exampleModalRegistrase").modal("hide");
-      // Limpiar campos del formulario
-      $("#NomPropietarios").val("");
-      $("#IdentPropietarios").val("");
-      $("#TelPropietarios").val("");
-      $("#DirPropietarios").val("");
-      $("#EmailPropietarios").val("");
-      $("#UsuPropietarios").val("");
-      $("#PassPropietarios").val("");
-    } else {
+
+      let res2 = await req2.json();
+      if (res2 === true) {
+        $("#ModalRegistrarse").modal('hide');
+        Swal.fire({
+          icon: "success",
+          text: "Propietario Agregado Correctamente...!",
+        });
+        // Limpiar campos del formulario
+        $("#NomPropietarios").val("");
+        $("#IdentPropietarios").val("");
+        $("#TelPropietarios").val("");
+        $("#DirPropietarios").val("");
+        $("#EmailPropietarios").val("");
+        $("#UsuPropietarios").val("");
+        $("#PassPropietarios").val("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: "Ya existe un Propietario con esta Identificación...!",
+        });
+      }
+    } catch {
       Swal.fire({
         icon: "error",
-        text: "Ya existe un Propietario con esta Identificación...!",
+        text: "Problema del Servidor",
       });
     }
-  } catch {
+  } else {
     Swal.fire({
       icon: "error",
-      text: "Problema del Servidor",
+      text: "Debes de Aceptar terminos y condiones...!",
     });
   }
 }
 
-// maps();
 // async function maps() {
 //   let formData = new FormData();
 //   formData.append("funcion", "maps");

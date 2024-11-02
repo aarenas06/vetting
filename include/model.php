@@ -52,13 +52,14 @@ class modelo
     public function InsertPropietarios($data)
     {
         try {
-            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla) 
-                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios)";
+            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuSex, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla) 
+                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :UsuSex, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios)";
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':Rol', $data['Rol'], PDO::PARAM_INT);
             $stmt->bindParam(':NomPropietarios', $data['NomPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':IdentPropietarios', $data['IdentPropietarios'], PDO::PARAM_STR);
+            $stmt->bindParam(':UsuSex', $data['SexPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':TelPropietarios', $data['TelPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':DirPropietarios', $data['DirPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':EmailPropietarios', $data['EmailPropietarios'], PDO::PARAM_STR);

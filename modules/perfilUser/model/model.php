@@ -26,7 +26,7 @@ class modelo
     public function UpdateDataPerfil($data)
     {
         $sql = "UPDATE tbusuarios SET UsuNom = :Nombre, UsuCC = :Identificacion, 
-                UsuDirec = :Direccion,UsuCel = :Celular,UsuCla = :Contrasena 
+                UsuDirec = :Direccion,UsuCel = :Celular,UsuCla = :Contrasena, UsuPic=:UsuPic
             WHERE idTbUsuarios = :UsuCod AND UsuUser = :User";
         $stmt = $this->CNX1->prepare($sql);
         $stmt->bindParam(':Nombre', $data['Nombre']);
@@ -36,6 +36,7 @@ class modelo
         $stmt->bindParam(':Contrasena', $data['Contrasena']);
         $stmt->bindParam(':UsuCod', $data['UsuCod']);
         $stmt->bindParam(':User', $data['User']);
+        $stmt->bindParam(':UsuPic', $data['fotoPerfil']);
         if ($stmt->execute()) {
             return true;
         } else {
@@ -46,7 +47,7 @@ class modelo
     public function ObtMascoPerfil($data)
     {
         $sql = "SELECT idtbMascotas, MascoNom, concat(MascoYear, ' Años - ', MascoMes, ' Meses') Edad, MascoPic FROM tbmascotas 
-            where idTbUsuarios='".$data['UsuCod']."'";
+            where idTbUsuarios='" . $data['UsuCod'] . "'";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);

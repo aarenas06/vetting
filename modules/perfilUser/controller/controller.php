@@ -19,7 +19,23 @@ class Controller
 
     public function UpdateDataPerfil()
     {
-        $datos = $this->MODEL->UpdateDataPerfil($_POST);
+
+        $FotoTmpPath = $_FILES['MascoFoto']['tmp_name'];
+        $imge = file_get_contents($FotoTmpPath);
+        $fotoPerfil = base64_encode($imge);
+
+        $dataArray = [
+            'Nombre' => $_POST['Nombre'],
+            'Identificacion' => $_POST['Identificacion'],
+            'Direccion' => $_POST['Direccion'],
+            'Celular' => $_POST['Celular'],
+            'Contrasena' => $_POST['Contrasena'],
+            'UsuCod' => $_POST['UsuCod'],
+            'User' => $_POST['User'],
+            'fotoPerfil' => $fotoPerfil
+        ];
+
+        $datos = $this->MODEL->UpdateDataPerfil($dataArray);
         if ($datos == true) {
             echo json_encode(true);
         } else {

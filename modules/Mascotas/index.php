@@ -108,7 +108,7 @@ $UsuCod = $_SESSION['UsuCod'];
                         <label class="form-label">Comida que Consume</label>
                         <input type="text" class="form-control form-control-sm" id="MascoComida">
                         <label class="form-label">Último Celo</label>
-                        <input type="text" class="form-control form-control-sm" id="MascoCelo">
+                        <input type="date" class="form-control form-control-sm" id="MascoCelo">
                         <label class="form-label">¿Esta en adopción?</label>
                         <Select class="form-control form-control-sm" id="MascoAdopcion">
                             <option value="" disabled selected>Seleccione...</option>

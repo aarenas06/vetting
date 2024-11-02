@@ -51,7 +51,14 @@ class modelo
 
     public function listPropietarios($Emp)
     {
-        $sql = "SELECT * FROM `tbusuarios` where idTbRoles='2' AND indEmpr=$Emp;";
+        $sql = "SELECT tb1.UsuNom,tb1.UsuCC,tb1.UsuCel,tb1.UsuDirec,tb1.UsuEmail,Sc.C
+        FROM tbusuarios tb1
+        LEFT JOIN (
+            SELECT tb1.idTbUsuarios,tb1.IndEmpr, COUNT(tb1.idtbMascotas) C 
+            FROM tbmascotas tb1  
+            GROUP by tb1.idTbUsuarios,tb1.indEmpr
+        )As Sc on Sc.idTbUsuarios=tb1.idTbUsuarios AND Sc.IndEmpr=tb1.indEmpr
+        where idTbRoles='2' AND tb1.indEmpr=$Emp;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);

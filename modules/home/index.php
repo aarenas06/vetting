@@ -45,7 +45,6 @@ $Modulos = $control->GetModulos();
         border-radius: 15px;
         border: 2px #000;
         background-color: #EAEDED;
-        margin-top: 60px;
     }
 
     .card-body {
@@ -67,10 +66,15 @@ $Modulos = $control->GetModulos();
         display: flex;
         justify-content: space-between;
     }
+
+    #mascoCard {
+        margin-top: 60px;
+
+    }
 </style>
 
 <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
-<h4>Bienvenido <?= $_SESSION['Nombre']; ?> </h4>
+<h4 class="title">Bienvenido <?= $_SESSION['Nombre']; ?> </h4>
 <hr>
 
 

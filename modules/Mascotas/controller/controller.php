@@ -78,7 +78,7 @@ class Controller
 
         return $randomString;
     }
-    
+
     //FUNCION PARA RETORNAR EL CODIGO DEL CHIP
     public function generarMascoCod()
     {
@@ -139,7 +139,7 @@ class Controller
             'MascoPeso' => $_POST['MascoPeso'],
             'MascoVivienda' => $_POST['MascoVivienda'],
             'MascoCod' => $_POST['MascoCod'],
-            'MascoChip' => $_POST['MascoChip'],
+            'MascoChip' => $_POST['MascoCod'],
             'Mascoagresividad' => $_POST['Mascoagresividad'],
             'MascoPatologia' => $_POST['MascoPatologia'],
             'UsuCod' => $_POST['UsuCod'],

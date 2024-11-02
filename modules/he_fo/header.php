@@ -8,6 +8,14 @@ if (!isset($_SESSION["UsuCod"])) {
     echo '<script>window.location.href = "http://localhost/vetting/";</script>';
     exit; // Agrega exit para detener la ejecución del script después de la redirección
 }
+include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/he_fo/controller/controller.php');
+$control = new Controllerhe;
+if ($_SESSION['Emp'] != 0) {
+    $est = $control->ValidateEst($_SESSION['Emp']);
+    $estadoActual = $est['EmpreAct']; // Estado actual de la empresa (1 = activo, 0 = inactivo)
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +76,64 @@ if (!isset($_SESSION["UsuCod"])) {
         margin-left: 0;
         padding-left: 0;
     }
+
+    .switch-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        /* Ancho del interruptor */
+        height: 30px;
+        /* Altura del interruptor */
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 50px;
+        /* Ajustamos el radio para la altura */
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        /* Tamaño del círculo */
+        width: 22px;
+        /* Tamaño del círculo */
+        left: 4px;
+        /* Ajustamos el margen izquierdo */
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #4caf50;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(64px);
+        /* Movimiento ajustado del círculo */
+    }
 </style>
 
 <body>
@@ -92,10 +158,11 @@ if (!isset($_SESSION["UsuCod"])) {
                                 <span class="hide-menu">Disponibilidad</span>
                                 <div class="switch-container">
                                     <label class="switch">
-                                        <input type="checkbox" id="toggleSwitch">
+                                        <!-- Marcamos el interruptor si $estadoActual es 1 -->
+                                        <input type="checkbox" id="toggleSwitch" <?php echo ($estadoActual == 1) ? 'checked' : ''; ?>>
                                         <span class="slider"></span>
-                                    </label> </br></br>
-
+                                    </label>
+                                    <br><br>
                                 </div>
                             </li>
                         <?php } ?>
@@ -133,7 +200,7 @@ if (!isset($_SESSION["UsuCod"])) {
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="?p=DashVet/index" aria-expanded="false">
                                     <span>
-                                        <i class="fa-solid fa-people-line"></i>
+                                        <i class="fa-solid fa-house"></i>
                                     </span>
                                     <span class="hide-menu">Home</span>
                                 </a>
@@ -279,4 +346,5 @@ if (!isset($_SESSION["UsuCod"])) {
                     </div>
                 </nav>
             </header>
+
             <div class="contenido" style="padding-top: calc(40px + 15px); margin-left:20px;margin-right:20px; background-image: url('https://www.discolmedica.com.co/assets/img/background.png');   background-attachment: fixed;" cz-shortcut-listen="true">

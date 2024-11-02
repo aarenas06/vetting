@@ -79,7 +79,18 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
                                 <h5 class="title">Datos Mascota</h5>
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nueva</button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-plus"></i> Nueva
+                                    </button>
+                                    <ul class="dropdown-menu" style="padding: 5px;">
+                                        <li style="cursor: pointer;" onclick="Vent('Clientes')">Propietario</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li style="cursor: pointer;" onclick="Vent('Pacientes')">Mascota</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <input type="hidden" id="idtbMascotas">
@@ -205,4 +216,8 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
 <input type="hidden" id="View" value="1">
 <script>
     PintarCalen();
+
+    function Vent(mod) {
+        window.open("/vetting/modules/principal.php?p=" + mod + "/index", "v entana1", "w idth=600,height=500,scrollbars=NO")
+    }
 </script>

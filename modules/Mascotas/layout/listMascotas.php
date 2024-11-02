@@ -55,7 +55,7 @@
                     <td><?= $dt['Peso'] ?></td>
                     <td><?= $dt['Patologia'] ?></td>
                     <td><?= $dt['Agresion'] . '%'?></td>
-                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="HistorialMasco(<?= $dt['idMasco'] ?>)" data-bs-toggle="modal" data-bs-target="#HistorialMasco"> <i class="fa-solid fa-file-medical fa-beat"></i></button></td>
+                    <td class="text-center"><button class="btn btn-info btn-sm" onclick="HistorialMasco(<?= $dt['idMasco'] ?>)" data-bs-toggle="modal"> <i class="fa-solid fa-file-medical fa-beat"></i></button></td>
                     <td class="text-center"> <button onclick="ChangeEstMasco(<?= $dt['idMasco'] ?>,'<?= $dt['Chip'] ?>',<?= $dt['Estado'] ?>)" class="btn btn-sm btn-<?= $back ?>"><?= $text ?></button></td>
                     <td class="text-center"><button class="btn btn-warning btn-sm" onclick="EditDataMasco(<?= $dt['idMasco'] ?>)"> <i class="fa-solid fa-pen-to-square"></i></button></td>
                 </tr>

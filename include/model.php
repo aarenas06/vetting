@@ -49,6 +49,17 @@ class modelo
         return true; // Si no existe, retorna true
     }
 
+
+    public function ObtFotoPerfil($data)
+    {
+        $sql = "SELECT u.UsuPic FROM tbusuarios u
+            WHERE u.idTbUsuarios = '" . $data['UsuCod'] . "'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
     public function InsertPropietarios($data)
     {
         try {

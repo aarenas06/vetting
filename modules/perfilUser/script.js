@@ -38,6 +38,18 @@ async function ObtDataPerfil() {
 
     let InputContrasena = document.getElementById("InputContrasena");
     InputContrasena.value = res2[0]["UsuCla"];
+
+    let FotoInput = document.getElementById("FotoPerfil");
+    // Crea la imagen con base64 o URL predeterminada como src
+    let img = document.createElement("img");
+    img.src = res2[0]["UsuPic"] ? "data:image/jpeg;base64," + res2[0]["UsuPic"]
+      : "/vetting/plantilla/assets/img/home/profile.jpg";
+    img.alt = "Foto de Perfil";
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    FotoInput.appendChild(img);
+  
   } catch (error) {
     Swal.fire({
       icon: "error",
@@ -83,7 +95,7 @@ async function UpdateDataPerfil() {
   formData.append("UsuCod", $("#UsuCod").val());
   formData.append("User", $("#User").val());
   formData.append("fotoPerfil", $("#FotoInput").get(0).files[0]);
- 
+
   try {
     let req2 = await fetch(
       "/vetting/modules/perfilUser/controller/controller.php",

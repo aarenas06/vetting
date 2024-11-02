@@ -20,7 +20,7 @@ class Controller
     public function UpdateDataPerfil()
     {
 
-        $FotoTmpPath = $_FILES['MascoFoto']['tmp_name'];
+        $FotoTmpPath = $_FILES['fotoPerfil']['tmp_name'];
         $imge = file_get_contents($FotoTmpPath);
         $fotoPerfil = base64_encode($imge);
 

@@ -2,7 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vetting/include/model.php';
 
 class Controller
@@ -79,6 +78,12 @@ class Controller
         } else {
             echo json_encode('false');
         }
+    }
+
+    public function ObtFotoPerfil()
+    {
+        $data = $this->MODEL->ObtFotoPerfil($_POST);
+        echo json_encode($data);
     }
 }
 $controller = new Controller();

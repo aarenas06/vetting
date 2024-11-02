@@ -48,11 +48,10 @@ $User = $_SESSION['User'];
                         <div class="mt-n5">
                             <div class="d-flex align-items-center justify-content-center mb-2">
                                 <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle"
-                                    style="width: 110px; height: 110px;" ;>
+                                    style="width: 110px; height: 110px;";>
                                     <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
-                                        style="width: 100px; height: 100px;" ;>
-                                        <img src="/vetting/plantilla/assets/img/home/profile.jpg" alt=""
-                                            class="w-100 h-100">
+                                        style="width: 100px; height: 100px;"; id="FotoPerfil">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +173,7 @@ $User = $_SESSION['User'];
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="FotoNombre" placeholder="Foto de Tu Mascota" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
+                                <input type="text" class="form-control" id="FotoNombre" placeholder="Foto de Perfil" aria-label="Recipient's username" aria-describedby="button-addon2" readonly>
                                 <input type="file" id="FotoInput" style="display: none;" accept=".jpg,.jpeg" onchange="updateFileName()">
                                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="document.getElementById('FotoInput').click();">Seleccionar</button>
                             </div>

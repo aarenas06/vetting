@@ -102,8 +102,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 	opacity: 1;
   }
 
-  
-  
+    
   /* Estilos específicos para el modal de Inicio Sesion */
 
   .custom-modal-iniciosesion .modal-content {
@@ -186,7 +185,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 	color: #6c757d;
 	opacity: 1;
   }
-  
+ 
 body {
 	margin: 0;
 	font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

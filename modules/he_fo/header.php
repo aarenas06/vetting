@@ -219,8 +219,11 @@ if (!isset($_SESSION["UsuCod"])) {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
+                                            <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod']; ?>">
                                             <div class="user-profile-img">
-                                                <img src="/vetting/plantilla/assets/img/home/profile.jpg" class="rounded-circle" width="35" height="35" alt="" />
+                                                <div id="HeadFotoPerfil">
+                                                    <!-- La imagen se insertará aquí desde JavaScript -->
+                                                </div>
                                             </div>
                                         </div>
                                     </a>
@@ -230,7 +233,7 @@ if (!isset($_SESSION["UsuCod"])) {
                                                 <h5 class="mb-0 fs-5 fw-semibold">Perfil</h5>
                                             </div>
                                             <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                                <img src="/vetting/plantilla/assets/img/home/profile.jpg" class="rounded-circle" width="80" height="80" alt="" />
+                                                <img src="" id="FotoPerfilPerfil" class="rounded-circle" width="80" height="80" alt="" />
                                                 <div class="ms-3">
                                                     <h5 class="mb-1 fs-3"><?= $_SESSION['Nombre'] ?></h5>
                                                     <span class="mb-1 d-block text-dark"><?= $_SESSION['RolObs'] ?></span>
@@ -263,3 +266,4 @@ if (!isset($_SESSION["UsuCod"])) {
                 </nav>
             </header>
             <div class="contenido" style="padding-top: calc(40px + 15px); margin-left:20px;margin-right:20px; background-image: url('https://www.discolmedica.com.co/assets/img/background.png');   background-attachment: fixed;" cz-shortcut-listen="true">
+                <script type="text/javascript" src="/vetting/modules/he_fo/script.js"></script>

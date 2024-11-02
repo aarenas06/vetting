@@ -85,6 +85,12 @@ class Controller
         $data = $this->MODEL->ObtFotoPerfil($_POST);
         echo json_encode($data);
     }
+
+    public function NotifiCitas()
+    {
+        $data = $this->MODEL->NotifiCitas($_POST);
+        echo json_encode($data);
+    }
 }
 $controller = new Controller();
 

@@ -199,11 +199,8 @@ if (!isset($_SESSION["UsuCod"])) {
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
-
                     </ul>
-                    <div class="d-block d-lg-none">
-
-                    </div>
+                    <div class="d-block d-lg-none"></div>
                     <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="p-2">
                             <i class="ti ti-dots fs-7"></i>
@@ -216,6 +213,26 @@ if (!isset($_SESSION["UsuCod"])) {
                             </a>
                             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
 
+                                <!-- Botón de notificaciones -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link position-relative" href="javascript:void(0)" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ti ti-bell fs-4"></i>
+                                        <!-- Insignia de notificaciones dinámica -->
+                                        <span id="notificationCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="transform: translate(-50%, -50%); font-size: 0.75rem; padding: 0.2em 0.4em;">
+                                            <!-- Número dinámico de notificaciones -->
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="notificationDropdown">
+                                        <div class="p-3">
+                                            <h6 class="m-0">Notificaciones</h6>
+                                        </div>
+                                        <div class="list-group list-group-flush" id="contenNotifi">
+                                            <!-- Las notificaciones se agregarán aquí dinámicamente -->
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!-- Botón de perfil (ya existente) -->
                                 <li class="nav-item dropdown">
                                     <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
@@ -249,13 +266,12 @@ if (!isset($_SESSION["UsuCod"])) {
                                                     </span>
                                                     <div class="w-75 d-inline-block v-middle ps-3">
                                                         <h6 class="mb-1 bg-hover-primary fw-semibold"> Perfil </h6>
-                                                        <span class="d-block text-dark">Configuraciòn cuenta</span>
+                                                        <span class="d-block text-dark">Configuración cuenta</span>
                                                     </div>
                                                 </a>
-
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
-                                                <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesiòn</a>
+                                                <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesión</a>
                                             </div>
                                         </div>
                                     </div>
@@ -265,5 +281,6 @@ if (!isset($_SESSION["UsuCod"])) {
                     </div>
                 </nav>
             </header>
+
             <div class="contenido" style="padding-top: calc(40px + 15px); margin-left:20px;margin-right:20px; background-image: url('https://www.discolmedica.com.co/assets/img/background.png');   background-attachment: fixed;" cz-shortcut-listen="true">
                 <script type="text/javascript" src="/vetting/modules/he_fo/script.js"></script>

@@ -156,6 +156,15 @@ if (!isset($_SESSION["UsuCod"])) {
                                 </a>
                             </li>
                             <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Pacientes/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-shield-dog"></i>
+                                    </span>
+
+                                    <span class="hide-menu">Pacientes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a class="sidebar-link" href="?p=Agenda/index" aria-expanded="false">
                                     <span>
                                         <i class="fa-solid fa-calendar-days"></i>

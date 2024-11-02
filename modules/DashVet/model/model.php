@@ -18,7 +18,7 @@ class modelo
     {
         $sql = "SELECT tb1.idTbCitas ,tb1.CitaNom ,tb1.CitaDate ,tb1.CitaObs,tb1.CitaDateCre,tb2.MascoNom,tb2.MascoFechNac,tb2.MascoPelaje,tb2.MascoAgresion,
         tb2.MascoPatologia,tb2.MascoComidaHab,tb2.MascoSex,tb2.MascoCod ,tb3.UsuNom,tb3.UsuEmail,tb3.UsuCel,tb3.UsuCC,tb3.UsuDirec,
-        tb4.OptNombre,tb6.RazNom,tb7.EspeNom, tb2.MascoPic pic,tb5.EmpNom
+        tb4.OptNombre,tb6.RazNom,tb7.EspeNom, tb2.MascoPic pic,tb5.EmpNom,(CASE WHEN tb8.idTbHisClinica is null then 's' else 'n' end) AS IND,tb8.idTbHisClinica
         FROM tbcitas tb1
         INNER JOIN  tbmascotas tb2 on tb2.idtbMascotas=tb1.idtbMascotas
         INNER JOIN tbusuarios tb3 on tb3.idTbUsuarios=tb2.idTbUsuarios
@@ -26,6 +26,7 @@ class modelo
         INNER JOIN tbempleados tb5 on tb5.idTbEmpleados=tb1.idTbEmAsig
         INNER JOIN tbrazas tb6 on tb6.idTbRazas=tb2.idTbRazas
         INNER JOIN tbespecies tb7 on tb7.idTbEspecies=tb6.idTbEspecies
+        LEFT JOIN tbhisclinica tb8 on tb8.idTbCitas=tb1.idTbCitas
         WHERE tb1.idTbCitas=$idCita;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();

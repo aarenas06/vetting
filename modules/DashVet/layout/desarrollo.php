@@ -122,21 +122,26 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
         <div style="flex-grow: 1; text-align: center;">
             <h5 class="title">Gestión Agenda</h5>
         </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Estado Cita: <span style="color:red;">*</span></label>
-            <select class="form-select" aria-label="Default select example" id="HisEst">
-                <option selected></option>
-                <option value="1">Confirmada</option>
-                <option value="0">Rechazada</option>
-            </select>
-            <label for="" class="form-label">Resultados-Recomendaciones: <span style="color:red;">*</span></label>
-            <textarea class="form-control" id="HisObserv" rows="3"></textarea>
-            <label for="" class="form-label">Adjunto Soporte :</label>
-            <input type="file" class="form-control" id="HisAdj">
-        </div>
-        <br><br>
-        <center>
-            <button class="btn btn-primary btn-sm" onclick="InsertHisto()"><i class="fa-solid fa-floppy-disk"></i> Guardar Proceso</button>
-        </center>
+        <?php if ($dt['IND'] == 's') { ?>
+            <div class="mb-3">
+                <label for="" class="form-label">Estado Cita: <span style="color:red;">*</span></label>
+                <select class="form-select" aria-label="Default select example" id="HisEst">
+                    <option selected></option>
+                    <option value="1">Confirmada</option>
+                    <option value="0">Rechazada</option>
+                </select>
+                <label for="" class="form-label">Resultados-Recomendaciones: <span style="color:red;">*</span></label>
+                <textarea class="form-control" id="HisObserv" rows="3"></textarea>
+                <label for="" class="form-label">Adjunto Soporte :</label>
+                <input type="file" class="form-control" id="HisAdj">
+            </div>
+            <br><br>
+            <center>
+                <button class="btn btn-primary btn-sm" onclick="InsertHisto()"><i class="fa-solid fa-floppy-disk"></i> Guardar Proceso</button>
+            </center>
+        <?php  } else { ?>
+            <p class="title">Esta Cita ya fue desarrollada</p>
+        <?php   } ?>
+
     </div>
 </div>

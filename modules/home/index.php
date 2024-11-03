@@ -109,6 +109,4 @@ $Modulos = $control->GetModulos();
 </section>
 <br>
 
-
-
 <script type="text/javascript" src="/vetting/modules/home/script.js"></script>

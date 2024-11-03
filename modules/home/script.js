@@ -110,79 +110,79 @@ async function maps() {
 
     let markers = [];
 
+    // Intentar obtener la ubicación del usuario con alta precisión
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        let userLat = position.coords.latitude;
-        let userLng = position.coords.longitude;
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          let userLat = position.coords.latitude;
+          let userLng = position.coords.longitude;
 
-        console.log("User Latitude: " + userLat);
-        console.log("User Longitude: " + userLng);
-        // Definir un nuevo ícono con color verde
-        let greenIcon = L.icon({
-          iconUrl:
-            "https://cdn-icons-png.freepik.com/256/6645/6645221.png?semt=ais_hybrid", // URL de tu icono personalizado
-          shadowUrl:
-            "https://leafletjs.com/examples/custom-icons/leaf-shadow.png", // URL de la sombra del icono
+          console.log("Latitud del usuario: " + userLat);
+          console.log("Longitud del usuario: " + userLng);
 
-          iconSize: [28, 65], // tamaño del icono
-          shadowSize: [50, 64], // tamaño de la sombra
-          iconAnchor: [22, 94], // punto del icono que se ancla al mapa
-          shadowAnchor: [4, 62], // punto de la sombra que se ancla al mapa
-          popupAnchor: [-3, -76], // posición del popup relativa al icono
-        });
+          // Crear un ícono personalizado para la ubicación del usuario
+          let greenIcon = L.icon({
+            iconUrl:
+              "https://cdn-icons-png.freepik.com/256/6645/6645221.png?semt=ais_hybrid",
+            iconSize: [28, 65],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
+          });
 
-        // Añadir un marcador para la ubicación actual del usuario con el ícono verde
-        let userMarker = L.marker([userLat, userLng], { icon: greenIcon })
-          .addTo(map)
-          .bindPopup("Tu ubicación actual")
-          .openPopup();
+          // Añadir el marcador de ubicación del usuario
+          let userMarker = L.marker([userLat, userLng], { icon: greenIcon })
+            .addTo(map)
+            .bindPopup("Tu ubicación actual")
+            .openPopup();
 
-        markers.push(userMarker.getLatLng());
+          markers.push(userMarker.getLatLng());
 
-        // Añadir marcadores de las veterinarias
-        res2.forEach(function (item) {
-          let latitud = parseFloat(item.EmpreLatitud);
-          let longitud = parseFloat(item.EmpreLongitud.split(",")[0]); // Ignora lo que está después de la coma
+          // Añadir marcadores de las veterinarias desde la respuesta del servidor
+          res2.forEach(function (item) {
+            let latitud = parseFloat(item.EmpreLatitud);
+            let longitud = parseFloat(item.EmpreLongitud.split(",")[0]);
 
-          if (!isNaN(latitud) && !isNaN(longitud)) {
-            let marker = L.marker([latitud, longitud])
-              .addTo(map)
-              .bindPopup(
-                `Ubicación de veterinaria en latitud: ${latitud}, longitud: ${longitud}`
-              );
+            if (!isNaN(latitud) && !isNaN(longitud)) {
+              let marker = L.marker([latitud, longitud])
+                .addTo(map)
+                .bindPopup(
+                  `Ubicación de veterinaria en latitud: ${latitud}, longitud: ${longitud}`
+                );
 
-            markers.push(marker.getLatLng());
+              markers.push(marker.getLatLng());
+            }
+          });
+
+          // Ajusta la vista del mapa para mostrar todos los marcadores
+          if (markers.length > 0) {
+            let bounds = L.latLngBounds(markers);
+            map.fitBounds(bounds);
           }
-        });
-
-        // Ajustar la vista del mapa para mostrar todos los marcadores
-        if (markers.length > 0) {
-          let bounds = L.latLngBounds(markers);
-          map.fitBounds(bounds);
-        }
-      }, showError);
+        },
+        showError,
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      console.log("La geolocalización no es compatible con este navegador.");
     }
 
     function showError(error) {
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          console.log("User denied the request for Geolocation.");
+          console.log("El usuario negó el acceso a la geolocalización.");
           break;
         case error.POSITION_UNAVAILABLE:
-          console.log("Location information is unavailable.");
+          console.log("La información de ubicación no está disponible.");
           break;
         case error.TIMEOUT:
-          console.log("The request to get user location timed out.");
+          console.log("La solicitud de ubicación ha expirado.");
           break;
-        case error.UNKNOWN_ERROR:
-          console.log("An unknown error occurred.");
+        default:
+          console.log("Ocurrió un error desconocido al obtener la ubicación.");
           break;
       }
     }
   } catch (error) {
-    // Muestra el error con Swal y lo imprime en consola
     Swal.fire({
       icon: "error",
       title: "Error!",
@@ -190,6 +190,9 @@ async function maps() {
     });
     console.log(error);
   }
+
+}
+
 }
 
 async function ListVetActive() {
@@ -216,3 +219,4 @@ function abrirGoogleMaps(latitud, longitud) {
   // Abre Google Maps en una nueva pestaña
   window.open(url, "_blank");
 }
+

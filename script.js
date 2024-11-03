@@ -15,7 +15,7 @@ async function Validar() {
     console.log("holaaaa");
     let res2 = await req2.json();
     if (res2.success === "ok") {
-      console.log("Entre A sesion");
+
       if (res2.idTbRoles === 2) {
         //Vista propietarios
         const urlRedireccion = `/vetting/modules/principal.php?p=home/index`;
@@ -144,3 +144,4 @@ async function ValidarEmpr() {
     });
   }
 }
+

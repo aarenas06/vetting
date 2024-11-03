@@ -316,6 +316,7 @@ async function ChangeEstMasco(idMasco, chip, Est) {
 }
 
 async function HistorialMasco(IdMasco) {
+  $('#HistorialMasco').modal('show');
   let formData = new FormData();
   formData.append("funcion", "HistorialMasco");
   formData.append("IdMasco", IdMasco);
@@ -349,19 +350,18 @@ async function HistorialMasco(IdMasco) {
     // Iterar sobre la respuesta para mostrar los nuevos datos
     res2.forEach((item) => {
       ContMascotas.innerHTML += `
-      <br>
         <section class="row">
           <section class="col-md-12">
             <div class="card custom-card">
               <div class="card-header">
-                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["OptNombre"]}</p>
+                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["OptNombre"]} - <b>Dr. ${item["Doctor"]}</b></p>
                 <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["CitaDate"]}</p>
               </div>
 
               <div class="card-body">
                 <div style="text-align:left;">
                   <p class="card-text" style="text-align:left; color:black;">
-                    <b>Observaciones:</b> <br> ${item["CitaObs"]}
+                    <b>Observaciones:</b> <br> ${item["HisObserv"]}
                   </p>
                 </div>
               </div>
@@ -371,6 +371,7 @@ async function HistorialMasco(IdMasco) {
       `;
     });
   } catch (error) {
+    $('#HistorialMasco').modal('hide');
     Swal.fire({
       icon: "info",
       title: "Upss!!",

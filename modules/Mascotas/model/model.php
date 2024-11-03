@@ -126,7 +126,7 @@ class modelo
 
     public function HistorialMasco($data)
     {
-        $sql = "SELECT citas.idTbCitas,mas.MascoNom,serv.OptNombre,Emple.EmpNom Doctor,citas.CitaDate,,hc.HisObserv FROM tbcitas citas
+        $sql = "SELECT citas.idTbCitas,mas.MascoNom,serv.OptNombre,Emple.EmpNom Doctor,citas.CitaDate,hc.HisObserv FROM tbcitas citas
             LEFT JOIN tbmascotas mas ON mas.idtbMascotas=citas.idtbMascotas
             LEFT JOIN tboptservicios serv ON serv.IdoptServicios=citas.idTbServicios
             LEFT JOIN tbempleados Emple ON Emple.idTbEmpleados=citas.idTbEmAsig 

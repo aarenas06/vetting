@@ -190,9 +190,6 @@ async function maps() {
     });
     console.log(error);
   }
-
-}
-
 }
 
 async function ListVetActive() {
@@ -219,4 +216,3 @@ function abrirGoogleMaps(latitud, longitud) {
   // Abre Google Maps en una nueva pestaña
   window.open(url, "_blank");
 }
-

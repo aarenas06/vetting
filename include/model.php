@@ -62,10 +62,11 @@ class modelo
 
     public function NotifiCitas($data)
     {
-        $sql = "SELECT cita.CitaNom MotiCita, MAX(cita.CitaDate) FechCita, emple.EmpNom Doctor, masco.MascoNom from tbcitas cita
+        $sql = "SELECT cita.CitaNom MotiCita, MAX(cita.CitaDate) FechCita, emple.EmpNom Doctor, masco.MascoNom 
+            from tbcitas cita
             left join tbempleados emple on emple.idTbEmpleados=cita.idTbEmAsig
             left join tbmascotas masco on masco.idtbMascotas=cita.idtbMascotas  
-            where masco.idTbUsuarios='".$data['UsuCod']."' ";
+            where masco.idTbUsuarios='" . $data['UsuCod'] . "'  AND cita.CitaEst=0";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);

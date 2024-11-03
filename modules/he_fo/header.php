@@ -307,22 +307,22 @@ if ($_SESSION['Emp'] != 0) {
 
                                 <!-- Botón de notificaciones -->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link position-relative" href="javascript:void(0)" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="ti ti-bell fs-4"></i>
-                                        <!-- Insignia de notificaciones dinámica -->
-                                        <span id="notificationCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="transform: translate(-50%, -50%); font-size: 0.75rem; padding: 0.2em 0.4em;">
-                                            <!-- Número dinámico de notificaciones -->
-                                        </span>
+                                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ti ti-bell-ringing"></i>
+                                        <div class="notification bg-primary rounded-circle"></div>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="notificationDropdown">
-                                        <div class="p-3">
-                                            <h6 class="m-0">Notificaciones</h6>
+                                    <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                        <div class="d-flex align-items-center justify-content-between py-3 px-7">
+                                            <h5 class="mb-0 fs-5 fw-semibold">Notificaciones</h5>
+                                            <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm"><span id="notificationCount"></span> Nuevo</span>
                                         </div>
+                                        <hr>
                                         <div class="list-group list-group-flush" id="contenNotifi">
                                             <!-- Las notificaciones se agregarán aquí dinámicamente -->
                                         </div>
                                     </div>
                                 </li>
+
 
                                 <!-- Botón de perfil (ya existente) -->
                                 <li class="nav-item dropdown">

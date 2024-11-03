@@ -10,11 +10,11 @@
     if ($dt['CitaEst'] == 0) {
         $btn = 'warning';
     } else {
-        $btn = 'Success';
+        $btn = 'success';
     }
 ?>
     <div class="card" style="box-shadow: 4px 4px 4px 4px gray;">
-        <div class="card-body">
+        <div class="card-body" style="cursor: pointer;" onclick="DataCita(<?= $dt['idTbCitas'] ?>)">
             <h5 class="card-title">Propietario: <?= $dt['UsuNom'] ?></h5>
             <p class="card-text">Mascota: <?= $dt['MascoNom'] ?> <br>
                 Edad: <?= $edad->y ?> años y <?= $edad->m ?> meses <br>

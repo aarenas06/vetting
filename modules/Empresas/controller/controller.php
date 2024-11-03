@@ -109,6 +109,28 @@ class Controller
         }
         $update = $this->MODEL->ChangeEstEmp($_POST['IdEmp'], $new);
     }
+    public function BuyNewPlan()
+    {
+        $NombreCarpeta = $_POST['NomEmpre'];
+        $rutaGuardar = $_SERVER['DOCUMENT_ROOT'] . "/vetting/asset/documentacion/$NombreCarpeta/contratos/";
+        if (!file_exists($rutaGuardar)) {
+            mkdir($rutaGuardar, 0777, true);
+        }
+        $nuevoNombreEmpreContr = $this->getNombre(5) . '.pdf';
+        $rutaArchivoEmpreContr = $rutaGuardar . $nuevoNombreEmpreContr;
+
+        if (move_uploaded_file($_FILES['EmpreContr']['tmp_name'], $rutaArchivoEmpreContr)) {
+
+            $desactivaContr = $this->MODEL->desactivaContr($_POST['IdEmpreNew']);
+            $updateContrato = $this->MODEL->updateContrato($nuevoNombreEmpreContr, $_POST['IdEmpreNew']);
+            $dataPago = array(
+                "UsuCod" => $_POST['UsuCod'],
+                "idTbPlanes " => $_POST['PlanSelectNew'],
+                "idTbEmpresas " => $_POST['IdEmpreNew'],
+            );
+            $this->MODEL->InsertHistoPago($dataPago);
+        }
+    }
 }
 $controller = new Controller();
 

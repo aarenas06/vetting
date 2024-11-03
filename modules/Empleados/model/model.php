@@ -71,10 +71,11 @@ class modelo
     }
     public function ListEmp($emp)
     {
-        $sql = "SELECT tb1.idTbEmpleados,tb1.EmpNom Nom ,tb1.EmpNit, tb1.EmpUsu UsuCod ,(CASE when tb1.EmpEst=1 Then 'Activo' else 'Innactivo' END) estDes, tb1.EmpEst,tb1.EmpCel ,tb1.EmpEmail, tb1.EmpFechCrea,tb2.RolNom,tb3.EmpUsu UsuCrea
+        $sql = "SELECT tb1.idTbEmpleados,tb1.EmpNom Nom ,tb1.EmpNit, tb1.EmpUsu UsuCod ,(CASE when tb1.EmpEst=1 Then 'Activo' else 'Innactivo' END) estDes, tb1.EmpEst,tb1.EmpCel ,tb1.EmpEmail, tb1.EmpFechCrea,tb2.RolNom,tb3.EmpUsu UsuCrea ,tb4.EmpreNom
         FROM tbempleados tb1
         INNER JOIN tbroles tb2 on tb2.idTbRoles=tb1.idTbRoles
         INNER JOIN tbempleados tb3 on tb3.idTbEmpleados=tb1.EmplUsuCrea
+        inner JOIN tbempresas tb4 on tb4.idTbEmpresas=tb1.idTbEmpresas
         where tb1.idTbEmpresas=$emp;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
@@ -86,5 +87,57 @@ class modelo
         $sql = "update tbempleados set EmpEst='$new' where idTbEmpleados  =$idEmp";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
+    }
+
+
+    public function infoEmp($emp)
+    {
+        $sql = "SELECT tb1.idTbEmpleados,tb1.EmpNom,tb1.EmpCel,tb1.EmpEmail,tb1.EmpCla,tb1.idTbRoles,tb2.RolNom
+        FROM tbempleados tb1
+        INNER JOIN tbroles tb2 on tb2.idTbRoles=tb1.idTbRoles
+        where tb1.idTbEmpleados=$emp;";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_NAMED);
+        return $row;
+    }
+
+
+    public function UpdateEmp($datos)
+    {
+        // Extraer el ID del empleado y los demás datos
+        $empId = $datos['EmpIdEdit'];
+        $empNom = $datos['EmpNomEdit'];
+        $empCel = $datos['EmpCelEdit'];
+        $empEmail = $datos['EmpEmailEdit'];
+        $empCla = $datos['EmpClaEdit'];
+        $idTbRoles = $datos['idTbRolesEdit'];
+
+        // Construir la consulta SQL
+        $sql = "UPDATE tbempleados SET 
+                    EmpNom = :empNom, 
+                    EmpCel = :empCel, 
+                    EmpEmail = :empEmail, 
+                    EmpCla = :empCla,
+                    idTbRoles  = :idTbRoles 
+                WHERE idTbEmpleados  = :empId";
+
+        // Preparar la consulta
+        $stmt = $this->CNX1->prepare($sql);
+
+        // Vincular los parámetros
+        $stmt->bindParam(':empNom', $empNom);
+        $stmt->bindParam(':empCel', $empCel);
+        $stmt->bindParam(':empEmail', $empEmail);
+        $stmt->bindParam(':empCla', $empCla);
+        $stmt->bindParam(':idTbRoles', $idTbRoles);
+        $stmt->bindParam(':empId', $empId);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            return true; // La actualización fue exitosa
+        } else {
+            return false; // Ocurrió un error en la actualización
+        }
     }
 }

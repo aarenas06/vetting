@@ -45,7 +45,6 @@ $Modulos = $control->GetModulos();
         border-radius: 15px;
         border: 2px #000;
         background-color: #EAEDED;
-        margin-top: 60px;
     }
 
     .card-body {
@@ -62,10 +61,20 @@ $Modulos = $control->GetModulos();
         border: 2px #000;
         z-index: 3;
     }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #mascoCard {
+        margin-top: 60px;
+
+    }
 </style>
 
 <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
-<h4>Bienvenido <?= $_SESSION['Nombre']; ?> </h4>
+<h4 class="title">Bienvenid@ <?= $_SESSION['Nombre']; ?> </h4>
 <hr>
 
 
@@ -93,6 +102,7 @@ $Modulos = $control->GetModulos();
                 Veterinarias Activas
             </div>
             <div class="card-body bg-white">
+                <div class="ForVet" id="ForVet"></div>
             </div>
         </div>
     </section>

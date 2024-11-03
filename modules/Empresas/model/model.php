@@ -82,9 +82,21 @@ class modelo
             return false;
         }
     }
+    public function desactivaContr($idEmp)
+    {
+        $sql = "UPDATE tbhistorialpago SET HistPagoEst='2' where idTbEmpresas =$idEmp AND HistPagoEst='1'";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+    }
     public function ChangeEstEmp($idEmp, $new)
     {
         $sql = "update tbempresas set EmpreEst='$new' where idTbEmpresas =$idEmp";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+    }
+    public function updateContrato($Contr, $idEmp)
+    {
+        $sql = "UPDATE tbempresas SET EmpreContr='$Contr' where idTbEmpresas =$idEmp";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
     }

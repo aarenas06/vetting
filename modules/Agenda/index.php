@@ -22,10 +22,6 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
 </style>
 <h3 class="title">Modulo de Agenda:</h3>
 <h5>Gestiona Tu calendario</h5>
-
-
-
-
 <hr>
 <div class="header">
     <div>
@@ -37,12 +33,12 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
 </div>
 <br>
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-8" style="margin-top:10px;">
         <div class="container" style="background-color: white;">
             <div id='calendar'></div>
         </div>
-    </div>
-    <div class="col-lg-4">
+    </div> <br><br>
+    <div class="col-lg-4" style="margin-top:10px;">
         <div class="card">
             <div class="card-header bg-primary text-white">
                 Citas de Hoy
@@ -83,7 +79,18 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
                                 <h5 class="title">Datos Mascota</h5>
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nueva</button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-plus"></i> Nueva
+                                    </button>
+                                    <ul class="dropdown-menu" style="padding: 5px;">
+                                        <li style="cursor: pointer;" onclick="Vent('Clientes')">Propietario</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li style="cursor: pointer;" onclick="Vent('Pacientes')">Mascota</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <input type="hidden" id="idtbMascotas">
@@ -187,10 +194,8 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
                                 <label for="" class="form-label">Observación :</label>
                                 <textarea class="form-control" placeholder="Comentarios importantes " id="CitaObs" style="height: 100px"></textarea>
                             </div>
-                            <div class="col-lg-12">
-                                <label for="" class="form-label">Id Cita Previa:</label>
-                                <input type="number" class="form-control form-control-sm " id="citaPre">
-                            </div>
+
+                            <input type="hidden" class="form-control form-control-sm " id="citaPre">
                         </div>
                     </div>
                 </div>
@@ -205,10 +210,15 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
         </div>
     </div>
 </div>
+<input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
 <input type="hidden" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <script type="text/javascript" src="/vetting/modules/Agenda/script.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <input type="hidden" id="View" value="1">
 <script>
     PintarCalen();
+
+    function Vent(mod) {
+        window.open("/vetting/modules/principal.php?p=" + mod + "/index", "v entana1", "w idth=600,height=500,scrollbars=NO")
+    }
 </script>

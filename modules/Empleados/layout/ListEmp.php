@@ -35,8 +35,8 @@
                     <td><?= $dt['UsuCrea'] ?></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#EditEmp"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fa-solid fa-address-card"></i></button>
+                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#EditEmp" onclick="infoEmp(<?= $dt['idTbEmpleados'] ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#MdPdf" onclick="OpenPdf('<?= $dt['EmpreNom'] ?>','<?= $dt['UsuCod'] ?>')"><i class="fa-solid fa-address-card"></i></button>
                         </div>
                     </td>
                 </tr>

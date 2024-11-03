@@ -8,6 +8,14 @@ if (!isset($_SESSION["UsuCod"])) {
     echo '<script>window.location.href = "http://localhost/vetting/";</script>';
     exit; // Agrega exit para detener la ejecución del script después de la redirección
 }
+include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/he_fo/controller/controller.php');
+$control = new Controllerhe;
+if ($_SESSION['Emp'] != 0) {
+    $est = $control->ValidateEst($_SESSION['Emp']);
+    $estadoActual = $est['EmpreAct']; // Estado actual de la empresa (1 = activo, 0 = inactivo)
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +76,64 @@ if (!isset($_SESSION["UsuCod"])) {
         margin-left: 0;
         padding-left: 0;
     }
+
+    .switch-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        /* Ancho del interruptor */
+        height: 30px;
+        /* Altura del interruptor */
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 50px;
+        /* Ajustamos el radio para la altura */
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        /* Tamaño del círculo */
+        width: 22px;
+        /* Tamaño del círculo */
+        left: 4px;
+        /* Ajustamos el margen izquierdo */
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #4caf50;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(64px);
+        /* Movimiento ajustado del círculo */
+    }
 </style>
 
 <body>
@@ -87,15 +153,16 @@ if (!isset($_SESSION["UsuCod"])) {
                 </div>
                 <nav class="sidebar-nav scroll-sidebar" id="sidebar-nav" data-simplebar>
                     <ul id="sidebarnav">
-                        <?php if ($_SESSION['Tip'] == 1 || $_SESSION['Tip'] == 3) { ?>
+                        <?php if ($_SESSION['Tip'] == 1) { ?>
                             <li class="nav-small-cap">
                                 <span class="hide-menu">Disponibilidad</span>
                                 <div class="switch-container">
                                     <label class="switch">
-                                        <input type="checkbox" id="toggleSwitch">
+                                        <!-- Marcamos el interruptor si $estadoActual es 1 -->
+                                        <input type="checkbox" id="toggleSwitch" <?php echo ($estadoActual == 1) ? 'checked' : ''; ?>>
                                         <span class="slider"></span>
-                                    </label> </br></br>
-
+                                    </label>
+                                    <br><br>
                                 </div>
                             </li>
                         <?php } ?>
@@ -131,6 +198,22 @@ if (!isset($_SESSION["UsuCod"])) {
                                 <span class="hide-menu">Empresas</span>
                             </li>
                             <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Dashboard/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=DashVet/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-house"></i>
+                                    </span>
+                                    <span class="hide-menu">Home</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
                                 <a class="sidebar-link" href="?p=Empleados/index" aria-expanded="false">
                                     <span>
                                         <i class="fa-solid fa-people-line"></i>
@@ -145,6 +228,15 @@ if (!isset($_SESSION["UsuCod"])) {
                                     </span>
 
                                     <span class="hide-menu">Clientes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Pacientes/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-shield-dog"></i>
+                                    </span>
+
+                                    <span class="hide-menu">Pacientes</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">

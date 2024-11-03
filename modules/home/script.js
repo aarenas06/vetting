@@ -1,4 +1,5 @@
 listMascotashome();
+ListVetActive();
 async function listMascotashome() {
   let formData = new FormData();
   formData.append("funcion", "listMascotashome");
@@ -28,7 +29,7 @@ async function listMascotashome() {
           <br>
           <section class="row">
               <section class="col-md-4">
-                  <div class="card custom-card">
+                  <div class="card custom-card" style="margin-top: 60px;" id="mascoCard">
                       <div class="circle-img">
                           <img src="${base64Image}" alt="Foto" class="img-fluid">
                       </div>
@@ -48,7 +49,7 @@ async function listMascotashome() {
                               <p class="card-text" style="color:black;"><b>Raza:</b> ${
                                 item["Raza"]
                               }</p>
-                              <p class="card-text" style="color:black;"><b>Chip:</b> ${
+                              <p class="card-text" style="color:black;"><b>Ide:</b> ${
                                 item["Chip"]
                               }</p>
                           </div>
@@ -189,4 +190,33 @@ async function maps() {
     });
     console.log(error);
   }
+
 }
+
+}
+
+async function ListVetActive() {
+  let formData = new FormData();
+  formData.append("funcion", "ListVetActive");
+
+  try {
+    let req2 = await fetch("/vetting/modules/Home/controller/controller.php", {
+      method: "POST",
+      body: formData,
+    });
+    let res2 = await req2.text();
+    $("#ForVet").html(res2);
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error!",
+      text: `Problema del Servidor: ${error.message}`,
+    });
+  }
+}
+function abrirGoogleMaps(latitud, longitud) {
+  const url = `https://www.google.com/maps/search/?api=1&query=${latitud},${longitud}`;
+  // Abre Google Maps en una nueva pestaña
+  window.open(url, "_blank");
+}
+

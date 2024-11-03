@@ -114,7 +114,7 @@ async function ListEmp() {
 async function ChangeEstEmpl(IdEmp, Est) {
   Swal.fire({
     icon: "info",
-    text: "¿Enserio Quieres cambiar de estado?",
+    text: "Esta seguro de  cambiar de estado?",
     showCancelButton: true,
     confirmButtonText: "Aceptar",
   }).then(async (result) => {
@@ -148,4 +148,85 @@ async function ChangeEstEmpl(IdEmp, Est) {
     } else if (result.isDenied) {
     }
   });
+}
+function OpenPdf(Emp, Usu) {
+  var link =
+    "/vetting/asset/documentacion/" + Emp + "/Personal/" + Usu + ".pdf";
+
+  console.log(link);
+  // Configura el src del iframe y muestra el div
+  $("#pdfFrame").attr("src", link);
+  $("#viewPdf").css("display", "block");
+}
+
+async function infoEmp(IdEmp) {
+  let formData = new FormData();
+  formData.append("funcion", "infoEmp");
+  formData.append("IdEmp", IdEmp);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Empleados/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.json();
+
+    $("#EmpIdEdit").val(res2.idTbEmpleados);
+    $("#EmpNomEdit").val(res2.EmpNom);
+    $("#EmpCelEdit").val(res2.EmpCel);
+    $("#EmpEmailEdit").val(res2.EmpEmail);
+    $("#EmpClaEdit").val(res2.EmpCla);
+    $("#idTbRolesEdit").val(res2.idTbRoles);
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "Problema del Servidor",
+    });
+    button.innerHTML = originalContent;
+  }
+}
+
+async function UpdateEmp() {
+  // Capturar los valores y guardarlos en variables
+  var EmpIdEdit = $("#EmpIdEdit").val();
+  var EmpNomEdit = $("#EmpNomEdit").val();
+  var EmpCelEdit = $("#EmpCelEdit").val();
+  var EmpEmailEdit = $("#EmpEmailEdit").val();
+  var EmpClaEdit = $("#EmpClaEdit").val();
+  var idTbRolesEdit = $("#idTbRolesEdit").val();
+
+  let formData = new FormData();
+  formData.append("funcion", "UpdateEmp");
+  formData.append("EmpIdEdit", EmpIdEdit);
+  formData.append("EmpNomEdit", EmpNomEdit);
+  formData.append("EmpCelEdit", EmpCelEdit);
+  formData.append("EmpEmailEdit", EmpEmailEdit);
+  formData.append("EmpClaEdit", EmpClaEdit);
+  formData.append("idTbRolesEdit", idTbRolesEdit);
+
+  try {
+    let req2 = await fetch(
+      "/vetting/modules/Empleados/controller/controller.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    let res2 = await req2.text();
+    Swal.fire({
+      icon: "success",
+      text: "Actualizacion correcta",
+    });
+    $("#EditEmp").modal("hide");
+    ListEmp();
+  } catch {
+    Swal.fire({
+      icon: "error",
+      text: "Problema del Servidor",
+    });
+    button.innerHTML = originalContent;
+  }
 }

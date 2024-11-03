@@ -7,6 +7,7 @@
                 <th scope="col">Contacto</th>
                 <th scope="col">Dir Residencia</th>
                 <th scope="col">Email</th>
+                <th scope="col">#Mascotas</th>
                 <!-- <th scope="col">Opt</th> -->
             </tr>
         </thead>
@@ -18,6 +19,7 @@
                     <td><?= $Clientes['UsuCel']; ?></td>
                     <td><?= $Clientes['UsuDirec']; ?></td>
                     <td><?= $Clientes['UsuEmail']; ?></td>
+                    <td class="text-center"><?= number_format($Clientes['C'], 00); ?></td>
                     <!-- <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary btn-sm" onclick="GetDataPropietarios(<?= $Clientes['idTbUsuarios'] ?>,<?= $Clientes['idTbRoles'] ?>)" data-bs-toggle="modal" data-bs-target="#ModalUpdatePropietarios"><i class="fa-solid fa-pen-to-square"></i></button>

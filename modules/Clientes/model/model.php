@@ -17,8 +17,8 @@ class modelo
     public function InsertPropietarios($data)
     {
         try {
-            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla,indEmpr) 
-                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios,:indEmpr)";
+            $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla,indEmpr,UsuSex) 
+                VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios,:indEmpr,:UsuSex)";
             $stmt = $this->CNX1->prepare($sql);
             // Asignar los valores a los parámetros
             $stmt->bindParam(':Rol', $data['Rol'], PDO::PARAM_INT);
@@ -30,6 +30,7 @@ class modelo
             $stmt->bindParam(':UsuPropietarios', $data['EmailPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':PassPropietarios', $data['IdentPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':indEmpr', $data['Emp'], PDO::PARAM_STR);
+            $stmt->bindParam(':UsuSex', $data['UsuSex'], PDO::PARAM_STR);
             $stmt->execute();
             $lastInsertId = $this->CNX1->lastInsertId();
             return true; // Retornamos la respuesta de la DB
@@ -51,7 +52,14 @@ class modelo
 
     public function listPropietarios($Emp)
     {
-        $sql = "SELECT * FROM `tbusuarios` where idTbRoles='2' AND indEmpr=$Emp;";
+        $sql = "SELECT tb1.UsuNom,tb1.UsuCC,tb1.UsuCel,tb1.UsuDirec,tb1.UsuEmail,Sc.C
+        FROM tbusuarios tb1
+        LEFT JOIN (
+            SELECT tb1.idTbUsuarios,tb1.IndEmpr, COUNT(tb1.idtbMascotas) C 
+            FROM tbmascotas tb1  
+            GROUP by tb1.idTbUsuarios,tb1.indEmpr
+        )As Sc on Sc.idTbUsuarios=tb1.idTbUsuarios AND Sc.IndEmpr=tb1.indEmpr
+        where idTbRoles='2' AND tb1.indEmpr=$Emp;";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_NAMED);

@@ -6,17 +6,24 @@ async function Validar() {
   formData.append("funcion", "Validar");
   formData.append("User", User);
   formData.append("Pass", Pass);
-
+  console.log("holaaaa");
   try {
     let req2 = await fetch("/vetting/include/controller.php", {
       method: "POST",
       body: formData,
     });
+    console.log("holaaaa");
     let res2 = await req2.json();
     if (res2.success === "ok") {
+
       if (res2.idTbRoles === 2) {
         //Vista propietarios
         const urlRedireccion = `/vetting/modules/principal.php?p=home/index`;
+
+        window.location.href = urlRedireccion;
+      }
+      if (res2.idTbRoles === 1) {
+        const urlRedireccion = `/vetting/modules/principal.php?p=Empresas/index`;
 
         window.location.href = urlRedireccion;
       }

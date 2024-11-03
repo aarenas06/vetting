@@ -43,10 +43,16 @@ $Modulos = $control->GetModulos();
                 <input type="number" class="form-control form-control-sm " id="IdentPropietarios">
                 <label class="form-label">Telefono</label>
                 <input type="number" class="form-control form-control-sm " id="TelPropietarios">
-                <label class="form-label">Dirección Redencial</label>
+                <label class="form-label">Dirección Residencial</label>
                 <input type="text" class="form-control form-control-sm " id="DirPropietarios">
                 <label class="form-label">Correo Electronico</label>
                 <input type="text" class="form-control form-control-sm " id="EmailPropietarios">
+                <label class="form-label">Sexo</label>
+                <select class="form-select form-select-sm" id="SexPro">
+                    <option selected></option>
+                    <option value="0">Masculino</option>
+                    <option value="1">Femino</option>
+                </select>
                 <hr>
                 <br>
                 <center>

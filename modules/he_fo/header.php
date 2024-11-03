@@ -153,7 +153,7 @@ if ($_SESSION['Emp'] != 0) {
                 </div>
                 <nav class="sidebar-nav scroll-sidebar" id="sidebar-nav" data-simplebar>
                     <ul id="sidebarnav">
-                        <?php if ($_SESSION['Tip'] == 1 || $_SESSION['Tip'] == 3) { ?>
+                        <?php if ($_SESSION['Tip'] == 1) { ?>
                             <li class="nav-small-cap">
                                 <span class="hide-menu">Disponibilidad</span>
                                 <div class="switch-container">
@@ -196,6 +196,14 @@ if ($_SESSION['Emp'] != 0) {
                             <li class="nav-small-cap" style="margin-top: 0px;">
                                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                 <span class="hide-menu">Empresas</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="?p=Dashboard/index" aria-expanded="false">
+                                    <span>
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link" href="?p=DashVet/index" aria-expanded="false">

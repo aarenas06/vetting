@@ -5,19 +5,16 @@ $MODEL = new modelo();
 
 $Emp = $_GET['ind'];
 
+session_start(); // Asegúrate de que la sesión esté iniciada
+session_unset(); // Eliminar todas las variables de sesión
+session_destroy(); // Destruir la sesión
+
+
 if ($Emp == 0) {
-    session_unset();
-
-    session_destroy();
-
     header("Location: /vetting/");
     exit(); // Asegura que el script se detenga después de redirigir
 } else {
     $acces = $MODEL->GetTok($Emp);
-    session_unset();
-
-    session_destroy();
-
     header("Location: /vetting/Empresa.php?PreDict=" . urlencode($acces['nit']) . "&pack=" . urlencode($acces['tok']));
     exit(); // Asegura que el script se detenga después de redirigir
 }

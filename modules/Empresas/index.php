@@ -58,7 +58,7 @@ $GetPlanes = $control->GetPlanes();
                         <option value="<?= $Gp['idTbPlanes'] ?>"><?= $Gp['PlanNom'] ?></option>
                     <?php } ?>
                 </select>
-                <input type="text" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
+                <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
                 <hr>
                 <br>
                 <center>
@@ -81,6 +81,37 @@ $GetPlanes = $control->GetPlanes();
                 <div class="viewPdf" id="viewPdf"></div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Modal Actualizar Paquete -->
+<div class="modal fade" id="BuyNewPlan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualiza tu Plan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="IdEmpreNew">
+                <input type="text" id="NameEmpreNew">
+                <p> <span class="text-danger">Nota:</span><br>
+                    Tu paquete actual <span id="PaqueteAct"></span> Podria Caducar, Actualiza tu Poximo Paquete</p>
+                <label class="form-label">Contrato Firmado</label>
+                <input type="file" class="form-control form-control-sm " id="EmpreContrNew">
+                <label class="form-label ">Plan firmado:</label>
+                <select class="form-select form-select-sm" id="PlanSelectNew">
+                    <option selected></option>
+                    <?php foreach ($GetPlanes as $Gp) { ?>
+                        <option value="<?= $Gp['idTbPlanes'] ?>"><?= $Gp['PlanNom'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="BuyNewPlan()"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            </div>
         </div>
     </div>
 </div>

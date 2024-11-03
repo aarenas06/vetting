@@ -74,7 +74,7 @@ $Modulos = $control->GetModulos();
 </style>
 
 <input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
-<h4 class="title">Bienvenido <?= $_SESSION['Nombre']; ?> </h4>
+<h4 class="title">Bienvenid@ <?= $_SESSION['Nombre']; ?> </h4>
 <hr>
 
 

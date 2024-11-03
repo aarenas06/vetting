@@ -134,6 +134,7 @@ async function InsertMascota() {
         icon: "success",
         text: "Mascota Agregada Correctamente...!",
       });
+      ListPaciente();
     } else {
       Swal.fire({
         icon: "error",
@@ -318,7 +319,7 @@ async function HistoricoMd(idMasco) {
       text: "Problema del Servidor",
     });
   }
-}  
+}
 function OpenPdf(Adj, Mascod) {
   var Ruta = `/vetting/asset/documentacion/empresa/historiasClinicas/${Mascod}/${Adj}`;
   var pdfEmbed = `<embed src="${Ruta}" type="application/pdf" width="100%" height="600px" />`;

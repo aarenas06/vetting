@@ -2452,6 +2452,11 @@ async function Validar() {
         const urlRedireccion = `/vetting/modules/principal.php?p=home/index`;
         window.location.href = urlRedireccion;
       }
+      if (res2.idTbRoles === 1) {
+        const urlRedireccion = `/vetting/modules/principal.php?p=Empresas/index`;
+
+        window.location.href = urlRedireccion;
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -2500,7 +2505,7 @@ async function InsertPropietarios() {
 
       let res2 = await req2.json();
       if (res2 === true) {
-        $("#ModalRegistrarse").modal('hide');
+        $("#ModalRegistrarse").modal("hide");
         Swal.fire({
           icon: "success",
           text: "Propietario Agregado Correctamente...!",

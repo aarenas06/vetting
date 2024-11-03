@@ -135,6 +135,16 @@ class Controller
         }
         $update = $this->MODEL->ChangeEstEmpl($_POST['IdEmp'], $new);
     }
+    public function infoEmp()
+    {
+        $data = $this->MODEL->infoEmp($_POST['IdEmp']);
+        echo json_encode($data);
+    }
+    public function UpdateEmp()
+    {
+
+        $ex = $this->MODEL->UpdateEmp($_POST);
+    }
 }
 $controller = new Controller();
 if (isset($_POST['funcion'])) {

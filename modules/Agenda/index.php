@@ -210,6 +210,7 @@ $ListEmp = $control->ListEmpl($_SESSION['Emp']);
         </div>
     </div>
 </div>
+<input type="hidden" id="UsuCod" value="<?= $_SESSION['UsuCod'] ?>">
 <input type="hidden" id="Emp" value="<?= $_SESSION['Emp'] ?>">
 <script type="text/javascript" src="/vetting/modules/Agenda/script.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>

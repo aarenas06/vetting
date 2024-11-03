@@ -125,15 +125,17 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
         <?php if ($dt['IND'] == 's') { ?>
             <div class="mb-3">
                 <label for="" class="form-label">Estado Cita: <span style="color:red;">*</span></label>
-                <select class="form-select" aria-label="Default select example" id="HisEst">
+                <select class="form-select" aria-label="Default select example" id="HisEst" onchange="Depend()">
                     <option selected></option>
                     <option value="1">Confirmada</option>
                     <option value="0">Rechazada</option>
                 </select>
-                <label for="" class="form-label">Resultados-Recomendaciones: <span style="color:red;">*</span></label>
-                <textarea class="form-control" id="HisObserv" rows="3"></textarea>
-                <label for="" class="form-label">Adjunto Soporte :</label>
-                <input type="file" class="form-control" id="HisAdj">
+                <div class="condicion" id="condicion" style="display: none;">
+                    <label for="" class="form-label">Resultados-Recomendaciones: <span style="color:red;">*</span></label>
+                    <textarea class="form-control" id="HisObserv" rows="3"></textarea>
+                    <label for="" class="form-label">Adjunto Soporte :</label>
+                    <input type="file" class="form-control" id="HisAdj">
+                </div>
             </div>
             <br><br>
             <center>
@@ -142,6 +144,20 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
         <?php  } else { ?>
             <p class="title">Esta Cita ya fue desarrollada</p>
         <?php   } ?>
-
     </div>
 </div>
+
+
+<script>
+    function Depend() {
+        var selectedValue = $("#HisEst").val(); // Obtener el valor seleccionado
+
+        if (selectedValue === "1") {
+            // Si la opción es "Confirmada", mostrar el div
+            $("#condicion").css("display", "block");
+        } else {
+            // Para cualquier otra opción (incluyendo "Rechazada" o vacío), ocultar el div
+            $("#condicion").css("display", "none");
+        }
+    }
+</script>

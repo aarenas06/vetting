@@ -36,7 +36,7 @@ class modelo
 
     public function maps()
     {
-        $sql = "SELECT EmpreLatitud, EmpreLongitud from tbempresas where EmpreAct=1";
+        $sql = "SELECT EmpreLatitud, EmpreLongitud from tbempresas where EmpreAct=1 AND EmpreEst=1";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -50,5 +50,4 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $row;
     }
-    
 }

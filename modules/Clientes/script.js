@@ -49,11 +49,29 @@ async function InsertPropietarios() {
   var TelPropietarios = $("#TelPropietarios").val();
   var DirPropietarios = $("#DirPropietarios").val();
   var EmailPropietarios = $("#EmailPropietarios").val();
+
+  var SexPro = $("#SexPro").val();
   var Emp = $("#Emp").val();
+
+  if (
+    NomPropietarios === "" ||
+    IdentPropietarios === "" ||
+    TelPropietarios === "" ||
+    DirPropietarios === "" ||
+    SexPro === ""
+  ) {
+    // Mostrar un mensaje de error
+    Swal.fire({
+      icon: "info",
+      text: "campos obligatorios.!",
+    });
+    return;
+  }
 
   let formData = new FormData();
   formData.append("funcion", "InsertPropietarios");
   formData.append("NomPropietarios", NomPropietarios);
+  formData.append("UsuSex", SexPro);
   formData.append("IdentPropietarios", IdentPropietarios);
   formData.append("TelPropietarios", TelPropietarios);
   formData.append("DirPropietarios", DirPropietarios);

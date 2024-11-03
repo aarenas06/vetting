@@ -136,20 +136,21 @@ async function InsertHisto() {
   var MascoCod = $("#MacoCod").val();
   var HisAdj = $("#HisAdj")[0].files[0];
 
-  if (HisEst === "" || HisObserv === "") {
-    Swal.fire({
-      icon: "info",
-      text: `Campos con * son obligatorios`,
-    });
-    return;
-  }
-
-  if (HisAdj && HisAdj.type !== "application/pdf") {
-    Swal.fire({
-      icon: "info",
-      text: `Solo Archivos Pdf`,
-    });
-    return;
+  if (HisEst != 0) {
+    if (HisEst === "" || HisObserv === "") {
+      Swal.fire({
+        icon: "info",
+        text: `Campos con * son obligatorios`,
+      });
+      return;
+    }
+    if (HisAdj && HisAdj.type !== "application/pdf") {
+      Swal.fire({
+        icon: "info",
+        text: `Solo Archivos Pdf`,
+      });
+      return;
+    }
   }
 
   let formData = new FormData();

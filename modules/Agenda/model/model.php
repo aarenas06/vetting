@@ -74,7 +74,7 @@ class modelo
     {
         $fechaActual = date('Y-m-d');
 
-        $sql = "SELECT tb1.idTbCitas ,tb1.idTbEmAsig,tb1.CitaDate,(Case when tb1.CitaEst=0 then 'Pendiente' ELSE 'Finalizada' END) EstDes ,tb1.CitaEst ,tb2.EmpNom doc ,tb3.MascoNom,tb3.MascoFechNac ,tb4.UsuNom ,tb5.OptNombre
+        $sql = "SELECT tb1.idTbCitas ,tb1.idTbEmAsig,tb1.CitaDate,(Case when tb1.CitaEst=0 then 'Pendiente' ELSE 'Gestionada' END) EstDes ,tb1.CitaEst ,tb2.EmpNom doc ,tb3.MascoNom,tb3.MascoFechNac ,tb4.UsuNom ,tb5.OptNombre
         FROM `tbcitas`  tb1
         Inner JOIN tbempleados tb2 on tb2.idTbEmpleados=tb1.idTbEmAsig
         INNER JOIN tbmascotas tb3 on tb3.idtbMascotas=tb1.idtbMascotas

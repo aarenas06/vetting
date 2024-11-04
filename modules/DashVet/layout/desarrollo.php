@@ -72,8 +72,6 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
         </div>
         <hr>
 
-    </div>
-    <div class="col-lg-4">
         <h5 class="title text-center">Datos Propietario</h5>
         <div class="row">
             <div class="col-lg-6">
@@ -93,6 +91,9 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
                 <input type="text" class="form-control form-control-sm readonly-input" value="<?= $dt['UsuDirec'] ?>" id="UsuDirec" readonly>
             </div>
         </div>
+    </div>
+    <div class="col-lg-4">
+
         <hr>
         <h5 class="title text-center">Datos Cita</h5>
         <div class="row">
@@ -117,6 +118,30 @@ $horaCita = $fechaCita->format('g:i A'); // Formato 12 horas con AM/PM
                 <textarea class="form-control readonly-input" placeholder="" id="CitaObs" style="height: 100px"><?= $dt['CitaObs'] ?></textarea>
             </div>
         </div>
+        <hr>
+        <h5 class="title text-center">Historico Clinico</h5>
+        <div class="espacio" style="    max-height: 850px;overflow-y: auto;">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Tipo Servicio</th>
+                        <th scope="col">Observacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($histo as $ht) { ?>
+                        <tr>
+                            <th scope="row"><?= $ht['HisFec'] ?></th>
+                            <td><?= $ht['OptNombre'] ?></td>
+                            <td><?= $ht['HisObserv'] ?></td>
+                        </tr>
+                    <?php
+                    } ?>
+                </tbody>
+            </table>
+        </div>
+
     </div>
     <div class="col-lg-4">
         <div style="flex-grow: 1; text-align: center;">

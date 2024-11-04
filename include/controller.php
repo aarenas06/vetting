@@ -15,7 +15,7 @@ class Controller
     public function Validar()
     {
         $user = $_POST['User'];
-        $pass = $_POST['Pass'];
+        $pass = md5($_POST['Pass']);
         $validar = $this->MODEL->Validar($user, $pass);
         if ($validar) {
             session_start();

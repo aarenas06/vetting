@@ -13,6 +13,7 @@ class Controller
     public function DataCita()
     {
         $dt = $this->MODEL->DataCita($_POST['id']);
+        $histo = $this->MODEL->Historico($dt['idtbMascotas']);
         if ($dt) {
             include($_SERVER['DOCUMENT_ROOT'] . '/vetting/modules/DashVet/layout/desarrollo.php');
         } else {

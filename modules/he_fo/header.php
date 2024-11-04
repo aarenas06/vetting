@@ -1,13 +1,4 @@
-<?php session_start();
-// Verifica si las variables de sesión no existen
-if (!isset($_SESSION["UsuCod"])) {
-    // Muestra el mensaje
-    echo '<script>alert("No has iniciado sesión");</script>';
-
-    // Redirige a la pantalla principal
-    echo '<script>window.location.href = "http://localhost/vetting/";</script>';
-    exit; // Agrega exit para detener la ejecución del script después de la redirección
-}
+<?php
 include($_SERVER['DOCUMENT_ROOT'] . '/Vetting/modules/he_fo/controller/controller.php');
 $control = new Controllerhe;
 if ($_SESSION['Emp'] != 0) {
@@ -352,15 +343,17 @@ if ($_SESSION['Emp'] != 0) {
                                                 </div>
                                             </div>
                                             <div class="message-body">
-                                                <a href="/vetting/modules/principal.php?p=perfilUser/index" class="py-8 px-7 mt-8 d-flex align-items-center">
-                                                    <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="/vetting/plantilla/assets/img/home/icon-account.svg" alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold"> Perfil </h6>
-                                                        <span class="d-block text-dark">Configuración cuenta</span>
-                                                    </div>
-                                                </a>
+                                                <?php if ($_SESSION['Tip'] == 2) { ?>
+                                                    <a href="/vetting/modules/principal.php?p=perfilUser/index" class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                        <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
+                                                            <img src="/vetting/plantilla/assets/img/home/icon-account.svg" alt="" width="24" height="24">
+                                                        </span>
+                                                        <div class="w-75 d-inline-block v-middle ps-3">
+                                                            <h6 class="mb-1 bg-hover-primary fw-semibold"> Perfil </h6>
+                                                            <span class="d-block text-dark">Configuración cuenta</span>
+                                                        </div>
+                                                    </a>.
+                                                <?php  } ?>
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
                                                 <a href="/vetting/modules/he_fo/logout.php?ind=<?= $_SESSION['Emp'] ?>" class="btn btn-outline-primary">Cerrar Sesión</a>
@@ -373,6 +366,6 @@ if ($_SESSION['Emp'] != 0) {
                     </div>
                 </nav>
             </header>
-
+            <input type="hidden" value="<?= $_SESSION['Tip'] ?>" id="TipPerfil">
             <div class="contenido" style="padding-top: calc(40px + 15px); margin-left:20px;margin-right:20px; background-image: url('https://www.discolmedica.com.co/assets/img/background.png');   background-attachment: fixed;" cz-shortcut-listen="true">
                 <script type="text/javascript" src="/vetting/modules/he_fo/script.js"></script>

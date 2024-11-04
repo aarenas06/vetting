@@ -104,6 +104,14 @@ class Controller
             echo 'No Hay Planes Aún Creados';
         }
     }
+    public function ChangePass()
+    {
+        $list = $this->MODEL->list();
+        foreach ($list as $lt) {
+            $new = md5($lt['UsuCla']);
+            $update = $this->MODEL->update($lt['idtbUsuarios'], $new);
+        }
+    }
 }
 $controller = new Controller();
 

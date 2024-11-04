@@ -55,25 +55,24 @@
                             <div class="col-sm-6">
                                 <div class="text-center text-sm-left">
                                     <p class="text-extra-large text-primary">404</p>
-                                </div>
-                                <div class="section-single-main-content">
-                                    <h6 class="title-decorated title-decorated-lg text-deep-blue">Page was not found</h6>
-                                    <p><span class="text-width-2">You may have mistyped the address or the page may have moved.</span></p><a class="button button-lg button-primary button-winona" href="/vetting/">Back to home page</a>
+                                    <div class="section-single-main-content">
+                                        <h6 class="title-decorated title-decorated-lg text-deep-blue">Pagina No encontrada</h6>
+                                        <p><span class="text-width-2">Revisa con tu Proveedor </span></p><a class="button button-lg button-primary button-winona" href="/vetting/">Regresar a Inicio</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="footer-minimal section-single-footer">
-                    <div class="container">
-                        <div class="footer-minimal-inner">
-                            <!--Brand--><a class="brand" href="index-2.html"><img class="brand-logo-dark" src="/vetting/plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" /><img class="brand-logo-light" src="images/logo-inverse-334x88.png" alt="" width="167" height="44" /></a>
-                            <!-- Rights-->
-                            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none" /><a href="privacy-policy.html">Privacy Policy</a></p>
+                    <div class="footer-minimal section-single-footer">
+                        <div class="container">
+                            <div class="footer-minimal-inner">
+                                <!--Brand--><a class="brand" href="index-2.html"><img class="brand-logo-dark" src="/vetting/plantilla/assets/img/Vetconnect.png" alt="" width="167" height="44" /><img class="brand-logo-light" src="images/logo-inverse-334x88.png" alt="" width="167" height="44" /></a>
+                                <!-- Rights-->
+                                <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none" /><a href="privacy-policy.html">Privacy Policy</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
     <!-- Global Mailform Output-->

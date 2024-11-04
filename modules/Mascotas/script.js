@@ -316,7 +316,7 @@ async function ChangeEstMasco(idMasco, chip, Est) {
 }
 
 async function HistorialMasco(IdMasco) {
-  $('#HistorialMasco').modal('show');
+  $("#HistorialMasco").modal("show");
   let formData = new FormData();
   formData.append("funcion", "HistorialMasco");
   formData.append("IdMasco", IdMasco);
@@ -354,8 +354,27 @@ async function HistorialMasco(IdMasco) {
           <section class="col-md-12">
             <div class="card custom-card">
               <div class="card-header">
-                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["OptNombre"]} - <b>Dr. ${item["Doctor"]}</b></p>
-                <p class="card-text" style="text-align:left; color:black; margin: 0;">${item["CitaDate"]}</p>
+              <div class="header">
+                <div>
+                  <p class="card-text" style="text-align:left; color:black; margin: 0;">${
+                    item["OptNombre"]
+                  } - <b>Dr. ${item["Doctor"]}</b></p>
+                  <p class="card-text" style="text-align:left; color:black; margin: 0;">${
+                    item["CitaDate"]
+                  }</p>              
+                </div>
+          ${
+            item["HisAdj"]
+              ? `
+              <div>
+                <button class="btn btn-danger btn-sm title" onclick="OpenDiag('${item["MascoCod"]}','${item["HisAdj"]}')">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </button>
+              </div>`
+              : ""
+          }
+            </div>
+               
               </div>
 
               <div class="card-body">
@@ -371,7 +390,7 @@ async function HistorialMasco(IdMasco) {
       `;
     });
   } catch (error) {
-    $('#HistorialMasco').modal('hide');
+    $("#HistorialMasco").modal("hide");
     Swal.fire({
       icon: "info",
       title: "Upss!!",
@@ -508,4 +527,11 @@ async function SaveEditMasco() {
       text: "Problema del Servidor",
     });
   }
+}
+function OpenDiag(UsuCod, adj) {
+  window.open(
+    "/vetting/asset/documentacion/empresa/historiasClinicas/" + UsuCod + "/" + adj,
+    "ventana1",
+    "w idth=600,height=500,scrollbars=NO"
+  );
 }

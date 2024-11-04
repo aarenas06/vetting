@@ -1,3 +1,5 @@
+let map; // Definimos la variable del mapa globalmente
+let markers = []; // Marcadores globales
 listMascotashome();
 ListVetActive();
 async function listMascotashome() {
@@ -90,6 +92,7 @@ maps();
 async function maps() {
   let formData = new FormData();
   formData.append("funcion", "maps");
+
   try {
     let req2 = await fetch("/vetting/modules/home/controller/controller.php", {
       method: "POST",
@@ -99,43 +102,48 @@ async function maps() {
     let res2 = await req2.json();
     console.log(res2);
 
-    // Inicializa el mapa centrado en Neiva, Huila, Colombia
-    var map = L.map("maps").setView([2.9386, -75.2715], 13);
+    // Inicializa el mapa solo si no está inicializado
+    if (!map) {
+      // Inicializa el mapa centrado en Neiva, Huila, Colombia
+      map = L.map("maps").setView([2.9386, -75.2715], 13);
 
-    // Añade el mapa base desde OpenStreetMap
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    let markers = [];
+      // Añade el mapa base desde OpenStreetMap
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+    } else {
+      // Si el mapa ya existe, limpiamos los marcadores existentes
+      markers.forEach((marker) => map.removeLayer(marker));
+      markers = []; // Reiniciar el array de marcadores
+    }
 
     // Intentar obtener la ubicación del usuario con alta precisión
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
-          let userLat = position.coords.latitude;
-          let userLng = position.coords.longitude;
+          // Latitud y longitud manual
+          let userLat = 2.965877; // Cambiar a position.coords.latitude para usar la ubicación real
+          let userLng = -75.269072; // Cambiar a position.coords.longitude para usar la ubicación real
 
           console.log("Latitud del usuario: " + userLat);
           console.log("Longitud del usuario: " + userLng);
 
-          // Crear un ícono personalizado para la ubicación del usuario
-          let greenIcon = L.icon({
-            iconUrl:
-              "https://cdn-icons-png.freepik.com/256/6645/6645221.png?semt=ais_hybrid",
-            iconSize: [28, 65],
-            iconAnchor: [22, 94],
-            popupAnchor: [-3, -76],
-          });
-
-          // Añadir el marcador de ubicación del usuario
-          let userMarker = L.marker([userLat, userLng], { icon: greenIcon })
+          // Añade un marcador para la ubicación actual del usuario
+          let userMarker = L.marker([userLat, userLng])
             .addTo(map)
             .bindPopup("Tu ubicación actual")
             .openPopup();
 
-          markers.push(userMarker.getLatLng());
+          // Dibujar un círculo con un radio de 500 metros alrededor del usuario
+          let userCircle = L.circle([userLat, userLng], {
+            color: "blue", // Color del borde del círculo
+            fillColor: "#add8e6", // Color de relleno del círculo
+            fillOpacity: 0.3, // Opacidad del relleno
+            radius: 500, // Radio en metros
+          }).addTo(map);
+
+          markers.push(userMarker); // Agregar el marcador del usuario al array de marcadores
 
           // Añadir marcadores de las veterinarias desde la respuesta del servidor
           res2.forEach(function (item) {
@@ -149,13 +157,15 @@ async function maps() {
                   `Ubicación de veterinaria en latitud: ${latitud}, longitud: ${longitud}`
                 );
 
-              markers.push(marker.getLatLng());
+              markers.push(marker); // Agregar el marcador de la veterinaria al array de marcadores
             }
           });
 
           // Ajusta la vista del mapa para mostrar todos los marcadores
           if (markers.length > 0) {
-            let bounds = L.latLngBounds(markers);
+            let bounds = L.latLngBounds(
+              markers.map((marker) => marker.getLatLng())
+            );
             map.fitBounds(bounds);
           }
         },
@@ -216,3 +226,9 @@ function abrirGoogleMaps(latitud, longitud) {
   // Abre Google Maps en una nueva pestaña
   window.open(url, "_blank");
 }
+
+// Llama a ListVetActive cada 8 segundos
+setInterval(ListVetActive, 15000);
+
+// Llama a maps cada 8 segundos
+setInterval(maps, 15000);

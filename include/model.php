@@ -76,6 +76,7 @@ class modelo
     public function InsertPropietarios($data)
     {
         try {
+            $pass = md5($data['PassPropietarios']);
             $sql = "INSERT INTO tbusuarios (idTbRoles, UsuNom, UsuCC, UsuSex, UsuCel, UsuDirec, UsuEmail, UsuUser, UsuCla) 
                 VALUES (:Rol, :NomPropietarios, :IdentPropietarios, :UsuSex, :TelPropietarios, :DirPropietarios, :EmailPropietarios, :UsuPropietarios, :PassPropietarios)";
             $stmt = $this->CNX1->prepare($sql);
@@ -88,7 +89,7 @@ class modelo
             $stmt->bindParam(':DirPropietarios', $data['DirPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':EmailPropietarios', $data['EmailPropietarios'], PDO::PARAM_STR);
             $stmt->bindParam(':UsuPropietarios', $data['UsuPropietarios'], PDO::PARAM_STR);
-            $stmt->bindParam(':PassPropietarios', $data['PassPropietarios'], PDO::PARAM_STR);
+            $stmt->bindParam(':PassPropietarios', $pass, PDO::PARAM_STR);
             $stmt->execute();
             $lastInsertId = $this->CNX1->lastInsertId();
             return true; // Retornamos la respuesta de la DB

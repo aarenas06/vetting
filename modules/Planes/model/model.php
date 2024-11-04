@@ -111,4 +111,18 @@ class modelo
         $row = $sql->fetchAll(PDO::FETCH_NAMED);
         return $row;
     }
+    public function list()
+    {
+        $sql = "SELECT idtbUsuarios,UsuCla FROM `tbusuarios` where idtbUsuarios not in(15,18);";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
+    public function update($id, $cla)
+    {
+        $sql = "UPDATE  `tbusuarios` SET  UsuCla ='$cla'  where idtbUsuarios=$id";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+    }
 }

@@ -77,13 +77,13 @@ $Modulos = $control->GetModulos();
 <h4 class="title">Bienvenid@ <?= $_SESSION['Nombre']; ?> </h4>
 <hr>
 
-
 <section class="row">
     <section id="ContMascotasWrapper" class="col-md-12">
         <div id="ContMascotas" class="d-flex flex-row overflow-auto">
         </div>
     </section>
 </section>
+<br>
 <section class="row">
     <section class="col-md-8">
         <div class="card">

@@ -1,5 +1,31 @@
-ObtFotoPerfil();
+var TipPerfil = $("#TipPerfil").val();
+
+if (TipPerfil == 2) {
+  console.log("Es usuario");
+  ObtFotoPerfil();
+} else {
+  console.log("Es admin o emp");
+
+  //foto del header
+  let FotoInput = document.getElementById("HeadFotoPerfil");
+  let img = document.createElement("img");
+  img.src = "/vetting/plantilla/assets/img/home/profile.jpg";
+  img.alt = "Foto de Perfil";
+  img.classList.add("rounded-circle");
+  img.style.width = "35px";
+  img.style.height = "35px";
+  img.style.objectFit = "cover";
+  FotoInput.appendChild(img);
+
+  //Foto al precionar click en la imagen del header
+  let imgPerfil = document.getElementById("FotoPerfilPerfil");
+  imgPerfil.src = "/vetting/plantilla/assets/img/home/profile.jpg";
+  imgPerfil.alt = "Foto de Perfil";
+}
 async function ObtFotoPerfil() {
+  var TipPerfil = $("#TipPerfil").val();
+  console.log("este es el tipo de user " + TipPerfil);
+
   let formData = new FormData();
   formData.append("funcion", "ObtFotoPerfil");
   formData.append("UsuCod", $("#UsuCod").val());
@@ -10,6 +36,7 @@ async function ObtFotoPerfil() {
       body: formData,
     });
     let res2 = await req2.json();
+    console.log(res2);
 
     //foto del header
     let FotoInput = document.getElementById("HeadFotoPerfil");

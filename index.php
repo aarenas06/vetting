@@ -226,7 +226,11 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="termsConditions">
                                 <label class="form-check-label" for="termsConditions">
-                                    Acepto los <b>términos y condiciones</b>
+                                    Acepto los 
+                                    <span style="cursor: pointer;" onclick="Opentyc()" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';">
+                                        <b><u>términos y condiciones</u></b>
+                                    </span>
+
                                 </label>
                             </div>
                         </div>
@@ -251,7 +255,7 @@
                             <div class="swiper-slide-caption">
                                 <div class="row row-30">
                                     <div class="col-lg-6 text-center text-lg-left">
-                                        <h1><span class="font-weight-light"><span>Haz que tus Mascotas</span></span><span class="font-weight-bold"><span>Luzcan lo mejor posible</span></span></h1>
+                                        <h1><span class="font-weight-light"><span>Cuidamos a  tus Mascotas,</span></span><span class="font-weight-bold"><span>Cuidamos de ti</span></span></h1>
                                         <!-- <div class="button-outer"><a class="button button-lg button-primary button-winona" href="#">Free consultation</a></div> -->
                                     </div>
                                     <div class="col-lg-6 position-static">
@@ -478,6 +482,15 @@
     <!-- Javascript-->
     <script src="/vetting/landing/js/core.min.js"></script>
     <script src="/vetting/landing/js/script.js"></script>
+    <script>
+        function Opentyc() {
+            window.open(
+                "/vetting/TyC.php",
+                "ventana1",
+                "w idth=600,height=500,scrollbars=NO"
+            );
+        }
+    </script>
 </body>
 
 <!-- Mirrored from ld-wt73.template-help.com/wt_prod-24921/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Oct 2024 14:44:50 GMT -->

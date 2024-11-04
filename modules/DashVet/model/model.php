@@ -16,7 +16,7 @@ class modelo
     }
     public function DataCita($idCita)
     {
-        $sql = "SELECT tb1.idTbCitas ,tb1.CitaNom ,tb1.CitaDate ,tb1.CitaObs,tb1.CitaDateCre,tb2.MascoNom,tb2.MascoFechNac,tb2.MascoPelaje,tb2.MascoAgresion,
+        $sql = "SELECT tb1.idTbCitas , tb1.idtbMascotas,tb1.CitaNom ,tb1.CitaDate ,tb1.CitaObs,tb1.CitaDateCre,tb2.MascoNom,tb2.MascoFechNac,tb2.MascoPelaje,tb2.MascoAgresion,
         tb2.MascoPatologia,tb2.MascoComidaHab,tb2.MascoSex,tb2.MascoCod ,tb3.UsuNom,tb3.UsuEmail,tb3.UsuCel,tb3.UsuCC,tb3.UsuDirec,
         tb4.OptNombre,tb6.RazNom,tb7.EspeNom, tb2.MascoPic pic,tb5.EmpNom,(CASE WHEN tb8.idTbHisClinica is null then 's' else 'n' end) AS IND,tb8.idTbHisClinica
         FROM tbcitas tb1
@@ -74,5 +74,16 @@ class modelo
         $sql = "Update tbcitas set CitaEst=1 where idTbCitas=$idCita";
         $sql = $this->CNX1->prepare($sql);
         $sql->execute();
+    }
+    public function Historico($idMasco)
+    {
+        $sql = "SELECT tb1.idTbHisClinica, tb1.HisFec,tb1.HisObserv,tb3.OptNombre FROM tbhisclinica tb1
+        INNER join tbcitas tb2 on tb2.idTbCitas=tb1.idTbCitas
+        INNER JOIN tboptservicios tb3 on tb3.IdoptServicios=tb2.idTbServicios
+        WHERE tb2.idtbMascotas=$idMasco";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
     }
 }

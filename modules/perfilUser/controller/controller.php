@@ -29,7 +29,7 @@ class Controller
             'Identificacion' => $_POST['Identificacion'],
             'Direccion' => $_POST['Direccion'],
             'Celular' => $_POST['Celular'],
-            'Contrasena' => $_POST['Contrasena'],
+            'Contrasena' => md5($_POST['Contrasena']),
             'UsuCod' => $_POST['UsuCod'],
             'User' => $_POST['User'],
             'fotoPerfil' => $fotoPerfil

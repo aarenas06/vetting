@@ -108,4 +108,12 @@ class modelo
         $row = $sql->fetch(PDO::FETCH_NAMED);
         return $row;
     }
+    public function ListActive()
+    {
+        $sql = "SELECT empreNom,EmpreTokTel,EmpreNit,EmpreTok FROM `tbempresas` WHERE EmpreEst=1 AND EmpreAct=1; ";
+        $sql = $this->CNX1->prepare($sql);
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_NAMED);
+        return $row;
+    }
 }

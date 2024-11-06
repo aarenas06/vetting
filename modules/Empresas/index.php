@@ -94,8 +94,8 @@ $GetPlanes = $control->GetPlanes();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" id="IdEmpreNew">
-                <input type="text" id="NameEmpreNew">
+                <input type="hidden" id="IdEmpreNew">
+                <input type="hidden" id="NameEmpreNew">
                 <p> <span class="text-danger">Nota:</span><br>
                     Tu paquete actual <span id="PaqueteAct"></span> Podria Caducar, Actualiza tu Poximo Paquete</p>
                 <label class="form-label">Contrato Firmado</label>

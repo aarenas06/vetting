@@ -58,8 +58,8 @@
                     <td class="<?= $clase ?>" style="cursor: pointer;" data-bs-toggle="modal" onclick="OpenNewPla(<?= $dt['idTbEmpresas'] ?>,'<?= $dt['EmpreNom'] ?>')" data-bs-target="#BuyNewPlan"><?= $fechaTerminacion ?></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#mdPdf" onclick="ModalPdf('<?= $dt['EmpreContr'] ?>','<?= $dt['EmpreNom'] ?>')"><i class="fa-solid fa-file-pdf"></i></button>
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#mdPdf" onclick="ModalPdf('<?= $dt['EmpreAdj'] ?>','<?= $dt['EmpreNom'] ?>')"><i class="fa-solid fa-id-card"></i></button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#mdPdf" onclick="ModalPdf('<?= $dt['EmpreContr'] ?>','<?= $dt['EmpreNom'] ?>',1)"><i class="fa-solid fa-file-pdf"></i></button>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#mdPdf" onclick="ModalPdf('<?= $dt['EmpreAdj'] ?>','<?= $dt['EmpreNom'] ?>',2)"><i class="fa-solid fa-id-card"></i></button>
                             <a type="button" href="/vetting/Empresa.php?PreDict=<?= $dt['EmpreNit'] ?>&pack=<?= $dt['EmpreTok'] ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa-solid fa-link"></i></a>
                         </div>
                     </td>

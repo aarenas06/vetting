@@ -139,8 +139,14 @@ async function ChangeEstEmp(IdEmp, Est) {
   });
 }
 
-async function ModalPdf(Archivo, Emp) {
-  var Url = `/vetting/asset/documentacion/${Emp}/contratos/${Archivo}`;
+async function ModalPdf(Archivo, Emp, opt) {
+  if (opt === 1) {
+    var Url = `/vetting/asset/documentacion/${Emp}/contratos/${Archivo}`;
+    console.log(Url);
+  } else {
+    var Url = `/vetting/asset/documentacion/${Emp}/contratos/${Archivo}`;
+    console.log(Url);
+  }
   console.log(Url);
   document.getElementById(
     "viewPdf"
